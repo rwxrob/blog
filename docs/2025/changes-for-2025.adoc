@@ -1,0 +1,46 @@
+= 2025
+[small]#Wednesday, January 1, 2025, 12:02:14PM EST#
+
+Here we are in a new year. I'm a sucker for setting goals and reviewing them after the fact. Sipping coffee and eating a waffle with my wife while she writes in her shiny new 2025 journal. Sam is lounging on the patio in the sun. Seems like 2025 is going to be a great year.
+
+== Goals
+
+- Hour a day outside: bike, paddle, hike
+- Get new teeth
+- Finish book: _Terminal Velocity_
+- Finish book: _Coding from the Get Go_
+
+== Events
+
+- Son's college graduation in Idaho
+- Son's stay with us in apartment
+
+Changes:
+
+- Books now available in PDF and EPUB automatically
+- Reward hard-working readers over lazy viewers
+- One blog post per day
+- Daily cycling at sunset
+- Mostly SCREEN mode livestreaming
+- YouTube update videos
+- Perl over bash for small scripts
+
+== Banishing Bash
+
+- Not as flexible or ubiquitous as POSIX
+- Safer than POSIX but not as safe as `perl -T`
+- Bloated with completely unnecessary stuff (100x > perl)
+  - `-r-xr-xr-x  1 root  wheel   1.2M Aug  4 06:31 /bin/bash`
+  - `-rwxr-xr-x  1 root  wheel   134K Aug  4 06:31 /usr/bin/perl`
+- Sloooow, really slow (one reason `dash` was invented)
+- Only integer math support
+- Dependence on other external tools for text processing
+- Bashisms aren't really that great
+- Extended regular expressions are absolutely grotesque
+- Using `/bin/sh` _is_ `/bin/bash` on some systems but POSIX limited
+
+== Pumping up Perl
+
+> "Perl is, by and large, a digested and simplified version of Unix. Perl is the Cliff Notes of Unix. I could never really get myself to learn sed, awk, zsh, grep, find, m4, pipes, xargs, tee, cut, paste, yacc, lex, various IPC or even C for that matter. I ought to. In practice, in almost all cases I use perl." - Larry Wall
+
+

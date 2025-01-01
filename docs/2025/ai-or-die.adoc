@@ -1,0 +1,22 @@
+= AI or die
+
+For 10 years I used some form of Zettelkasten or knowledge base instead of a blog but since the advent of AI and large language models (LLMs) writing anything that isn't narrative prose is just stupid.
+
+An AI assistant can find answers faster than any search I could ever do before.
+
+These things favor stories, articles, and blogs over random note-taking and are sourced from the Internet.
+
+Very few people will realize why this matters. Most of mediocrity will continue to chase the pointless trends and play with idiotic wastes of time like Obsidian and other flashy note-taking systems rather than incorporating AI into their workflows to get _actual_ knowledge work done. Not me. While they are making 40 minute videos about how to get Excalidraw to render from your highly specific note taking with a stupid Lua plugin I will use by time for other things:
+
+- Ongoing learning and research in real-time, anytime
+- Interactive language instruction in Russian and French
+- Automatic bibliographic reference creation down to the page number
+- Automated YouTube descriptions and chapter markers derived from transcripts
+- Full bike trip planning _while moving on the bike_
+- Early medical issue diagnosis and training plans
+- Breaking writers block for anything I'd ever write
+- Perfect grammar and punctuation evaluation of my writing
+- Automatic code comment generation from the code itself
+- Mundane code creation
+
+All I can say to the many skeptics out there is _try it_. Get ChatGPT and begin using it for stuff for which you would use Google search. Then, increase that, have it make you a plan for the day. Ask it what to eat for the next meal based on your day and current fitness goals. Show it your favorite painting and ask it to comment on it and provide resources. This isn't the kind of thing you will believe until it happens to you.
