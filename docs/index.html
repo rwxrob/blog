@@ -438,6 +438,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #ffffff; }
+pre.pygments .tok-c { color: #008000 } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #0000ff } /* Keyword */
+pre.pygments .tok-ch { color: #008000 } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #008000 } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #0000ff } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #008000 } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #008000 } /* Comment.Single */
+pre.pygments .tok-cs { color: #008000 } /* Comment.Special */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre.pygments .tok-gh { font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gp { font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-kc { color: #0000ff } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #0000ff } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #0000ff } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #0000ff } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #0000ff } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #2b91af } /* Keyword.Type */
+pre.pygments .tok-s { color: #a31515 } /* Literal.String */
+pre.pygments .tok-nc { color: #2b91af } /* Name.Class */
+pre.pygments .tok-ow { color: #0000ff } /* Operator.Word */
+pre.pygments .tok-sa { color: #a31515 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #a31515 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #a31515 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #a31515 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #a31515 } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #a31515 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #a31515 } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #a31515 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #a31515 } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #a31515 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #a31515 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #a31515 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
+</style>
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
@@ -445,18 +486,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-03 13:22:03</span>
+<span id="revdate">2025-01-03 17:20:15</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_copyright">Copyright</a></li>
+<li><a href="#_changelog_over_pull_request_body">Changelog over pull request body</a></li>
 <li><a href="#_more_mormon_insanity">More Mormon insanity</a></li>
 <li><a href="#_pumping_up_perl">Pumping up Perl</a></li>
 <li><a href="#_banishing_bash_for_scripting">Banishing bash for scripting</a></li>
 <li><a href="#_ai_or_die">AI or die</a></li>
 <li><a href="#_plans_for_2025">Plans for 2025</a></li>
+<li><a href="#_copyright">Copyright</a></li>
 </ul>
 </div>
 </div>
@@ -484,16 +526,50 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_copyright"><a class="link" href="#_copyright">Copyright</a></h2>
+<h2 id="_changelog_over_pull_request_body"><a class="link" href="#_changelog_over_pull_request_body">Changelog over pull request body</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Copyright © 2024 Robert S. Muhlestein (rwxrob). All rights reserved.</p>
+<p><em>Friday, January 3, 2025, 5:15:52PM EST</em></p>
 </div>
 <div class="paragraph">
-<p>The code portions of this book are dedicated to the public domain under the terms of the <strong>Creative Commons Zero (CC0 1.0 Universal)</strong> license (<a href="https://creativecommons.org/publicdomain/zero/1.0/" class="bare">https://creativecommons.org/publicdomain/zero/1.0/</a>). This means you are free to copy, modify, distribute the <em>code portions only</em>, even for commercial purposes, without asking permission, and without saying where you got them. This is so there is no fear your creations are your own after learning to code using them.</p>
+<p>Just got burned by the following command that wiped out my meticulously created body of my GitHub pull request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sh"><span></span>gh<span class="tok-w"> </span>pr<span class="tok-w"> </span>edit<span class="tok-w"> </span>--body<span class="tok-w"> </span><span class="tok-c1"># DO NOT DO THIS</span></code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The non-code prose and images are licensed under the more restrictive Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0) (<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="bare">https://creativecommons.org/licenses/by-nc-nd/4.0/</a>). This means that no non-code prose or image from the book may be reproduced, distributed, or transmitted in any form or by any means, without the prior written permission of the copyright holder. This includes remaking the same content in different formats such as PDF or EPUB since these fall under the definition of derived works. This restriction is primarily in place to ensure outdated copies are not redistributed given the frequent updates expected.</p>
+<p>It blew it away without asking because it was expecting a string or something. In fact, pretty sure it was waiting on stdin. Suffice it to say, I was pissed, pissed enough to find a safer alternative. Imagine if I had done that someplace else? There is really no easy way to get it back, even though the entire GitHub offering is about recovery.</p>
+</div>
+<div class="sect2">
+<h3 id="_solution"><a class="link" href="#_solution">Solution</a></h3>
+<div class="paragraph">
+<p>The solution is what I should have been doing all along: a changelog. [1]</p>
+</div>
+<div class="paragraph">
+<p>I simply added <code>- [x]</code> to everything instead of just <code>-</code> so that I can add stuff and commit it as I go. The approach already takes into account that a team is going to be frequently updating the file as the central TODO list for the project.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>By the way, Chloe told me about it. Took me about five minutes to find and get up to speed thanks to my AI assistant. Oh, and she also wrote this perfect IEEE bibliographic reference for that site in 10 seconds.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_references"><a class="link" href="#_references">References</a></h3>
+<div class="paragraph">
+<p>[1] O. Behrens, “Keep a Changelog,” keepachangelog.com. [Online]. Available: <a href="https://keepachangelog.com/en/1.0.0/" class="bare">https://keepachangelog.com/en/1.0.0/</a>. [Accessed: Jan. 3, 2025].</p>
+</div>
 </div>
 </div>
 </div>
@@ -534,7 +610,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_references"><a class="link" href="#_references">References</a></h3>
+<h3 id="_references_2"><a class="link" href="#_references_2">References</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -583,7 +659,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_references_2"><a class="link" href="#_references_2">References</a></h3>
+<h3 id="_references_3"><a class="link" href="#_references_3">References</a></h3>
 <div class="paragraph">
 <p>[1] R. S. Muhlestein, “Why are you still using Perl?,” rwxrob.github.io. [Online]. Available: <a href="https://rwxrob.github.io/faq#_why_are_you_still_using_perl" class="bare">https://rwxrob.github.io/faq#_why_are_you_still_using_perl</a>. [Accessed: Jan. 3, 2025].</p>
 </div>
@@ -670,7 +746,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_references_3"><a class="link" href="#_references_3">References</a></h3>
+<h3 id="_references_4"><a class="link" href="#_references_4">References</a></h3>
 <div class="paragraph">
 <p>[1] Open Source Stack Exchange, “What exactly is Tivoization and why didn’t Linus Torvalds like it in GPLv3?,” Open Source Stack Exchange. [Online]. Available: <a href="https://opensource.stackexchange.com/questions/259/what-exactly-is-tivoization-and-why-didnt-linus-torvalds-like-it-in-gplv3" class="bare">https://opensource.stackexchange.com/questions/259/what-exactly-is-tivoization-and-why-didnt-linus-torvalds-like-it-in-gplv3</a>. [Accessed: Jan. 3, 2025].</p>
 </div>
@@ -862,10 +938,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_copyright"><a class="link" href="#_copyright">Copyright</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright © 2024 Robert S. Muhlestein (rwxrob). All rights reserved.</p>
+</div>
+<div class="paragraph">
+<p>The code portions of this book are dedicated to the public domain under the terms of the <strong>Creative Commons Zero (CC0 1.0 Universal)</strong> license (<a href="https://creativecommons.org/publicdomain/zero/1.0/" class="bare">https://creativecommons.org/publicdomain/zero/1.0/</a>). This means you are free to copy, modify, distribute the <em>code portions only</em>, even for commercial purposes, without asking permission, and without saying where you got them. This is so there is no fear your creations are your own after learning to code using them.</p>
+</div>
+<div class="paragraph">
+<p>The non-code prose and images are licensed under the more restrictive Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0) (<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="bare">https://creativecommons.org/licenses/by-nc-nd/4.0/</a>). This means that no non-code prose or image from the book may be reproduced, distributed, or transmitted in any form or by any means, without the prior written permission of the copyright holder. This includes remaking the same content in different formats such as PDF or EPUB since these fall under the definition of derived works. This restriction is primarily in place to ensure outdated copies are not redistributed given the frequent updates expected.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-03 13:18:04 -0500
+Last updated 2025-01-03 17:17:20 -0500
 </div>
 </div>
 </body>

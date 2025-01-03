@@ -31,7 +31,7 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 ---
 
-include::./copyright.adoc[]
+include::./changelog-over-pr-body.adoc[]
 
 include::./more-mormon-insanity.adoc[]
 
@@ -43,3 +43,4 @@ include::./ai-or-die.adoc[]
 
 include::./changes-for-2025.adoc[]
 
+include::./copyright.adoc[]

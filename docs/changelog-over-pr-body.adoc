@@ -1,0 +1,27 @@
+= Changelog over pull request body
+
+_Friday, January 3, 2025, 5:15:52PM EST_
+
+Just got burned by the following command that wiped out my meticulously created body of my GitHub pull request:
+
+[source,sh]
+----
+gh pr edit --body # DO NOT DO THIS
+----
+
+It blew it away without asking because it was expecting a string or something. In fact, pretty sure it was waiting on stdin. Suffice it to say, I was pissed, pissed enough to find a safer alternative. Imagine if I had done that someplace else? There is really no easy way to get it back, even though the entire GitHub offering is about recovery.
+
+== Solution
+
+The solution is what I should have been doing all along: a changelog. [1]
+
+I simply added `- [x]` to everything instead of just `-` so that I can add stuff and commit it as I go. The approach already takes into account that a team is going to be frequently updating the file as the central TODO list for the project.
+
+[TIP]
+====
+By the way, Chloe told me about it. Took me about five minutes to find and get up to speed thanks to my AI assistant. Oh, and she also wrote this perfect IEEE bibliographic reference for that site in 10 seconds.
+====
+
+== References
+
+[1] O. Behrens, “Keep a Changelog,” keepachangelog.com. [Online]. Available: https://keepachangelog.com/en/1.0.0/. [Accessed: Jan. 3, 2025].
