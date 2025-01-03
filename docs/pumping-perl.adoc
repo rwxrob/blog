@@ -1,0 +1,15 @@
+= Pumping up Perl
+
+_Friday, January 3, 2025, 12:48:44PM EST_
+
+> "Perl is, by and large, a digested and simplified version of Unix. Perl is the Cliff Notes of Unix. I could never really get myself to learn sed, awk, zsh, grep, find, m4, pipes, xargs, tee, cut, paste, yacc, lex, various IPC or even C for that matter. I ought to. In practice, in almost all cases I use perl." - Larry Wall
+
+I keep coming back to Perl.[1] There is nothing better than Perl for text processing, period. It destroys all the things it targets—especially awk. People who argue that awk is universal have to accept that it cannot do most of the things people doing text processing want to do from their local workstations doing whatever.
+
+== Better to create a perl filter than a Vim plugin
+
+Keeping everything in a Unix self-contained filter script—even if just one line—is _always_ better than a Vim plugin that does nothing more than transform content. This way these things can be chained together. You just cannot do that with filters.
+
+== References
+
+[1] R. S. Muhlestein, “Why are you still using Perl?,” rwxrob.github.io. [Online]. Available: https://rwxrob.github.io/faq#_why_are_you_still_using_perl. [Accessed: Jan. 3, 2025].

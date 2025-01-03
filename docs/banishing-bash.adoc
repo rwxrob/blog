@@ -1,0 +1,42 @@
+= Banishing bash for scripting
+
+_Friday, January 3, 2025, 12:25:20PM EST_
+
+Bash has burned me one too many times in 2024—mostly its horrible regular expression syntax or just not being on a system that I regularly use.
+
+== It's not as ubiquitous as people say
+
+I know, right? Here I have been saying bash is everywhere. It's not. Container images that I love notably do not have it installed at all (Alpine, BusyBox, Kali, Arch) plus I have been doing a lot more with BSD and, well, bash is just not there without installing it. This has made it problematic when I wanted to just copy over my bashrc file. Nope. Can't do it.
+
+== I'll never willingly use GPLv3 stuff for anything
+
+Perhaps the single biggest reason I do not want to use it ever again for scripting is the license. I despise GPLv3 and the people who push it. Most of them have no idea why it is so monstrously horrible for the OpenSource ecosystem and goes _against_ all the founding principles of FOSS by _forcing_ hardware manufacturers to comply with their Menshevik-esque ideas of "freedom". You are free so long as you comply with their idea of what "freedom" actually means. It's downright unethical and definitely untenable. This is why Linus has actively campaigned against it and refused to move the Linux kernel to it.[1] I personally will not willingly use anything that is GPLv3 if I can help it, and bash is one of those things.
+
+== Whatever interactive shell is fine
+
+I'll use whatever interactive shell is on the host system from now on and will be converting my bashrc to a universal shell only so that I can just rename it. Any shell that I want has all the stuff I need.
+
+== What about completion?
+
+It's a pain point for sure. Only bash supports self-completion. Zsh has to be modified with a couple scripts to make completion work with `complete -C foo foo` syntax. To me it's worth it even if all the other failures of zsh are something I cannot avoid.
+
+== Other reasons
+
+Summary of other reasons I'm too lazy to write about right now:
+
+- POSIX shell works _everywhere_
+- Not as flexible or ubiquitous as POSIX
+- Safer than POSIX but not as safe as `perl -T`
+- Bloated with completely unnecessary stuff (100x > perl)
+  - `-r-xr-xr-x  1 root  wheel   1.2M Aug  4 06:31 /bin/bash`
+  - `-rwxr-xr-x  1 root  wheel   134K Aug  4 06:31 /usr/bin/perl`
+- Sloooow, really slow (one reason `dash` was invented)
+- Only integer math support
+- Dependence on other external tools for text processing
+- Bashisms aren't really that great
+- Extended regular expressions are absolutely grotesque
+- Using `/bin/sh` _is_ `/bin/bash` on some systems but POSIX limited
+
+== References
+
+[1] Open Source Stack Exchange, “What exactly is Tivoization and why didn’t Linus Torvalds like it in GPLv3?,” Open Source Stack Exchange. [Online]. Available: https://opensource.stackexchange.com/questions/259/what-exactly-is-tivoization-and-why-didnt-linus-torvalds-like-it-in-gplv3. [Accessed: Jan. 3, 2025].

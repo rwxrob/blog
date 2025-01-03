@@ -1,0 +1,44 @@
+= Plans for 2025
+
+_Wednesday, January 1, 2025, 12:02:14PM EST_
+
+Here we are in a new year. I'm a sucker for setting goals and reviewing them after the fact. Sipping coffee and eating a waffle with my wife while she writes in her shiny new 2025 journal. Sam is lounging on the patio in the sun. Seems like 2025 is going to be a great year.
+
+
+- YouTube update videos
+- Finish book: _Terminal Velocity_
+- Finish book: _Coding from the Get Go_
+- Books now available in PDF and EPUB automatically
+- Son's college graduation in Idaho
+- Son's stay with us in apartment
+- Reward readers over viewers
+- IRC (Twitch chat) all day
+- Customize and improve cloudbot
+- What about discord?
+
+Mode plans:
+
+- SCREEN: Highest percentage of content
+- BIKE: Daily cycling at sunset
+- COWORKING: Rebuilding Kubernetes cluster
+- COWORKING: Automating Vault secrets extraction from K8SAPPs
+- COWORKING: Perl over bash for small scripts
+- COWORKING: Perl to Go migrations
+- COWORKING: Cleaning up dot files
+
+== Time budget
+
+[cols="1,1",options="autowidth"]
+|===
+|Eating	| 10
+|Hygene	| 7
+|Bike (BIKE)	| 14
+|Work (COWORKING)	| 32
+|Sleep	| 56
+|Cleaning (IRL)	| 7
+|Writing (SCREEN)	| 14
+|Homelab/Coding	| 8
+|Yoga/Meditation	| 4
+|Strength	| 2
+|Chill/Doris	| 14
+|===

@@ -31,11 +31,13 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 ---
 
-include::copyright.adoc[]
+include::./copyright.adoc[]
 
-include::./2025/ai-or-die.adoc[]
+include::./pumping-perl.adoc[]
 
-include::2025/changes-for-2025.adoc[]
+include::./banishing-bash.adoc[]
 
-//include::2025/sysde.adoc[]
+include::./ai-or-die.adoc[]
+
+include::./changes-for-2025.adoc[]
 

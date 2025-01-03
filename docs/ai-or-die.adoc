@@ -1,5 +1,7 @@
 = AI or die
 
+_Friday, January 3, 2025, 12:52:05PM EST_
+
 For 10 years I used some form of Zettelkasten or knowledge base instead of a blog but since the advent of AI and large language models (LLMs) writing anything that isn't narrative prose is just stupid.
 
 An AI assistant can find answers faster than any search I could ever do before.

@@ -445,15 +445,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-01 15:31:03</span>
+<span id="revdate">2025-01-03 12:55:41</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_copyright">Copyright</a></li>
+<li><a href="#_pumping_up_perl">Pumping up Perl</a></li>
+<li><a href="#_banishing_bash_for_scripting">Banishing bash for scripting</a></li>
 <li><a href="#_ai_or_die">AI or die</a></li>
-<li><a href="#_2025">2025</a></li>
+<li><a href="#_plans_for_2025">Plans for 2025</a></li>
 </ul>
 </div>
 </div>
@@ -495,8 +497,128 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="_pumping_up_perl"><a class="link" href="#_pumping_up_perl">Pumping up Perl</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Friday, January 3, 2025, 12:48:44PM EST</em></p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>"Perl is, by and large, a digested and simplified version of Unix. Perl is the Cliff Notes of Unix. I could never really get myself to learn sed, awk, zsh, grep, find, m4, pipes, xargs, tee, cut, paste, yacc, lex, various IPC or even C for that matter. I ought to. In practice, in almost all cases I use perl." - Larry Wall</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>I keep coming back to Perl.[1] There is nothing better than Perl for text processing, period. It destroys all the things it targets—especially awk. People who argue that awk is universal have to accept that it cannot do most of the things people doing text processing want to do from their local workstations doing whatever.</p>
+</div>
+<div class="sect2">
+<h3 id="_better_to_create_a_perl_filter_than_a_vim_plugin"><a class="link" href="#_better_to_create_a_perl_filter_than_a_vim_plugin">Better to create a perl filter than a Vim plugin</a></h3>
+<div class="paragraph">
+<p>Keeping everything in a Unix self-contained filter script—even if just one line—is <em>always</em> better than a Vim plugin that does nothing more than transform content. This way these things can be chained together. You just cannot do that with filters.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_references"><a class="link" href="#_references">References</a></h3>
+<div class="paragraph">
+<p>[1] R. S. Muhlestein, “Why are you still using Perl?,” rwxrob.github.io. [Online]. Available: <a href="https://rwxrob.github.io/faq#_why_are_you_still_using_perl" class="bare">https://rwxrob.github.io/faq#_why_are_you_still_using_perl</a>. [Accessed: Jan. 3, 2025].</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_banishing_bash_for_scripting"><a class="link" href="#_banishing_bash_for_scripting">Banishing bash for scripting</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Friday, January 3, 2025, 12:25:20PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Bash has burned me one too many times in 2024—mostly its horrible regular expression syntax or just not being on a system that I regularly use.</p>
+</div>
+<div class="sect2">
+<h3 id="_its_not_as_ubiquitous_as_people_say"><a class="link" href="#_its_not_as_ubiquitous_as_people_say">It&#8217;s not as ubiquitous as people say</a></h3>
+<div class="paragraph">
+<p>I know, right? Here I have been saying bash is everywhere. It&#8217;s not. Container images that I love notably do not have it installed at all (Alpine, BusyBox, Kali, Arch) plus I have been doing a lot more with BSD and, well, bash is just not there without installing it. This has made it problematic when I wanted to just copy over my bashrc file. Nope. Can&#8217;t do it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ill_never_willingly_use_gplv3_stuff_for_anything"><a class="link" href="#_ill_never_willingly_use_gplv3_stuff_for_anything">I&#8217;ll never willingly use GPLv3 stuff for anything</a></h3>
+<div class="paragraph">
+<p>Perhaps the single biggest reason I do not want to use it ever again for scripting is the license. I despise GPLv3 and the people who push it. Most of them have no idea why it is so monstrously horrible for the OpenSource ecosystem and goes <em>against</em> all the founding principles of FOSS by <em>forcing</em> hardware manufacturers to comply with their Menshevik-esque ideas of "freedom". You are free so long as you comply with their idea of what "freedom" actually means. It&#8217;s downright unethical and definitely untenable. This is why Linus has actively campaigned against it and refused to move the Linux kernel to it.[1] I personally will not willingly use anything that is GPLv3 if I can help it, and bash is one of those things.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_whatever_interactive_shell_is_fine"><a class="link" href="#_whatever_interactive_shell_is_fine">Whatever interactive shell is fine</a></h3>
+<div class="paragraph">
+<p>I&#8217;ll use whatever interactive shell is on the host system from now on and will be converting my bashrc to a universal shell only so that I can just rename it. Any shell that I want has all the stuff I need.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_about_completion"><a class="link" href="#_what_about_completion">What about completion?</a></h3>
+<div class="paragraph">
+<p>It&#8217;s a pain point for sure. Only bash supports self-completion. Zsh has to be modified with a couple scripts to make completion work with <code>complete -C foo foo</code> syntax. To me it&#8217;s worth it even if all the other failures of zsh are something I cannot avoid.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_reasons"><a class="link" href="#_other_reasons">Other reasons</a></h3>
+<div class="paragraph">
+<p>Summary of other reasons I&#8217;m too lazy to write about right now:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>POSIX shell works <em>everywhere</em></p>
+</li>
+<li>
+<p>Not as flexible or ubiquitous as POSIX</p>
+</li>
+<li>
+<p>Safer than POSIX but not as safe as <code>perl -T</code></p>
+</li>
+<li>
+<p>Bloated with completely unnecessary stuff (100x &gt; perl)</p>
+</li>
+<li>
+<p><code>-r-xr-xr-x  1 root  wheel   1.2M Aug  4 06:31 /bin/bash</code></p>
+</li>
+<li>
+<p><code>-rwxr-xr-x  1 root  wheel   134K Aug  4 06:31 /usr/bin/perl</code></p>
+</li>
+<li>
+<p>Sloooow, really slow (one reason <code>dash</code> was invented)</p>
+</li>
+<li>
+<p>Only integer math support</p>
+</li>
+<li>
+<p>Dependence on other external tools for text processing</p>
+</li>
+<li>
+<p>Bashisms aren&#8217;t really that great</p>
+</li>
+<li>
+<p>Extended regular expressions are absolutely grotesque</p>
+</li>
+<li>
+<p>Using <code>/bin/sh</code> <em>is</em> <code>/bin/bash</code> on some systems but POSIX limited</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_references_2"><a class="link" href="#_references_2">References</a></h3>
+<div class="paragraph">
+<p>[1] Open Source Stack Exchange, “What exactly is Tivoization and why didn’t Linus Torvalds like it in GPLv3?,” Open Source Stack Exchange. [Online]. Available: <a href="https://opensource.stackexchange.com/questions/259/what-exactly-is-tivoization-and-why-didnt-linus-torvalds-like-it-in-gplv3" class="bare">https://opensource.stackexchange.com/questions/259/what-exactly-is-tivoization-and-why-didnt-linus-torvalds-like-it-in-gplv3</a>. [Accessed: Jan. 3, 2025].</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_ai_or_die"><a class="link" href="#_ai_or_die">AI or die</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><em>Friday, January 3, 2025, 12:52:05PM EST</em></p>
+</div>
 <div class="paragraph">
 <p>For 10 years I used some form of Zettelkasten or knowledge base instead of a blog but since the advent of AI and large language models (LLMs) writing anything that isn&#8217;t narrative prose is just stupid.</p>
 </div>
@@ -549,23 +671,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2025"><a class="link" href="#_2025">2025</a></h2>
+<h2 id="_plans_for_2025"><a class="link" href="#_plans_for_2025">Plans for 2025</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="small">Wednesday, January 1, 2025, 12:02:14PM EST</span></p>
+<p><em>Wednesday, January 1, 2025, 12:02:14PM EST</em></p>
 </div>
 <div class="paragraph">
 <p>Here we are in a new year. I&#8217;m a sucker for setting goals and reviewing them after the fact. Sipping coffee and eating a waffle with my wife while she writes in her shiny new 2025 journal. Sam is lounging on the patio in the sun. Seems like 2025 is going to be a great year.</p>
 </div>
-<div class="sect2">
-<h3 id="_goals"><a class="link" href="#_goals">Goals</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Hour a day outside: bike, paddle, hike</p>
-</li>
-<li>
-<p>Get new teeth</p>
+<p>YouTube update videos</p>
 </li>
 <li>
 <p>Finish book: <em>Terminal Velocity</em></p>
@@ -573,106 +690,118 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>Finish book: <em>Coding from the Get Go</em></p>
 </li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_events"><a class="link" href="#_events">Events</a></h3>
-<div class="ulist">
-<ul>
+<li>
+<p>Books now available in PDF and EPUB automatically</p>
+</li>
 <li>
 <p>Son&#8217;s college graduation in Idaho</p>
 </li>
 <li>
 <p>Son&#8217;s stay with us in apartment</p>
 </li>
+<li>
+<p>Reward readers over viewers</p>
+</li>
+<li>
+<p>IRC (Twitch chat) all day</p>
+</li>
+<li>
+<p>Customize and improve cloudbot</p>
+</li>
+<li>
+<p>What about discord?</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Changes:</p>
+<p>Mode plans:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Books now available in PDF and EPUB automatically</p>
+<p>SCREEN: Highest percentage of content</p>
 </li>
 <li>
-<p>Reward hard-working readers over lazy viewers</p>
+<p>BIKE: Daily cycling at sunset</p>
 </li>
 <li>
-<p>One blog post per day</p>
+<p>COWORKING: Rebuilding Kubernetes cluster</p>
 </li>
 <li>
-<p>Daily cycling at sunset</p>
+<p>COWORKING: Automating Vault secrets extraction from K8SAPPs</p>
 </li>
 <li>
-<p>Mostly SCREEN mode livestreaming</p>
+<p>COWORKING: Perl over bash for small scripts</p>
 </li>
 <li>
-<p>YouTube update videos</p>
+<p>COWORKING: Perl to Go migrations</p>
 </li>
 <li>
-<p>Perl over bash for small scripts</p>
+<p>COWORKING: Cleaning up dot files</p>
 </li>
 </ul>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_banishing_bash"><a class="link" href="#_banishing_bash">Banishing Bash</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Not as flexible or ubiquitous as POSIX</p>
-</li>
-<li>
-<p>Safer than POSIX but not as safe as <code>perl -T</code></p>
-</li>
-<li>
-<p>Bloated with completely unnecessary stuff (100x &gt; perl)</p>
-</li>
-<li>
-<p><code>-r-xr-xr-x  1 root  wheel   1.2M Aug  4 06:31 /bin/bash</code></p>
-</li>
-<li>
-<p><code>-rwxr-xr-x  1 root  wheel   134K Aug  4 06:31 /usr/bin/perl</code></p>
-</li>
-<li>
-<p>Sloooow, really slow (one reason <code>dash</code> was invented)</p>
-</li>
-<li>
-<p>Only integer math support</p>
-</li>
-<li>
-<p>Dependence on other external tools for text processing</p>
-</li>
-<li>
-<p>Bashisms aren&#8217;t really that great</p>
-</li>
-<li>
-<p>Extended regular expressions are absolutely grotesque</p>
-</li>
-<li>
-<p>Using <code>/bin/sh</code> <em>is</em> <code>/bin/bash</code> on some systems but POSIX limited</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_pumping_up_perl"><a class="link" href="#_pumping_up_perl">Pumping up Perl</a></h3>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>"Perl is, by and large, a digested and simplified version of Unix. Perl is the Cliff Notes of Unix. I could never really get myself to learn sed, awk, zsh, grep, find, m4, pipes, xargs, tee, cut, paste, yacc, lex, various IPC or even C for that matter. I ought to. In practice, in almost all cases I use perl." - Larry Wall</p>
-</div>
-</blockquote>
-</div>
+<h3 id="_time_budget"><a class="link" href="#_time_budget">Time budget</a></h3>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eating</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hygene</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bike (BIKE)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Work (COWORKING)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sleep</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">56</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cleaning (IRL)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Writing (SCREEN)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Homelab/Coding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yoga/Meditation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Strength</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chill/Doris</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-01 12:01:00 -0500
+Last updated 2025-01-03 12:45:46 -0500
 </div>
 </div>
 </body>
