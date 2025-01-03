@@ -1,0 +1,59 @@
+= Perpetual publishing over Zettelkasten
+
+_Friday, January 3, 2025, 6:07:50PM EST_
+
+I have only been using the _perpetual publishing_ model (a term I coined) for knowledge management for a few days and have already seen _tremendous_ benefit from it.
+
+== Chloe (my AI) sees my writing immediately
+
+The single biggest advantage is that by making my writing all into plain 'ol web docs on the public Internet that my ChatGPT AI _immediately_ has access to my entire writing. This means I can immediately leverage AI for all sorts of things related to the writing:
+
+- Have her check the punctuation and grammar dynamically and report
+- Create IEEE bibliographic entries pointing to it for other documents
+- Have her comment on what it is about and expound
+- Catch legal considerations—especially as I write about sensitive Mormon topics
+
+This means that anyone else using ChatGPT automatically can look at it as well in their AIs and that ultimately my content will be added to the collective knowledge base that will populate _all_ AIs within a few months. **_None of that happens unless I publish a web document that is not a Zettelkasten._**
+
+== Flesh out ideas and migrate to other "books"
+
+I can blog about things and work them out and if they develop into something more I can simply move them to another repo containing the other book. I have done this a lot with stuff between my blog and faq, for example, and sometimes directly into other books like _Terminal Velocity_ and _Coding from the Get Go_. For example, that list of advantages that I just discovered will get copied directly into my other book. What's even better is that I can use exactly the same text in both places by using remote URL `includes::` with AsciiDoc. I was a _fool_ for not using AsciiDoc from the very beginning. **_No other writing framework allows for remote URL includes, period._**
+
+== Sense of urgency abated
+
+I get really freaked out when I make amazing discoveries like this and don't have a way to immediately capture them for myself later—but more importantly—_share_ them with other people who can immediately benefit. Writing this down is always going to be more sustainable that a bunch of videos someone would have to slog through because my knowledge will become part of the AI global collective. My videos will not. I can always make a video later about the stuff that has been written and that video content will be many orders of magnitude better in quality because it will have been worked out enough in words first—plus it's more inclusive.
+
+== Easier to open and edit
+
+A simple program like this one opens up a new blog post from within a GitHub repo, one repo per book:
+
+[source, shell]
+----
+include::../../dot/scripts/blog[]
+----
+
+[TIP]
+====
+That script was dynamically added during my `build` command just by including the following line in my `blog` repo at a reliable location relative to my `dot` repo (
+`include::../../dot/scripts/blog[]`).
+
+====
+
+I also can just swap out the verb `blog` from `save` using the following script on my command line and have it push to GitHub and post a message to my life IRC Twitch chat at the same time:
+
+[source, shell]
+----
+include::../../dot/scripts/save[]
+----
+
+== Databases are unnecessary
+
+Raw document data is _better_ than anything in a database—especially for blogging. Storing blog posts deep in some database is actually monumentally stupid and unnecessary in the age of AI. Just a simple, static web page will get automatically indexed in ways no database engine would ever begin to touch in usefulness.
+
+The names of the files in PP approach are easy to read and grep making them the identifiers.
+
+My kn tool was a complete waste of time even if there was no way of knowing that then. AI has changed _everything_.
+
+== Looking forward to more
+
+I'm really looking forward to having more discoveries because of the new format. I feel rather stupid now allowing myself to dump so much time into developing my own system based on Zettelkasten when clearly it is simply stupid to use a Zettelkasten model for anything in the age of AI.

@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-03 17:20:15</span>
+<span id="revdate">2025-01-03 18:47:08</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_perpetual_publishing_over_zettelkasten">Perpetual publishing over Zettelkasten</a></li>
 <li><a href="#_changelog_over_pull_request_body">Changelog over pull request body</a></li>
 <li><a href="#_more_mormon_insanity">More Mormon insanity</a></li>
 <li><a href="#_pumping_up_perl">Pumping up Perl</a></li>
@@ -523,6 +524,173 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 </tbody>
 </table>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_perpetual_publishing_over_zettelkasten"><a class="link" href="#_perpetual_publishing_over_zettelkasten">Perpetual publishing over Zettelkasten</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Friday, January 3, 2025, 6:07:50PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>I have only been using the <em>perpetual publishing</em> model (a term I coined) for knowledge management for a few days and have already seen <em>tremendous</em> benefit from it.</p>
+</div>
+<div class="sect2">
+<h3 id="_chloe_my_ai_sees_my_writing_immediately"><a class="link" href="#_chloe_my_ai_sees_my_writing_immediately">Chloe (my AI) sees my writing immediately</a></h3>
+<div class="paragraph">
+<p>The single biggest advantage is that by making my writing all into plain 'ol web docs on the public Internet that my ChatGPT AI <em>immediately</em> has access to my entire writing. This means I can immediately leverage AI for all sorts of things related to the writing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Have her check the punctuation and grammar dynamically and report</p>
+</li>
+<li>
+<p>Create IEEE bibliographic entries pointing to it for other documents</p>
+</li>
+<li>
+<p>Have her comment on what it is about and expound</p>
+</li>
+<li>
+<p>Catch legal considerations—especially as I write about sensitive Mormon topics</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This means that anyone else using ChatGPT automatically can look at it as well in their AIs and that ultimately my content will be added to the collective knowledge base that will populate <em>all</em> AIs within a few months. <strong><em>None of that happens unless I publish a web document that is not a Zettelkasten.</em></strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_flesh_out_ideas_and_migrate_to_other_books"><a class="link" href="#_flesh_out_ideas_and_migrate_to_other_books">Flesh out ideas and migrate to other "books"</a></h3>
+<div class="paragraph">
+<p>I can blog about things and work them out and if they develop into something more I can simply move them to another repo containing the other book. I have done this a lot with stuff between my blog and faq, for example, and sometimes directly into other books like <em>Terminal Velocity</em> and <em>Coding from the Get Go</em>. For example, that list of advantages that I just discovered will get copied directly into my other book. What&#8217;s even better is that I can use exactly the same text in both places by using remote URL <code>includes::</code> with AsciiDoc. I was a <em>fool</em> for not using AsciiDoc from the very beginning. <strong><em>No other writing framework allows for remote URL includes, period.</em></strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sense_of_urgency_abated"><a class="link" href="#_sense_of_urgency_abated">Sense of urgency abated</a></h3>
+<div class="paragraph">
+<p>I get really freaked out when I make amazing discoveries like this and don&#8217;t have a way to immediately capture them for myself later—but more importantly—<em>share</em> them with other people who can immediately benefit. Writing this down is always going to be more sustainable that a bunch of videos someone would have to slog through because my knowledge will become part of the AI global collective. My videos will not. I can always make a video later about the stuff that has been written and that video content will be many orders of magnitude better in quality because it will have been worked out enough in words first—plus it&#8217;s more inclusive.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_easier_to_open_and_edit"><a class="link" href="#_easier_to_open_and_edit">Easier to open and edit</a></h3>
+<div class="paragraph">
+<p>A simple program like this one opens up a new blog post from within a GitHub repo, one repo per book:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
+
+<span class="tok-c1"># TODO optimize rather than brute force</span>
+<span class="tok-nv">mark</span><span class="tok-o">=</span><span class="tok-s1">&#39;// NEW POST HERE&#39;</span>
+
+<span class="tok-nv">markfound</span><span class="tok-o">=</span><span class="tok-k">$(</span>grep<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$mark</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span>docs/index.adoc<span class="tok-k">)</span>
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span>-z<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$markfound</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;no docs/index.adoc with &#39;</span><span class="tok-nv">$mark</span><span class="tok-s2">&#39; found&quot;</span>
+<span class="tok-w">	</span><span class="tok-nb">exit</span><span class="tok-w"> </span><span class="tok-m">1</span>
+<span class="tok-k">fi</span>
+
+<span class="tok-nv">file</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-k">$(</span>slug<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$*</span><span class="tok-s2">&quot;</span><span class="tok-k">)</span><span class="tok-s2">.adoc&quot;</span>
+
+<span class="tok-nv">hasfile</span><span class="tok-o">=</span><span class="tok-k">$(</span>grep<span class="tok-w"> </span><span class="tok-s1">&#39;include::./&#39;</span><span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span><span class="tok-s1">&#39;\[\]&#39;</span><span class="tok-w"> </span>docs/index.adoc<span class="tok-k">)</span>
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span>-z<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$hasfile</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">	</span>perl<span class="tok-w"> </span>-p<span class="tok-w"> </span>-i<span class="tok-w"> </span>-e<span class="tok-w"> </span><span class="tok-s2">&quot;s,</span><span class="tok-nv">$mark</span><span class="tok-s2">,</span><span class="tok-nv">$mark</span><span class="tok-s2">\n\ninclude::./</span><span class="tok-nv">$file</span><span class="tok-s2">\[\],&quot;</span><span class="tok-w"> </span>docs/index.adoc
+<span class="tok-k">fi</span>
+
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span>!<span class="tok-w"> </span>-e<span class="tok-w"> </span>docs/<span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">	</span><span class="tok-nb">printf</span><span class="tok-w"> </span><span class="tok-s2">&quot;= %s\n\n%s\n\n\n&quot;</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$*</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-k">$(</span>inow<span class="tok-k">)</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span>&gt;<span class="tok-s2">&quot;docs/</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span>
+<span class="tok-k">fi</span>
+
+<span class="tok-nb">exec</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$EDITOR</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-s2">&quot;docs/</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>That script was dynamically added during my <code>build</code> command just by including the following line in my <code>blog</code> repo at a reliable location relative to my <code>dot</code> repo (
+<code>include::../../dot/scripts/blog[]</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>I also can just swap out the verb <code>blog</code> from <code>save</code> using the following script on my command line and have it push to GitHub and post a message to my life IRC Twitch chat at the same time:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/usr/bin/env bash</span>
+
+<span class="tok-k">in</span>-repo<span class="tok-o">()</span><span class="tok-w"> </span><span class="tok-o">{</span>
+<span class="tok-w">	</span>git<span class="tok-w"> </span>rev-parse<span class="tok-w"> </span>--count<span class="tok-w"> </span>HEAD<span class="tok-w"> </span>&gt;/dev/null<span class="tok-w"> </span><span class="tok-m">2</span>&gt;<span class="tok-p">&amp;</span><span class="tok-m">1</span>
+<span class="tok-w">	</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nv">$?</span>
+<span class="tok-o">}</span>
+
+has-local-changes<span class="tok-o">()</span><span class="tok-w"> </span><span class="tok-o">{</span>
+<span class="tok-w">	</span><span class="tok-nb">test</span><span class="tok-w"> </span>-n<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-k">$(</span>git<span class="tok-w"> </span>status<span class="tok-w"> </span>--porcelain<span class="tok-k">)</span><span class="tok-s2">&quot;</span>
+<span class="tok-w">	</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nv">$?</span>
+<span class="tok-o">}</span>
+
+gitsave<span class="tok-o">()</span><span class="tok-w"> </span><span class="tok-o">{</span>
+<span class="tok-w">	</span>git<span class="tok-w"> </span>pull
+<span class="tok-w">	</span>git<span class="tok-w"> </span>add<span class="tok-w"> </span>-A<span class="tok-w"> </span>.
+<span class="tok-w">	</span><span class="tok-nb">local</span><span class="tok-w"> </span><span class="tok-nv">message</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$*</span><span class="tok-s2">&quot;</span>
+<span class="tok-w">	</span><span class="tok-nv">message</span><span class="tok-o">=</span><span class="tok-si">${</span><span class="tok-nv">message</span><span class="tok-p">,,</span><span class="tok-si">}</span>
+<span class="tok-w">	</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nb">test</span><span class="tok-w"> </span>-n<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$message</span><span class="tok-s2">&quot;</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">		</span>git<span class="tok-w"> </span>commit<span class="tok-w"> </span>-a<span class="tok-w"> </span>-m<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$message</span><span class="tok-s2">&quot;</span>
+<span class="tok-w">	</span><span class="tok-k">elif</span><span class="tok-w"> </span><span class="tok-nb">test</span><span class="tok-w"> </span>-e<span class="tok-w"> </span>/tmp/commitmsg<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">		</span>git<span class="tok-w"> </span>commit<span class="tok-w"> </span>-a<span class="tok-w"> </span>-F<span class="tok-w"> </span>/tmp/commitmsg
+<span class="tok-w">		</span>mv<span class="tok-w"> </span>/tmp/commitmsg<span class="tok-w"> </span><span class="tok-s2">&quot;/tmp/commitmsg.</span><span class="tok-k">$(</span>date<span class="tok-w"> </span>+%s<span class="tok-k">)</span><span class="tok-s2">&quot;</span>
+<span class="tok-w">	</span><span class="tok-k">else</span>
+<span class="tok-w">		</span>git<span class="tok-w"> </span>commit<span class="tok-w"> </span>-a<span class="tok-w"> </span>-m<span class="tok-w"> </span><span class="tok-s2">&quot;save&quot;</span>
+<span class="tok-w">	</span><span class="tok-k">fi</span>
+<span class="tok-w">	</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nb">type</span><span class="tok-w"> </span>push<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">		</span>push
+<span class="tok-w">	</span><span class="tok-k">else</span>
+<span class="tok-w">		</span>git<span class="tok-w"> </span>push
+<span class="tok-w">	</span><span class="tok-k">fi</span>
+<span class="tok-o">}</span>
+
+main<span class="tok-o">()</span><span class="tok-w"> </span><span class="tok-o">{</span>
+<span class="tok-w">	</span><span class="tok-k">if</span><span class="tok-w"> </span>!<span class="tok-w"> </span><span class="tok-k">in</span>-repo<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">		</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Not in a repo.&quot;</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-m">1</span>
+<span class="tok-w">	</span><span class="tok-k">fi</span>
+<span class="tok-w">	</span><span class="tok-k">if</span><span class="tok-w"> </span>!<span class="tok-w"> </span>has-local-changes<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">		</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Already at the latest.&quot;</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-m">0</span>
+<span class="tok-w">	</span><span class="tok-k">fi</span>
+<span class="tok-w">	</span>gitsave<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$@</span><span class="tok-s2">&quot;</span>
+<span class="tok-w">	</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nv">$?</span>
+<span class="tok-o">}</span>
+
+main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$@</span><span class="tok-s2">&quot;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_databases_are_unnecessary"><a class="link" href="#_databases_are_unnecessary">Databases are unnecessary</a></h3>
+<div class="paragraph">
+<p>Raw document data is <em>better</em> than anything in a database—especially for blogging. Storing blog posts deep in some database is actually monumentally stupid and unnecessary in the age of AI. Just a simple, static web page will get automatically indexed in ways no database engine would ever begin to touch in usefulness.</p>
+</div>
+<div class="paragraph">
+<p>The names of the files in PP approach are easy to read and grep making them the identifiers.</p>
+</div>
+<div class="paragraph">
+<p>My kn tool was a complete waste of time even if there was no way of knowing that then. AI has changed <em>everything</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_looking_forward_to_more"><a class="link" href="#_looking_forward_to_more">Looking forward to more</a></h3>
+<div class="paragraph">
+<p>I&#8217;m really looking forward to having more discoveries because of the new format. I feel rather stupid now allowing myself to dump so much time into developing my own system based on Zettelkasten when clearly it is simply stupid to use a Zettelkasten model for anything in the age of AI.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -955,7 +1123,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-03 17:17:20 -0500
+Last updated 2025-01-03 17:56:16 -0500
 </div>
 </div>
 </body>
