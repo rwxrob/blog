@@ -33,6 +33,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 include::./copyright.adoc[]
 
+include::./more-mormon-insanity.adoc[]
+
 include::./pumping-perl.adoc[]
 
 include::./banishing-bash.adoc[]
