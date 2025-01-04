@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 10:11:32</span>
+<span id="revdate">2025-01-04 10:14:30</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
@@ -546,7 +546,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Normally I really hate using <code>/usr/bin/env</code> for anything if for no other reason than being completely unnecessary extra process. I also come from a time when such things were considered extremely insecure and we set <code>PATH</code> explicitly at the top of all our shell scripts.</p>
 </div>
 <div class="paragraph">
-<p>God bless macOS for not sucking, except for <code>brew</code>. I absolutely love it but having everything in <code>/opt/homebrew</code> really screws up depending on any sort of reliable location for expected binaries in <em>any</em> interpreted language shebang line.</p>
+<p>God bless macOS for not sucking, except for <code>brew</code>. I absolutely love it but having everything in <code>/opt/homebrew</code> really screws up depending on any sort of reliable location for expected binaries in <em>any</em> interpreted language shebang line, which, if I&#8217;m completely honest, was a significant consideration in my decision to switch to <code>/bin/sh</code> instead of <code>/usr/bin/env bash</code> which is mandated if you want to use the latest bash on macOS. It just made everything that much slower to execute unnecessarily.</p>
 </div>
 <div class="paragraph">
 <p>For what it&#8217;s worth, this practice is explicitly recommended in the current official man page for Perl itself so I guess I&#8217;ll get over it.</p>
