@@ -47,4 +47,6 @@ include::./ai-or-die.adoc[]
 
 include::./changes-for-2025.adoc[]
 
+include::./face-plant.adoc[]
+
 include::./copyright.adoc[]
