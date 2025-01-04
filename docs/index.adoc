@@ -23,9 +23,17 @@
 :pygments-style: vs
 :pygments-linenums-mode: table
 
-[cols="^.^1,1,1",options="autowidth"]
+[cols="^.^1,1,1,1",options="autowidth"]
 |===
-| https://linktr.ee/rwxrob | link:./rwxrob-blog.pdf[Download PDF] | link:./rwxrob-blog.epub[Download EPUB]
+
+ifndef::notoc[]
+| link:./notoc.html[No TOC Version] | https://linktr.ee/rwxrob | link:./rwxrob-blog.pdf[Download PDF] | link:./rwxrob-blog.epub[Download EPUB]
+endif::notoc[]
+
+ifdef::notoc[]
+| link:./index.html[TOC Version] | https://linktr.ee/rwxrob | link:./rwxrob-blog.pdf[Download PDF] | link:./rwxrob-blog.epub[Download EPUB]
+endif::notoc[]
+
 |===
 
 Hello friend. Welcome. Here you'll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.
@@ -33,6 +41,12 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 ---
 
 // NEW POST HERE
+
+include::./perl-chomp-is-dead.adoc[]
+
+include::./building-asciidoc.adoc[]
+
+include::./subshell-fail.adoc[]
 
 include::./mkdocs-fails.adoc[]
 

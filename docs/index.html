@@ -486,12 +486,15 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 08:43:29</span>
+<span id="revdate">2025-01-04 10:05:06</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_perl_chomp_is_dead">Perl chomp is dead</a></li>
+<li><a href="#_building_asciidoc">Building AsciiDoc</a></li>
+<li><a href="#_subshell_fail">Subshell fail</a></li>
 <li><a href="#_mkdocs_fails_writers">MkDocs fails writers</a></li>
 <li><a href="#_perl_use_v5_36">Perl: use v5.36</a></li>
 <li><a href="#_frequent_disposable_commits">Frequent, disposable commits</a></li>
@@ -515,10 +518,12 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <col>
 <col>
 <col>
+<col>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><a href="https://linktr.ee/rwxrob" class="bare">https://linktr.ee/rwxrob</a></p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><a href="./notoc.html">No TOC Version</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linktr.ee/rwxrob" class="bare">https://linktr.ee/rwxrob</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./rwxrob-blog.pdf">Download PDF</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./rwxrob-blog.epub">Download EPUB</a></p></td>
 </tr>
@@ -528,6 +533,211 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_perl_chomp_is_dead"><a class="link" href="#_perl_chomp_is_dead">Perl chomp is dead</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 9:50:12AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>After a very frustrating fight with new Perl having lost a lot of knowledge about it I learned that the age-old <code>chomp</code> in Perl is still there but for some reason is  not as dependable. I&#8217;m sure it has something to do with the <code>$/</code> the <code>$INPUT_RECORD_SEPARATOR</code> which is normally <code>\n</code> and now that I&#8217;m on several different types of systems (macOS and Linux) it just doesn&#8217;t behave correctly. I specifically hit this in my <code>buildadoc</code> script (posted earlier).</p>
+</div>
+<div class="paragraph">
+<p>Rather than use it I use the Unicode white space <code>\R</code> instead. That&#8217;s right, good 'ol <code>\S</code> has been replaced with one that is Unicode aware.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/env perl</span>
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">v5</span><span class="tok-mf">.36</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$pwd</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-sb">`pwd`</span><span class="tok-p">;</span>
+<span class="tok-nv">$pwd</span><span class="tok-w"> </span><span class="tok-o">=~</span><span class="tok-w"> </span><span class="tok-sr">s/\R$//</span><span class="tok-p">;</span><span class="tok-w">    </span><span class="tok-c1"># better than chomp</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nv">$parent</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$name</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$pwd</span><span class="tok-w"> </span><span class="tok-o">=~</span><span class="tok-w"> </span><span class="tok-n">m</span><span class="tok-p">,</span><span class="tok-sr">/([^/</span><span class="tok-p">]</span><span class="tok-o">+</span><span class="tok-p">)</span><span class="tok-sr">/([^/</span><span class="tok-p">]</span><span class="tok-o">+</span><span class="tok-p">)</span><span class="tok-nv">$</span><span class="tok-p">,</span><span class="tok-n">m</span><span class="tok-p">;</span>
+<span class="tok-n">say</span><span class="tok-w"> </span><span class="tok-s">&quot;$parent-$name.txt&quot;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_asciidoc"><a class="link" href="#_building_asciidoc">Building AsciiDoc</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 9:37:10AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s the latest script that I use to build this site and content.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/usr/bin/env perl</span>
+use<span class="tok-w"> </span>v5.36<span class="tok-p">;</span>
+
+<span class="tok-c1"># total the hours from the main index.adoc page</span>
+open<span class="tok-w"> </span>my<span class="tok-w"> </span><span class="tok-nv">$fh</span>,<span class="tok-w"> </span><span class="tok-s1">&#39;&lt;&#39;</span>,<span class="tok-w"> </span><span class="tok-s1">&#39;./docs/index.adoc&#39;</span><span class="tok-w"> </span>or<span class="tok-w"> </span>die<span class="tok-w"> </span><span class="tok-s2">&quot;Could not open file: </span><span class="tok-nv">$!</span><span class="tok-s2">&quot;</span><span class="tok-p">;</span>
+<span class="tok-nb">local</span><span class="tok-w"> </span>$/<span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-nv">$buf</span><span class="tok-w">          </span><span class="tok-o">=</span><span class="tok-w"> </span>&lt;<span class="tok-nv">$fh</span>&gt;<span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-nv">$hours_mentor</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-m">0</span><span class="tok-p">;</span>
+map<span class="tok-w"> </span><span class="tok-o">{</span><span class="tok-w"> </span><span class="tok-nv">$hours_mentor</span><span class="tok-w"> </span>+<span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$_</span><span class="tok-w"> </span><span class="tok-o">}</span><span class="tok-w"> </span><span class="tok-nv">$buf</span><span class="tok-w"> </span><span class="tok-o">=</span>~<span class="tok-w"> </span>/hours<span class="tok-o">=</span><span class="tok-s2">&quot;(\d+)&quot;</span>/g<span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-nv">$hours_self</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$hours_mentor</span><span class="tok-w"> </span>*<span class="tok-w"> </span><span class="tok-m">2</span><span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-nv">$hours_total</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$hours_self</span><span class="tok-w"> </span>+<span class="tok-w"> </span><span class="tok-nv">$hours_mentor</span><span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-nv">$hours_week</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$hours_total</span><span class="tok-w"> </span>/<span class="tok-w"> </span><span class="tok-m">15</span><span class="tok-p">;</span>
+
+<span class="tok-c1"># set the exact date and time of the build</span>
+my<span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-w"> </span><span class="tok-nv">$sec</span>,<span class="tok-w"> </span><span class="tok-nv">$min</span>,<span class="tok-w"> </span><span class="tok-nv">$hour</span>,<span class="tok-w"> </span><span class="tok-nv">$mday</span>,<span class="tok-w"> </span><span class="tok-nv">$mon</span>,<span class="tok-w"> </span><span class="tok-nv">$year</span><span class="tok-w"> </span><span class="tok-o">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span>localtime<span class="tok-o">()</span><span class="tok-p">;</span>
+<span class="tok-nv">$year</span><span class="tok-w"> </span>+<span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-m">1900</span><span class="tok-p">;</span>
+<span class="tok-nv">$mon</span><span class="tok-w">  </span>+<span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-m">1</span><span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-nv">$date</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span>sprintf<span class="tok-w"> </span><span class="tok-s2">&quot;%04d-%02d-%02d %02d:%02d:%02d&quot;</span>,
+<span class="tok-w">  </span><span class="tok-nv">$year</span>,<span class="tok-w"> </span><span class="tok-nv">$mon</span>,<span class="tok-w"> </span><span class="tok-nv">$mday</span>,<span class="tok-w"> </span><span class="tok-nv">$hour</span>,<span class="tok-w"> </span><span class="tok-nv">$min</span>,<span class="tok-w"> </span><span class="tok-nv">$sec</span><span class="tok-p">;</span>
+
+<span class="tok-c1"># HTML</span>
+qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-D<span class="tok-w"> </span>docs<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">date</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$date</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span>allow-uri-read<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_mentor</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_mentor</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_self</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_self</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_total</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_total</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_week</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_week</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-o<span class="tok-w"> </span>index.html<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>./docs/index.adoc
+<span class="tok-o">}</span><span class="tok-p">;</span>
+
+qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-D<span class="tok-w"> </span>docs<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">date</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$date</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span>toc!<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">notoc</span><span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span>allow-uri-read<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_mentor</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_mentor</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_self</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_self</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_total</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_total</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_week</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_week</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-o<span class="tok-w"> </span>notoc.html<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>./docs/index.adoc
+<span class="tok-o">}</span><span class="tok-p">;</span>
+
+my<span class="tok-w"> </span><span class="tok-nv">$pwd</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-sb">`</span><span class="tok-nb">pwd</span><span class="tok-sb">`</span><span class="tok-p">;</span>
+<span class="tok-nv">$pwd</span><span class="tok-w"> </span><span class="tok-o">=</span>~<span class="tok-w"> </span>s/<span class="tok-se">\R</span>$//<span class="tok-p">;</span>
+my<span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-w"> </span><span class="tok-nv">$parent</span>,<span class="tok-w"> </span><span class="tok-nv">$name</span><span class="tok-w"> </span><span class="tok-o">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$pwd</span><span class="tok-w"> </span><span class="tok-o">=</span>~<span class="tok-w"> </span>m,/<span class="tok-o">([</span>^/<span class="tok-o">]</span>+<span class="tok-o">)</span>/<span class="tok-o">([</span>^/<span class="tok-o">]</span>+<span class="tok-o">)</span>$,m<span class="tok-p">;</span>
+
+<span class="tok-c1"># PDF</span>
+qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor-pdf<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-D<span class="tok-w"> </span>docs<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">date</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$date</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span>allow-uri-read<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_mentor</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_mentor</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_self</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_self</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_total</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_total</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_week</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_week</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-o<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$parent</span><span class="tok-s2">-</span><span class="tok-nv">$name</span><span class="tok-s2">.pdf&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>./docs/index.adoc
+<span class="tok-o">}</span><span class="tok-p">;</span>
+
+<span class="tok-c1">#EPUB</span>
+qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor-epub3<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-D<span class="tok-w"> </span>docs<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">date</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$date</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span>allow-uri-read<span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_mentor</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_mentor</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_self</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_self</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_total</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_total</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_week</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_week</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>-o<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$parent</span><span class="tok-s2">-</span><span class="tok-nv">$name</span><span class="tok-s2">.epub&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
+<span class="tok-w">  </span>./docs/index.adoc
+<span class="tok-o">}</span><span class="tok-p">;</span>
+
+<span class="tok-nv">__END__</span>
+
+<span class="tok-o">=</span>head1<span class="tok-w"> </span>NAME
+
+buildadoc<span class="tok-w"> </span>-<span class="tok-w"> </span>build<span class="tok-w"> </span>AsciiDoc<span class="tok-w"> </span>with<span class="tok-w"> </span>rwxrob<span class="tok-w"> </span>preferences</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The script is updated every time I build so might not reflect the date of this blog post.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_different_formats"><a class="link" href="#_different_formats">Different formats</a></h3>
+<div class="paragraph">
+<p>You&#8217;ll see that <code>asciidoc</code> gets run four times:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>HTML site with TOC</p>
+</li>
+<li>
+<p>HTML site without TOC</p>
+</li>
+<li>
+<p>PDF</p>
+</li>
+<li>
+<p>EPUB</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>I could add any other formats that I need.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_calculate_hours"><a class="link" href="#_calculate_hours">Calculate hours</a></h3>
+<div class="paragraph">
+<p>I have hours calculation built into the current default. I&#8217;ll probably remove that later since not everything has hours in it. That was specifically for <a href="https://github.com/rwxrob/coding-from-the-get-go"><em>Coding from the Get Go</em></a>. It is nice to have though for other things. As the volume of text gets larger though it might have to go.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_subshell_fail"><a class="link" href="#_subshell_fail">Subshell fail</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 9:00:00AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>I used to think that by encapsulating everything in any of my shell scripts into a function and calling it at the end of the script was a good thing even though it meant there would be a forced subshell execution. Here&#8217;s an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bash"><span></span><span class="tok-ch">#!/usr/bin/env bash</span>
+
+<span class="tok-c1"># Outputs the seconds since the thing identified by the first argument</span>
+<span class="tok-c1"># was last modified (not created).</span>
+
+ageof<span class="tok-o">()</span><span class="tok-w"> </span><span class="tok-o">{</span>
+<span class="tok-w">	</span><span class="tok-nb">local</span><span class="tok-w"> </span><span class="tok-nv">path</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$1</span><span class="tok-s2">&quot;</span>
+<span class="tok-w">	</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[[</span><span class="tok-w"> </span>-z<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$path</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">		</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s1">&#39;usage: ageof &lt;path&gt;&#39;</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-m">1</span>
+<span class="tok-w">	</span><span class="tok-k">fi</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-k">$(($(</span>date<span class="tok-w"> </span>+%s<span class="tok-k">)</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-k">$(</span>date<span class="tok-w"> </span>-r<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$path</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span>+%s<span class="tok-k">)))</span>
+<span class="tok-o">}</span>
+
+ageof<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$@</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-c1"># OMG WHY THE SUBSHELL FOR NO REASON!!</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I&#8217;m mortified with embarrassment for doing this.</p>
+</div>
+<div class="paragraph">
+<p>My logic was that I could easily <code>daf</code> the function into other stuff later. But by just having it as a single command I can simply remove the shebang line and include it just as easily and give it a name that is better fitted for whatever I&#8217;m putting it in.</p>
+</div>
+<div class="paragraph">
+<p>Honestly, however, if it is reusable code should either stay a single command or be written in Go in a more reusable way.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1369,7 +1579,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 08:13:38 -0500
+Last updated 2025-01-04 09:50:12 -0500
 </div>
 </div>
 </body>

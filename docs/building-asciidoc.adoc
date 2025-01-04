@@ -1,0 +1,30 @@
+= Building AsciiDoc
+
+_Saturday, January 4, 2025, 9:37:10AM EST_
+
+Here's the latest script that I use to build this site and content.
+
+[source,shell]
+----
+include::../../dot/scripts/buildadoc[]
+----
+
+[NOTE]
+====
+The script is updated every time I build so might not reflect the date of this blog post.
+====
+
+== Different formats
+
+You'll see that `asciidoc` gets run four times:
+
+. HTML site with TOC
+. HTML site without TOC
+. PDF
+. EPUB
+
+I could add any other formats that I need.
+
+== Calculate hours
+
+I have hours calculation built into the current default. I'll probably remove that later since not everything has hours in it. That was specifically for link:https://github.com/rwxrob/coding-from-the-get-go[_Coding from the Get Go_]. It is nice to have though for other things. As the volume of text gets larger though it might have to go.

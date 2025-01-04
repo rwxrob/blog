@@ -1,0 +1,17 @@
+= Perl chomp is dead
+
+_Saturday, January 4, 2025, 9:50:12AM EST_
+
+After a very frustrating fight with new Perl having lost a lot of knowledge about it I learned that the age-old `chomp` in Perl is still there but for some reason is  not as dependable. I'm sure it has something to do with the `$/` the `$INPUT_RECORD_SEPARATOR` which is normally `\n` and now that I'm on several different types of systems (macOS and Linux) it just doesn't behave correctly. I specifically hit this in my `buildadoc` script (posted earlier).
+
+Rather than use it I use the Unicode white space `\R` instead. That's right, good 'ol `\S` has been replaced with one that is Unicode aware.
+
+[source,perl]
+----
+#!/usr/bin/env perl
+use v5.36;
+my $pwd = `pwd`;
+$pwd =~ s/\R$//;    # better than chomp
+my ( $parent, $name ) = $pwd =~ m,/([^/]+)/([^/]+)$,m;
+say "$parent-$name.txt"
+----

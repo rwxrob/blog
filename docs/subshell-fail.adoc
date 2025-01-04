@@ -1,0 +1,30 @@
+= Subshell fail
+
+_Saturday, January 4, 2025, 9:00:00AM EST_
+
+I used to think that by encapsulating everything in any of my shell scripts into a function and calling it at the end of the script was a good thing even though it meant there would be a forced subshell execution. Here's an example:
+
+[source,bash]
+----
+#!/usr/bin/env bash
+
+# Outputs the seconds since the thing identified by the first argument
+# was last modified (not created).
+
+ageof() {
+	local path="$1"
+	if [[ -z "$path" ]]; then
+		echo 'usage: ageof <path>'
+		return 1
+	fi
+	echo $(($(date +%s) - $(date -r "$path" +%s)))
+}
+
+ageof "$@" # OMG WHY THE SUBSHELL FOR NO REASON!!
+----
+
+I'm mortified with embarrassment for doing this.
+
+My logic was that I could easily `daf` the function into other stuff later. But by just having it as a single command I can simply remove the shebang line and include it just as easily and give it a name that is better fitted for whatever I'm putting it in.
+
+Honestly, however, if it is reusable code should either stay a single command or be written in Go in a more reusable way.
