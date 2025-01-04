@@ -1,0 +1,45 @@
+= type? which? command -v?
+
+_Saturday, January 4, 2025, 4:03:37PM EST_
+
+I was pleased to see that `type` works in a Perl `backtick` pipeline if the underlying shell is `bash`, `ksh`, `zsh`, even `/bin/sh` on macOS, which is close to `ksh`. But is it good for POSIX shell scripts? Definitely not. In fact, `type` is amazing for use interactively but should probably never be used in a script, even though I had forgotten why until just now when I did the research.
+
+Here are the options as a reminder:
+
+[cols="1,1,1,1", options="header"]
+|===
+| Task                          | `type`  | `command -v` | `which`
+| Check built-in/alias/function | ✅ Yes  | ✅ Yes       | ❌ No
+| Check shell built-in          | ✅ Yes  | ✅ Yes       | ❌ No
+| Check shell alias             | ✅ Yes  | ✅ Yes       | ❌ No
+| Check shell function          | ✅ Yes  | ✅ Yes       | ❌ No
+| Check executable in `$PATH`   | ✅ Yes  | ✅ Yes       | ✅ Yes
+| Portability                   | ❌ No   | ✅ POSIX     | ⚠️ Varies
+| Performance                   | ✅ Fast | ✅ Fast      | ⚠️ Slow
+|===
+
+== Interactive command line usage: `type`
+
+I was burned pretty hard recently by using `which` out of habit. (Let's be honest, it's a lot faster to type than `command -v`.) I have several decades of muscle memory that were wrongly programmed to type `which` instead of `type`. On this one occasion I had recently added a new script to take the place of another and change the location so that PATH resolved differently. (I see you cringing already.) I ran it and still got the old thing even though it didn't even exist. It was as if the old one was gone and the new one—in my path—was not being seen. The fix was simply `hash -r` but had I used `type` I would have seen that immediately.
+
+Keep in mind that `type` _is not POSIX_ no matter what shell supports it.
+
+[cols="1,1,1", options="header"]
+|===
+| Shell      | `type` Support    | `command -v` Support
+| **bash**   | ✅ Yes           | ✅ Yes
+| **zsh**    | ✅ Yes           | ✅ Yes
+| **ksh**    | ✅ Yes           | ✅ Yes
+| **dash**   | ⚠️ Partial       | ✅ Yes
+| **sh (POSIX)** | ❌ Not guaranteed | ✅ Yes
+|===
+
+The `type` command also requires annoyingly to redirect the output every time.
+
+== Call to know which is in PATH: `which`
+
+The `which` command returns the full path as well as whether or not it exists. Most people have used this all their terminal-using lives. It does have one _major_ weakness. If the goal is to check what would happen in a user's experience when that thing is added to a pipeline potentially called from within a calling executable then the response would be drastically wrong. This can lead to all kinds of obscure but very serious bugs. It's also the main reason I only use shell functions and aliases in a very limited way so they don't potentially conflict with code someone has written that assumes `which` is a safe way to determine if that thing they are typing or calling is safe. I don't have to tell you how easy such a program would be to own by adding a function that is the same name as that executable binary the program is expecting. There. I gave you yet another attack vector: which injection.
+
+== Call to know if _anything_ callable exists: `command -v`
+
+This is the only safe way to ensure that something can be called or is not already callable by the parent shell. This is why you will see this method used in most textbooks and courses about Unix shell scripting. Hopefully, this memory jog will help you understand why.

@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 15:50:13</span>
+<span id="revdate">2025-01-04 16:31:20</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_type_which_command_v">type? which? command -v?</a></li>
 <li><a href="#_scripts_without_suffixes">Scripts without suffixes</a></li>
 <li><a href="#_always_script_over_function">Always script over function</a></li>
 <li><a href="#_packing_a_syscall_in_perl">Packing a syscall in perl</a></li>
@@ -538,6 +539,145 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_type_which_command_v"><a class="link" href="#_type_which_command_v">type? which? command -v?</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 4:03:37PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>I was pleased to see that <code>type</code> works in a Perl <code>backtick</code> pipeline if the underlying shell is <code>bash</code>, <code>ksh</code>, <code>zsh</code>, even <code>/bin/sh</code> on macOS, which is close to <code>ksh</code>. But is it good for POSIX shell scripts? Definitely not. In fact, <code>type</code> is amazing for use interactively but should probably never be used in a script, even though I had forgotten why until just now when I did the research.</p>
+</div>
+<div class="paragraph">
+<p>Here are the options as a reminder:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Task</th>
+<th class="tableblock halign-left valign-top"><code>type</code></th>
+<th class="tableblock halign-left valign-top"><code>command -v</code></th>
+<th class="tableblock halign-left valign-top"><code>which</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check built-in/alias/function</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check shell built-in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check shell alias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check shell function</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check executable in <code>$PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Portability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ POSIX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Varies</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Fast</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Fast</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Slow</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_interactive_command_line_usage_type"><a class="link" href="#_interactive_command_line_usage_type">Interactive command line usage: <code>type</code></a></h3>
+<div class="paragraph">
+<p>I was burned pretty hard recently by using <code>which</code> out of habit. (Let&#8217;s be honest, it&#8217;s a lot faster to type than <code>command -v</code>.) I have several decades of muscle memory that were wrongly programmed to type <code>which</code> instead of <code>type</code>. On this one occasion I had recently added a new script to take the place of another and change the location so that PATH resolved differently. (I see you cringing already.) I ran it and still got the old thing even though it didn&#8217;t even exist. It was as if the old one was gone and the new one—in my path—was not being seen. The fix was simply <code>hash -r</code> but had I used <code>type</code> I would have seen that immediately.</p>
+</div>
+<div class="paragraph">
+<p>Keep in mind that <code>type</code> <em>is not POSIX</em> no matter what shell supports it.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Shell</th>
+<th class="tableblock halign-left valign-top"><code>type</code> Support</th>
+<th class="tableblock halign-left valign-top"><code>command -v</code> Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bash</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>zsh</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ksh</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dash</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Partial</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sh (POSIX)</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ Not guaranteed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>type</code> command also requires annoyingly to redirect the output every time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_call_to_know_which_is_in_path_which"><a class="link" href="#_call_to_know_which_is_in_path_which">Call to know which is in PATH: <code>which</code></a></h3>
+<div class="paragraph">
+<p>The <code>which</code> command returns the full path as well as whether or not it exists. Most people have used this all their terminal-using lives. It does have one <em>major</em> weakness. If the goal is to check what would happen in a user&#8217;s experience when that thing is added to a pipeline potentially called from within a calling executable then the response would be drastically wrong. This can lead to all kinds of obscure but very serious bugs. It&#8217;s also the main reason I only use shell functions and aliases in a very limited way so they don&#8217;t potentially conflict with code someone has written that assumes <code>which</code> is a safe way to determine if that thing they are typing or calling is safe. I don&#8217;t have to tell you how easy such a program would be to own by adding a function that is the same name as that executable binary the program is expecting. There. I gave you yet another attack vector: which injection.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_call_to_know_if_anything_callable_exists_command_v"><a class="link" href="#_call_to_know_if_anything_callable_exists_command_v">Call to know if <em>anything</em> callable exists: <code>command -v</code></a></h3>
+<div class="paragraph">
+<p>This is the only safe way to ensure that something can be called or is not already callable by the parent shell. This is why you will see this method used in most textbooks and courses about Unix shell scripting. Hopefully, this memory jog will help you understand why.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1756,7 +1896,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 15:08:59 -0500
+Last updated 2025-01-04 16:03:37 -0500
 </div>
 </div>
 </body>
