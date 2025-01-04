@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 10:14:30</span>
+<span id="revdate">2025-01-04 12:37:12</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -513,6 +513,29 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_awk_is_never_worth_it"><a class="link" href="#_awk_is_never_worth_it">Awk is never worth it</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 12:29:40PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Given the size of the <code>awk</code> binary versus even the latest <code>perl</code> it makes no sense to use <em>any</em> POSIX shell script that calls out to <code>awk</code> if you are sure <code>perl</code> is going to be on the system.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code><span></span>-rwxr-xr-x  1 root  wheel   295K Aug  4 06:31 /usr/bin/awk
+-rwxr-xr-x  1 root  wheel   134K Aug  4 06:31 /usr/bin/perl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In fact, as soon as you reach for <code>awk</code> or <code>tr</code> or <code>cut</code> or <code>sed</code> there is a good chance you have crossed over into <code>perl</code> territory and are no longer using the best tool for the job. You are likely not only going to invoke one subprocess for <code>awk</code> but another one later for one of these other POSIX requirements. Even if you use the <code>/usr/bin/env perl</code> shebang line you might as well write the entire script in <code>perl</code> at that point which <em><strong>runs in a single process</strong></em> once it is started and has ridiculously better text processing functionality for <em>half</em> the amount of RAM consumption.</p>
+</div>
+<div class="paragraph">
+<p>Even today most systems that have <code>awk</code> installed will have a version of <code>perl</code> installed that will do what you want more cleanly and use less resources.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1576,7 +1599,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 10:07:30 -0500
+Last updated 2025-01-04 12:29:40 -0500
 </div>
 </div>
 </body>

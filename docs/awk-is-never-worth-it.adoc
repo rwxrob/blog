@@ -1,0 +1,15 @@
+= Awk is never worth it
+
+_Saturday, January 4, 2025, 12:29:40PM EST_
+
+Given the size of the `awk` binary versus even the latest `perl` it makes no sense to use _any_ POSIX shell script that calls out to `awk` if you are sure `perl` is going to be on the system.
+
+[source]
+----
+-rwxr-xr-x  1 root  wheel   295K Aug  4 06:31 /usr/bin/awk
+-rwxr-xr-x  1 root  wheel   134K Aug  4 06:31 /usr/bin/perl
+----
+
+In fact, as soon as you reach for `awk` or `tr` or `cut` or `sed` there is a good chance you have crossed over into `perl` territory and are no longer using the best tool for the job. You are likely not only going to invoke one subprocess for `awk` but another one later for one of these other POSIX requirements. Even if you use the `/usr/bin/env perl` shebang line you might as well write the entire script in `perl` at that point which _**runs in a single process**_ once it is started and has ridiculously better text processing functionality for _half_ the amount of RAM consumption.
+
+Even today most systems that have `awk` installed will have a version of `perl` installed that will do what you want more cleanly and use less resources.
