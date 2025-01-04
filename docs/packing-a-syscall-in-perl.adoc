@@ -1,0 +1,23 @@
+= Packing a syscall in perl
+
+_Saturday, January 4, 2025, 2:22:40PM EST_
+
+I have been completely freaking out about how amazing Perl is. I am really kicking myself for moving anything over to Python and Bash all those years ago. I was so much more efficient and able to create useful code so much more quickly with Perl and I can feel that power returning as I  remember it. One of those complete _oh my god_ moments was remembering that I can create and send syscalls directly and pack and unpack binary data. Here's a sample:
+
+[source, perl]
+----
+#!/usr/bin/env perl
+use v5.36;
+
+use constant TIOCGWINSZ => 0x5413;
+
+my $winsize = pack('S4', 0, 0, 0, 0);
+if (ioctl(STDOUT, TIOCGWINSZ, $winsize)) {
+    my ($rows, $cols, $xpix, $ypix) = unpack('S4', $winsize);
+    print "Number of terminal lines: $rows\n";
+} else {
+    warn "Unable to get terminal size: $!";
+}
+----
+
+This is just a simple call to get the number of rows, and yeah it's overkill when `tput lines` does exactly the same thing, but just the fact that you can do it blows my mind. If you consider yourself a systems operations specialist or hacker you have to appreciate how succinct and amazing that is.

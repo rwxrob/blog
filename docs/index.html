@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 12:37:12</span>
+<span id="revdate">2025-01-04 14:26:55</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_packing_a_syscall_in_perl">Packing a syscall in perl</a></li>
 <li><a href="#_awk_is_never_worth_it">Awk is never worth it</a></li>
 <li><a href="#_usrbinenv_perl">#/usr/bin/env perl</a></li>
 <li><a href="#_perl_chomp_is_dead">Perl chomp is dead</a></li>
@@ -535,6 +536,36 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_packing_a_syscall_in_perl"><a class="link" href="#_packing_a_syscall_in_perl">Packing a syscall in perl</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 2:22:40PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>I have been completely freaking out about how amazing Perl is. I am really kicking myself for moving anything over to Python and Bash all those years ago. I was so much more efficient and able to create useful code so much more quickly with Perl and I can feel that power returning as I  remember it. One of those complete <em>oh my god</em> moments was remembering that I can create and send syscalls directly and pack and unpack binary data. Here&#8217;s a sample:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/env perl</span>
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">v5</span><span class="tok-mf">.36</span><span class="tok-p">;</span>
+
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">constant</span><span class="tok-w"> </span><span class="tok-n">TIOCGWINSZ</span><span class="tok-w"> </span><span class="tok-o">=&gt;</span><span class="tok-w"> </span><span class="tok-mh">0x5413</span><span class="tok-p">;</span>
+
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$winsize</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">pack</span><span class="tok-p">(</span><span class="tok-s">&#39;S4&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">);</span>
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nb">ioctl</span><span class="tok-p">(</span><span class="tok-bp">STDOUT</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">TIOCGWINSZ</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$winsize</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">$rows</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$cols</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$xpix</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$ypix</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">unpack</span><span class="tok-p">(</span><span class="tok-s">&#39;S4&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$winsize</span><span class="tok-p">);</span>
+<span class="tok-w">    </span><span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-s">&quot;Number of terminal lines: $rows\n&quot;</span><span class="tok-p">;</span>
+<span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-nb">warn</span><span class="tok-w"> </span><span class="tok-s">&quot;Unable to get terminal size: $!&quot;</span><span class="tok-p">;</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is just a simple call to get the number of rows, and yeah it&#8217;s overkill when <code>tput lines</code> does exactly the same thing, but just the fact that you can do it blows my mind. If you consider yourself a systems operations specialist or hacker you have to appreciate how succinct and amazing that is.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1621,7 +1652,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 12:29:40 -0500
+Last updated 2025-01-04 14:22:40 -0500
 </div>
 </div>
 </body>
