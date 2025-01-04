@@ -1,0 +1,37 @@
+= Scripts without suffixes
+
+_Saturday, January 4, 2025, 3:08:59PM EST_
+
+Very few things communicate "I'm a fucking noob" more that simply adding `.py` or `.pl` or `.sh` to the end of your _executable_ scripts (not libraries)—even more if you hard-code them into pipelines used by other scripts. If I were interviewing a person for a SysDE position (and I've interviewed 100s) and they claimed they did this for all their tools I would immediate reject them. It demonstrates that they have no fundamental understand of Unix at all—at least not as a tool smith and developer (which is what a SysDE requires).
+
+[source,shell]
+----
+foo.py | bar.pl | mysort.sh
+----
+
+The reason no one should willingly add suffixes to any executable that could ever be used in a pipeline at all—including installation logs—should be glaringly obvious to anyone who truly understands the Unix philosophy and the very thing that makes using the terminal so powerful in the first place. Unfortunately, it isn't. I mean, it _really_ isn't.
+
+== Who started it?
+
+That idiotic practice of suffixing _everything_ started in the probably 90s because of shitty Windows systems requiring them to know what type of script it is because Windows can't do shebang lines. But why THE HELL would we want a shitty Windows practice to persist into Unix land.
+
+Some of us have noticed that web developers and "full stack developers" tend to do this as well, which tracks because as a community they are the most likely to use a terminal without having a clue about what Unix even is, you know, the type who ask me "what's your distro?" These developers have suffixes on everything they make all the time because the web requires it, so, to them, it follows that it must be true for the scripts in their dot files scripts directory—if they even have one.
+
+[CAUTION]
+====
+Being a vendor who does this does not justify it. My friends and I bitch all the time about vendors who just do not understand this and yet are multi-million dollar companies. But these same companies have no problem corrupting my `~/.bashrc` without my confirmation at all either. Being a vendor of any size doesn't mean anything—in fact—it means you should probably be _more_ cautious when dealing with them—especially IBM.
+====
+
+I see professionals argue about this as if it is defensible all the time. I just laugh my ass off every single time. Do I look down on them? Absolutely. They instantly lose every shred of respect in my eyes because it means _they do not understand Unix at all_. Wait, I already said that. Oh well, it cannot be said enough.
+
+== What about symlinks?
+
+Some have suggested that links take care of this problem. That the original can have the suffix but the symbolic or hard link can not have it. While this is a good hack to _fix_ whatever some idiot did to add suffixes that you cannot now avoid, links are never a defense of doing it wrong to begin with.
+
+== We aren't talking libraries
+
+We aren't talking about _libraries_ and source files, anything that is _not_ executable without explicitly providing the interpreter on the command line first. Those tend to make a lot of sense because it makes no sense to put a shebang line in them and no editor on the planet is smart enough to guess based on the content alone. In fact, using suffixes for this sorts of things should probably be a mandatory best practice in order to disambiguate them and keep editors happy.
+
+== The only exception
+
+There are _extreme_ exceptions to this like for `install` when there is a `.bat` and a `.sh` and a `.py` of the same thing. Vendors love to so this and they are counting on their script getting executed once or so and not really being joined in pipeline permanently. But even then it is really not that justified—especially if there is only one install script. People use this exception to justify creating all their home scripts with suffixes because "all interpreted scripts should have a suffix" and they are monstrously _wrong_.
