@@ -1,0 +1,17 @@
+= Perl: use v5.36
+
+_Saturday, January 4, 2025, 7:51:24AM EST_
+
+Now that I have returned to my beloved Perl in 2025 (disposing of bash for all personal scripting after being really burned by it) I have been discovering a bunch of new changes that are very convenient for modern Perl development. Keep in mind that these are designed to make use of Perl _on a personal workstation_ where its primary purpose is to create really amazing text processing filter chains that can be easily incorporated into all versions of `vim` and `vi` (as opposed to brittle, bloated, non-transportable plugins to do the same thing).
+
+== No more `use strict`
+
+Yep. Any `use v5.12` or higher gets that by default.
+
+== No more `use warnings`
+
+Yep. Any `use v5.36` or higher gets that by default.
+
+== No more `-E` (`say` just works)
+
+Unfortunately, the amazing `say` keyword just doesn't work by default. I've always found this annoying given how important it is as an alternative to `print "some\n"` with the line returns every time. This is included by default since it is activated with `use v5.10` or higher.

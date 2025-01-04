@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 07:29:37</span>
+<span id="revdate">2025-01-04 08:01:31</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_perl_use_v5_36">Perl: use v5.36</a></li>
 <li><a href="#_frequent_disposable_commits">Frequent, disposable commits</a></li>
 <li><a href="#_perpetual_publishing_over_zettelkasten">Perpetual publishing over Zettelkasten</a></li>
 <li><a href="#_changelog_over_pull_request_body">Changelog over pull request body</a></li>
@@ -526,6 +527,35 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_perl_use_v5_36"><a class="link" href="#_perl_use_v5_36">Perl: use v5.36</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 7:51:24AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Now that I have returned to my beloved Perl in 2025 (disposing of bash for all personal scripting after being really burned by it) I have been discovering a bunch of new changes that are very convenient for modern Perl development. Keep in mind that these are designed to make use of Perl <em>on a personal workstation</em> where its primary purpose is to create really amazing text processing filter chains that can be easily incorporated into all versions of <code>vim</code> and <code>vi</code> (as opposed to brittle, bloated, non-transportable plugins to do the same thing).</p>
+</div>
+<div class="sect2">
+<h3 id="_no_more_use_strict"><a class="link" href="#_no_more_use_strict">No more <code>use strict</code></a></h3>
+<div class="paragraph">
+<p>Yep. Any <code>use v5.12</code> or higher gets that by default.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_no_more_use_warnings"><a class="link" href="#_no_more_use_warnings">No more <code>use warnings</code></a></h3>
+<div class="paragraph">
+<p>Yep. Any <code>use v5.36</code> or higher gets that by default.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_no_more_e_say_just_works"><a class="link" href="#_no_more_e_say_just_works">No more <code>-E</code> (<code>say</code> just works)</a></h3>
+<div class="paragraph">
+<p>Unfortunately, the amazing <code>say</code> keyword just doesn&#8217;t work by default. I&#8217;ve always found this annoying given how important it is as an alternative to <code>print "some\n"</code> with the line returns every time. This is included by default since it is activated with <code>use v5.10</code> or higher.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1270,7 +1300,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 07:29:36 -0500
+Last updated 2025-01-04 07:51:24 -0500
 </div>
 </div>
 </body>

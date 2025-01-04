@@ -34,6 +34,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./perl-use-5-36.adoc[]
+
 include::./disposable-commits.adoc[]
 
 include::./perpetual-publishing-over-zettelkasten.adoc[]
