@@ -1,0 +1,35 @@
+= Frequent, disposable commits
+
+_Saturday, January 4, 2025, 6:55:14AM EST_
+
+Squash and merge with disposable commit messages that really don't matter because they are all thrown away at the end in exchange for one PR merge commit that includes an extensive change log are really the only viable git PR management method if you want to be able to use draft PRs as a method of sharing ongoing work while it is happening—and you definitely should.
+
+== Who is the commit message for?
+
+Who are all those messages for anyway? Are they really for future generations to read and understand the history of the project? I don't think so. That is why the change log exists.
+
+The use of commit messages are to convey the current work being done to others following the draft PR during its execution.
+
+In a way, commit messages are like an ongoing chat about the work on the project that is happening in real time. Everyone hates that guy who writes a ton in a chat room forcing everyone to read it. Shorter is better.
+
+== Conventional commits are a waste of time
+
+This is going to really anger some people but it has to be said. All that meticulous attention to "conventional commits" is a monumental waste of time. No one cares how pretty the commit messages are.
+
+"But Rob, don't you think having automated change logs is worth it?"
+
+No, no I do not. Because that assumes you can automate something that should never be automated.
+
+Besides, the idea of automating change logs is a huge pipe dream. You can _never_ guarantee that everyone uses commit messages the same way. Therefore, the wasted time attempting to enforce it just stifles and slows development. Why berate the developers who have painfully decided to work on your project just because they didn't pick the exact perfect works to describe the commit.
+
+== Not everyone speaks English
+
+The assumption that commit messages are going to be beautiful also assumes you have perfect English speakers on the project—which describes absolutely zero projects worth following. These faithful committers are a cherished commodity to be encouraged and made to feel welcome and if you hit them with push back on their "bad commit messages" they will just walk and they would be right to do so. You are being a jerk about something that absolutely, positively does not matter. Requiring "good commit" messages just proves you have no idea how to run a project. At least good developers know how to identify that early in the project and stay the fuck away.
+
+== Change logs should _never_ be automated
+
+The change log is a human document for human consumption and attempting to automate their generation _never_ works. Just look around. You will find hundreds of projects with massive changelogs that are completely unintelligible _because_ they are automated instead of having a human—or better yet an AI—summarize the changes in a way that can be grokked easily by the humans bold enough to open it and read it. Huge, automated change logs cause readers to avoid them like the plague they are. Only engineers who don't work with people think automating this is a good idea. Anyone responsible for the marketing and documentation of a project hates that and refuses to accept their automatic creation.
+
+== Commit early, commit often
+
+The mantra _commit early, commit often_ is far more important than any convention about the content of the message itself. By reducing the friction on the commit message to something that is reasonably distinct but short and sweet you encourage yourself and your project developers to commit all the time making the visibility of the work on the project—as well as the possibility of lost work—even higher. I want this more than anything. I want to see the small decisions about how the code is evolving while it is happening over some big, meticulously crafted chunk of code on a massive commit. It makes the commit each much easier to monitor by looking at the diffs quickly and frequently by the others on the team.

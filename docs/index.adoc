@@ -14,6 +14,7 @@
 :toc: left
 :toclevels: 1
 :toc-title: Table of Contents
+:subtitle: Personal blog for Rob Muhlestein (rwxrob)
 :description: Personal blog for Rob Muhlestein (rwxrob)
 :keywords: terminal unix linux tech education tutorials learning techlife hacking cybersecurity cli command-line bash golang programming coding applied-programming independent-learning irc weechat tmux ed ex vi vim neovim nvim w3m lynx twitch proxmox homelab init beginner noob kubernetes network software-development utilities
 :icons: font
@@ -22,16 +23,18 @@
 :pygments-style: vs
 :pygments-linenums-mode: table
 
-Hello friend. Welcome. Here you'll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.
-
 [cols="^.^1,1,1",options="autowidth"]
 |===
 | https://linktr.ee/rwxrob | link:./rwxrob-blog.pdf[Download PDF] | link:./rwxrob-blog.epub[Download EPUB]
 |===
 
+Hello friend. Welcome. Here you'll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.
+
 ---
 
 // NEW POST HERE
+
+include::./disposable-commits.adoc[]
 
 include::./perpetual-publishing-over-zettelkasten.adoc[]
 
