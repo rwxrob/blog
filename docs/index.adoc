@@ -42,6 +42,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./always-script-over-function.adoc[]
+
 include::./packing-a-syscall-in-perl.adoc[]
 
 include::./awk-is-never-worth-it.adoc[]

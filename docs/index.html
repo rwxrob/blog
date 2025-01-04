@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 14:26:55</span>
+<span id="revdate">2025-01-04 15:08:36</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_always_script_over_function">Always script over function</a></li>
 <li><a href="#_packing_a_syscall_in_perl">Packing a syscall in perl</a></li>
 <li><a href="#_awk_is_never_worth_it">Awk is never worth it</a></li>
 <li><a href="#_usrbinenv_perl">#/usr/bin/env perl</a></li>
@@ -536,6 +537,45 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_always_script_over_function"><a class="link" href="#_always_script_over_function">Always script over function</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 2:46:10PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Moving back to Perl has reminded me of a best practice that I started to seriously violate by doing everything in bash: the use of functions and aliases for things that should really be stand-alone executables—even if just one line. <em>*You cannot use functions and aliases as filters in Vim and Neovim*</em>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Yes, I know you can force functions to be visible to shell scripts provided they are also in the same language, but that is not the same thing and doesn&#8217;t begin to address the problem.)</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>I hit this problem when I went to port my use of the following shell idiom to check for the existence of something that ends up running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span>!<span class="tok-w"> </span><span class="tok-nb">type</span><span class="tok-w"> </span><span class="tok-s2">&quot;foo&quot;</span><span class="tok-w"> </span>&gt;/dev/null<span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;foo not found&quot;</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-nb">exit</span><span class="tok-w"> </span><span class="tok-m">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While it is true that <code>which</code> and <code>command -a</code> do similar things, they only return true if an executable is in the <code>PATH</code>. Only <code>type</code> ensures that you are detecting aliases and functions as well. Only <code>type</code> catches if <code>foo</code> is still hashed to an old executable location in the <code>PATH</code> instead of the new one or worse <em>even after it has been removed from the system entirely</em> and not yet been rehashed with <code>hash -r</code>. (I promise, if you haven&#8217;t hit this problem you will eventually.)</p>
+</div>
+<div class="paragraph">
+<p>But why would you even want that? Having an alias mask a command makes sense for interactive things that you just don&#8217;t want to have to type out in long form. Masking an executable with a function might allow you to wrap it and call with the full path (like I do with <code>lynx</code>). But at the end of the day, you really just want to get in the habit of creating executable scripts that can be changed into whatever language later. This is why you <em>*should never, ever add a suffix to the end of an executable program of any kind*</em>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1652,7 +1692,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 14:22:40 -0500
+Last updated 2025-01-04 14:46:10 -0500
 </div>
 </div>
 </body>

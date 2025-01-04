@@ -1,0 +1,21 @@
+= Always script over function
+
+_Saturday, January 4, 2025, 2:46:10PM EST_
+
+Moving back to Perl has reminded me of a best practice that I started to seriously violate by doing everything in bash: the use of functions and aliases for things that should really be stand-alone executables—even if just one line. _*You cannot use functions and aliases as filters in Vim and Neovim*_.
+
+[CAUTION]
+====
+Yes, I know you can force functions to be visible to shell scripts provided they are also in the same language, but that is not the same thing and doesn't begin to address the problem.)
+====
+
+I hit this problem when I went to port my use of the following shell idiom to check for the existence of something that ends up running:
+
+[source, shell]
+----
+! type "foo" >/dev/null && echo "foo not found" && exit 1
+----
+
+While it is true that `which` and `command -a` do similar things, they only return true if an executable is in the `PATH`. Only `type` ensures that you are detecting aliases and functions as well. Only `type` catches if `foo` is still hashed to an old executable location in the `PATH` instead of the new one or worse _even after it has been removed from the system entirely_ and not yet been rehashed with `hash -r`. (I promise, if you haven't hit this problem you will eventually.)
+
+But why would you even want that? Having an alias mask a command makes sense for interactive things that you just don't want to have to type out in long form. Masking an executable with a function might allow you to wrap it and call with the full path (like I do with `lynx`). But at the end of the day, you really just want to get in the habit of creating executable scripts that can be changed into whatever language later. This is why you _*should never, ever add a suffix to the end of an executable program of any kind*_.
