@@ -1,0 +1,39 @@
+= MkDocs fails writers
+
+_Saturday, January 4, 2025, 8:13:38AM EST_
+
+Even though MkDocs is beautiful and still probably good for technical documentation it fails to fulfill the needs of a writer who wants more.
+
+== No official EPUB or PDF support
+
+While it can be done, it requires a bunch of Pandoc integration and adaptation. AsciiDoc has it built in.
+
+== Not for actual book publishing
+
+More books have been officially published with AsciiDoc than anything else. Pandoc might be a close second. MkDocs is not for actual book publishing and never was. Use the right tool for the job. AsciiDoc was created above all to publish books as well as web content.
+
+== Vastly inferior template language
+
+At first the AsciiDoc format is harder to grok than Markdown. Once you learn it though, you begin to realise how much better it is. Just tables are one example.
+
+== Cannot include remote URIs (without plugin)
+
+Even though it has to be enabled (for good reason), remote URI inclusion is perhaps one of the most powerful features for writers who maintain multiple copies of books that sometimes share the same content.
+
+`include::https://raw.githubusercontent.com/asciidoctor/asciidoctor/main/README.adoc[]`
+
+As far as I am aware, this cannot be done from any other writing framework (without modification or extension).
+
+== Much harder metadata manipulation
+
+Because AsciiDoc is designed to create documents and not searchable documentation it has much better metadata handling and tagging. This makes my content easier for search engines to process and my AI able to find the right thing.
+
+== Cannot handle large volume
+
+After testing MkDocs with 2000 Zettelkasten nodes earlier it fell on its face. The design of how it indexes keywords is downright idiotic. I did discover some convoluted ways to get around it but it is much nicer not to have to bother with any of that.
+
+== Poor keyword searching
+
+It turns out that keyword searching is actually a bad thing for most content. This is not intuitive at all.
+
+In order for keyword searching to be of value it has to load the entire keyword index—often as a full-site PWA—but at that point why not just put the entire document on the screen and let the reader's powerful builtin browser searching with regular expressions be used instead?

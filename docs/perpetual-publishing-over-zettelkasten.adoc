@@ -46,6 +46,10 @@ I also can just swap out the verb `blog` from `save` using the following script 
 include::../../dot/scripts/save[]
 ----
 
+== EPUB and PDF as a bonus
+
+The reason I don't use MkDocs anymore is because it has almost zero support for EPUB and PDF. AsciiDoc has all this covered and has done for more than two decades. Sometimes mature is better than the latest trends. This is one of those cases. Sure I give up a search box from MkDocs but it is rather poorly designed anyway and doesn't catch stuff that I can catch using regular expressions from a simple web browser. This is the reason I keep my stuff all in a single, long text file with no images to screw things up.
+
 == Databases are unnecessary
 
 Raw document data is _better_ than anything in a database—especially for blogging. Storing blog posts deep in some database is actually monumentally stupid and unnecessary in the age of AI. Just a simple, static web page will get automatically indexed in ways no database engine would ever begin to touch in usefulness.

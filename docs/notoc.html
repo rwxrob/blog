@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 08:01:31</span>
+<span id="revdate">2025-01-04 08:43:29</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -511,6 +511,68 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mkdocs_fails_writers"><a class="link" href="#_mkdocs_fails_writers">MkDocs fails writers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 8:13:38AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Even though MkDocs is beautiful and still probably good for technical documentation it fails to fulfill the needs of a writer who wants more.</p>
+</div>
+<div class="sect2">
+<h3 id="_no_official_epub_or_pdf_support"><a class="link" href="#_no_official_epub_or_pdf_support">No official EPUB or PDF support</a></h3>
+<div class="paragraph">
+<p>While it can be done, it requires a bunch of Pandoc integration and adaptation. AsciiDoc has it built in.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_not_for_actual_book_publishing"><a class="link" href="#_not_for_actual_book_publishing">Not for actual book publishing</a></h3>
+<div class="paragraph">
+<p>More books have been officially published with AsciiDoc than anything else. Pandoc might be a close second. MkDocs is not for actual book publishing and never was. Use the right tool for the job. AsciiDoc was created above all to publish books as well as web content.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vastly_inferior_template_language"><a class="link" href="#_vastly_inferior_template_language">Vastly inferior template language</a></h3>
+<div class="paragraph">
+<p>At first the AsciiDoc format is harder to grok than Markdown. Once you learn it though, you begin to realise how much better it is. Just tables are one example.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cannot_include_remote_uris_without_plugin"><a class="link" href="#_cannot_include_remote_uris_without_plugin">Cannot include remote URIs (without plugin)</a></h3>
+<div class="paragraph">
+<p>Even though it has to be enabled (for good reason), remote URI inclusion is perhaps one of the most powerful features for writers who maintain multiple copies of books that sometimes share the same content.</p>
+</div>
+<div class="paragraph">
+<p><code>include::https://raw.githubusercontent.com/asciidoctor/asciidoctor/main/README.adoc[]</code></p>
+</div>
+<div class="paragraph">
+<p>As far as I am aware, this cannot be done from any other writing framework (without modification or extension).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_much_harder_metadata_manipulation"><a class="link" href="#_much_harder_metadata_manipulation">Much harder metadata manipulation</a></h3>
+<div class="paragraph">
+<p>Because AsciiDoc is designed to create documents and not searchable documentation it has much better metadata handling and tagging. This makes my content easier for search engines to process and my AI able to find the right thing.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cannot_handle_large_volume"><a class="link" href="#_cannot_handle_large_volume">Cannot handle large volume</a></h3>
+<div class="paragraph">
+<p>After testing MkDocs with 2000 Zettelkasten nodes earlier it fell on its face. The design of how it indexes keywords is downright idiotic. I did discover some convoluted ways to get around it but it is much nicer not to have to bother with any of that.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_poor_keyword_searching"><a class="link" href="#_poor_keyword_searching">Poor keyword searching</a></h3>
+<div class="paragraph">
+<p>It turns out that keyword searching is actually a bad thing for most content. This is not intuitive at all.</p>
+</div>
+<div class="paragraph">
+<p>In order for keyword searching to be of value it has to load the entire keyword index—often as a full-site PWA—but at that point why not just put the entire document on the screen and let the reader&#8217;s powerful builtin browser searching with regular expressions be used instead?</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -743,6 +805,12 @@ main<span class="tok-o">()</span><span class="tok-w"> </span><span class="tok-o"
 
 main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$@</span><span class="tok-s2">&quot;</span></code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_epub_and_pdf_as_a_bonus"><a class="link" href="#_epub_and_pdf_as_a_bonus">EPUB and PDF as a bonus</a></h3>
+<div class="paragraph">
+<p>The reason I don&#8217;t use MkDocs anymore is because it has almost zero support for EPUB and PDF. AsciiDoc has all this covered and has done for more than two decades. Sometimes mature is better than the latest trends. This is one of those cases. Sure I give up a search box from MkDocs but it is rather poorly designed anyway and doesn&#8217;t catch stuff that I can catch using regular expressions from a simple web browser. This is the reason I keep my stuff all in a single, long text file with no images to screw things up.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1284,7 +1352,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 07:51:24 -0500
+Last updated 2025-01-04 08:13:38 -0500
 </div>
 </div>
 </body>
