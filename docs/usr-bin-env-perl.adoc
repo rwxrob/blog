@@ -1,0 +1,9 @@
+= #/usr/bin/env perl
+
+_Saturday, January 4, 2025, 10:07:30AM EST_
+
+Normally I really hate using `/usr/bin/env` for anything if for no other reason than being completely unnecessary extra process. I also come from a time when such things were considered extremely insecure and we set `PATH` explicitly at the top of all our shell scripts.
+
+God bless macOS for not sucking, except for `brew`. I absolutely love it but having everything in `/opt/homebrew` really screws up depending on any sort of reliable location for expected binaries in _any_ interpreted language shebang line.
+
+For what it's worth, this practice is explicitly recommended in the current official man page for Perl itself so I guess I'll get over it.
