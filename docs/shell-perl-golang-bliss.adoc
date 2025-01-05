@@ -1,0 +1,107 @@
+= Shell + Perl + Go = Bliss
+
+_Saturday, January 4, 2025, 6:13:17PM EST_
+
+While cleaning up all my dot files as the holidays wrap up I have reached the perfect state of coding bliss in the terminal, the perfect combination of tools that overlap exactly the way it should be. I don't know why I ever changed. The coverage that simple Shell, Perl, and Go provide is absolutely amazing. I'm definitely covering all three for terminal development in my link:https://github.com/rwxrob/terminal-velocity[_Terminal Velocity_] book (eventually). I had to go through this migration to fully realize just how right that decision is.
+
+== POSIX shell is ubiquitous
+
+No not `ksh` (which is _not_ POSIX), not `zsh`, not `bash`, not even `dash`, but pure POSIX shell. POSIX shell scripts will run anywhere. Usually they are gluing together a bunch of other existing things on the system. That's its purpose, to glue stuff together at a minimal level and take the place of functions and aliases that are anti-patterns for those wanting a pure Unix filter experience. Here are a few examples from plain POSIX shell.
+
+This first one called simply `what` is very typical one-liner—often a pipe—that can be called anywhere and combined with other commands in Unix pipelines:
+
+[source,shell]
+----
+include::../../dot/scripts/what[]
+----
+
+A big more complicated but the same idea, `pre` is a typical Vim filter script:
+
+[source,shell]
+----
+include::../../dot/scripts/pre[]
+----
+
+Here's the `wee` command that dumps whatever is passed as an argument or on standard input to the WeeChat IRC socket:
+
+[source,shell]
+----
+include::../../dot/scripts/wee[]
+----
+
+I can literally cut and paste anything, anywhere to my chat on Twitch and in IRC and indirectly to YouTube using this method. Someone wants an interesting block or URL? I just `!!wee` from within Vim to send it to them.
+
+[TIP]
+====
+Scripts this short don't need any extra white space for blank lines. Don't bother and you'll save the compiler just that much extra work. (Although a `;` is the same as a single `\n` so no sense smashing it all onto one line unless you have a lot of indentation. And _never_ indent with spaces. Tabs are the official method of indentation and if you use `shfmt` as your Vim/Ale fixer you will never have to worry about it.
+====
+
+Here's `liveicon` that is embedded in my TMUX configuration file so it appears on the screen:
+
+[source,shell]
+----
+include::../../dot/scripts/liveicon[]
+----
+
+Then I just toggle the status with `recording` and `muted`:
+
+[source,shell]
+----
+include::../../dot/scripts/recording[]
+----
+
+== Perl is a "miniature Linux"
+
+> "Perl is, by and large, a digested and simplified version of Unix. Perl is the Cliff Notes of Unix. I could never really get myself to learn sed, awk, zsh, grep, find, m4, pipes, xargs, tee, cut, paste, yacc, lex, various IPC or even C for that matter. I ought to. In practice, in almost all cases I use Perl." - Larry Wall
+
+Every other GNU/Linux utility can be rather easily replaced with Perl—especially `awk`. Perl's drop-dead simple handling of signals and forking as well as a simple backtick subprocess syntax make it the idea glue between simple shell scripts and other compiled programs. Just look at this example:
+
+[source,perl]
+----
+include::../../dot/scripts/banner[]
+----
+
+That example has a little of everything, besides maybe `pack` and system calls (which I wrote about earlier). This is where Perl really shines. It absolutely destroys bash for this sort of thing. I realized that after three years bashing my head against a wall. Don't be me. Learn Perl today.
+
+Here's another example (`F`) that puts `awk` to shame:
+
+[source,perl]
+----
+include::../../dot/scripts/F[]
+----
+
+I use this all the time as a Vim filter to eliminate columns in stuff with just `F 2..4,5` type of syntax.
+
+== Go for the big stuff
+
+As soon as something grows beyond the rational limits of Perl, which is far earlier than most developers who have made Perl into an entire middleware layer should have done, there is the Go language sitting in that ideal spot. It is super fast to write, simple to grok, powerful, and has every battery included you could ever need for terminal applications—especially terminal interface apps. The Charmbracelet stuff is absolutely gorgeous and CLI frameworks like Bonzai make Go the obvious favorite for a terminal junky who wants to stay productive producing useful, reusable, shareable tools.
+
+Here's an example of my Go YouTube API command line tool (`yt`) that uses Bonzai. You see that there is variable persistence with environment variable overrides, embedded documentation in Markdown rendered to the terminal, tab self-completion, and more. (This `cmd.go` file actually uses a high-level set of functions in another file as well.)
+
+[source,golang]
+----
+include::../../yt/cmd.go[]
+----
+
+== Nothing wrong with other languages
+
+Please do not misunderstand. This is not me saying those are the only languages out there or even that they are the only tools for the job be maintaining a personal terminal development environment the best. I know people who accomplish the entire thing using nothing but Emacs and Lisp. That's just not me. I also use a Rust terminal (WezTerm) and C when required to do low-level stuff that Go doesn't cover. It's just that Shell + Perl + Go covers every major need there is for coding utilities and tools for my personal use in the terminal. Everything else is highly specialized.
+
+== Why no Python?
+
+[CAUTION]
+====
+Python gets a special mention since I ported all my tools to python in 2014 and seriously regret having done that.
+====
+
+Python has very specific uses—especially machine learning (for some stupid reason even though C/C++ is doing all the work). The terminal is _not_ one of Python's strong suits and it never has been. Just compare a simple Perl one-liner to Python. There's no contest.
+
+The worst part about Python is how heavy and bloated it is compared to Perl. Most Python programs should be Go programs and a few small ones would be fine as Perl. There is simply never a good reason to willingly force yourself to do the Python virtual environment dance every time you want to use your dotfiles scripts. While it is true that most systems will not have Perl v5.36 it is true that those scripts that require it would be better served by installing Perl than Python.
+
+=== But Rob, all these hacker tools exist in Python?
+
+Yep, they do, and many are absolutely amazing. Pretty much every single one of them would have been a whole lot better in Go but Go wasn't really around when they where made.
+
+The hacker community is fickle and divided. The leading web pwning toolkit was written in Java for years. Metasploit had to apologize for "Ruby only" and eventually allowed anything into it even though they made a big deal about picking Ruby instead of Perl—that's right—_not_ Python. The point is hackers are always using whatever their favorite flavor of the day is. A few tools stick around and get big enough to maintain their inertia.
+
+If I'm hacking and needing a tool that is written in Python then I'll either port it to Go or use it as it just like I do with AsciiDoctor in Ruby.

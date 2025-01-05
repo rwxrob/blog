@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-04 16:31:20</span>
+<span id="revdate">2025-01-04 19:32:46</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -513,6 +513,429 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shell_perl_go_bliss"><a class="link" href="#_shell_perl_go_bliss">Shell + Perl + Go = Bliss</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Saturday, January 4, 2025, 6:13:17PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>While cleaning up all my dot files as the holidays wrap up I have reached the perfect state of coding bliss in the terminal, the perfect combination of tools that overlap exactly the way it should be. I don&#8217;t know why I ever changed. The coverage that simple Shell, Perl, and Go provide is absolutely amazing. I&#8217;m definitely covering all three for terminal development in my <a href="https://github.com/rwxrob/terminal-velocity"><em>Terminal Velocity</em></a> book (eventually). I had to go through this migration to fully realize just how right that decision is.</p>
+</div>
+<div class="sect2">
+<h3 id="_posix_shell_is_ubiquitous"><a class="link" href="#_posix_shell_is_ubiquitous">POSIX shell is ubiquitous</a></h3>
+<div class="paragraph">
+<p>No not <code>ksh</code> (which is <em>not</em> POSIX), not <code>zsh</code>, not <code>bash</code>, not even <code>dash</code>, but pure POSIX shell. POSIX shell scripts will run anywhere. Usually they are gluing together a bunch of other existing things on the system. That&#8217;s its purpose, to glue stuff together at a minimal level and take the place of functions and aliases that are anti-patterns for those wanting a pure Unix filter experience. Here are a few examples from plain POSIX shell.</p>
+</div>
+<div class="paragraph">
+<p>This first one called simply <code>what</code> is very typical one-liner—often a pipe—that can be called anywhere and combined with other commands in Unix pipelines:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
+head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$HOME</span><span class="tok-s2">/.currently&quot;</span><span class="tok-w"> </span><span class="tok-p">|</span><span class="tok-w"> </span>wee</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A big more complicated but the same idea, <code>pre</code> is a typical Vim filter script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-nv">IFS</span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">read</span><span class="tok-w"> </span>-r<span class="tok-w"> </span>line<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">do</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-si">${</span><span class="tok-nv">1</span><span class="tok-k">:-</span><span class="tok-p">#</span><span class="tok-si">}</span><span class="tok-s2"> </span><span class="tok-nv">$line</span><span class="tok-s2">&quot;</span>
+<span class="tok-k">done</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s the <code>wee</code> command that dumps whatever is passed as an argument or on standard input to the WeeChat IRC socket:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-nv">buf</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$*</span><span class="tok-s2">&quot;</span>
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nb">test</span><span class="tok-w"> </span>-n<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$buf</span><span class="tok-s2">&quot;</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;*</span><span class="tok-nv">$buf</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-p">|</span><span class="tok-w"> </span>toemoji<span class="tok-w"> </span>&gt;<span class="tok-s2">&quot;</span><span class="tok-nv">$HOME</span><span class="tok-s2">/.weechat/fifo&quot;</span>
+<span class="tok-w">	</span><span class="tok-nb">exit</span>
+<span class="tok-k">fi</span>
+<span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-nv">IFS</span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">read</span><span class="tok-w"> </span>-r<span class="tok-w"> </span>line<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">do</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;*</span><span class="tok-nv">$line</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-p">|</span><span class="tok-w"> </span>toemoji<span class="tok-w"> </span>&gt;<span class="tok-s2">&quot;</span><span class="tok-nv">$HOME</span><span class="tok-s2">/.weechat/fifo&quot;</span>
+<span class="tok-k">done</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I can literally cut and paste anything, anywhere to my chat on Twitch and in IRC and indirectly to YouTube using this method. Someone wants an interesting block or URL? I just <code>!!wee</code> from within Vim to send it to them.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Scripts this short don&#8217;t need any extra white space for blank lines. Don&#8217;t bother and you&#8217;ll save the compiler just that much extra work. (Although a <code>;</code> is the same as a single <code>\n</code> so no sense smashing it all onto one line unless you have a lot of indentation. And <em>never</em> indent with spaces. Tabs are the official method of indentation and if you use <code>shfmt</code> as your Vim/Ale fixer you will never have to worry about it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s <code>liveicon</code> that is embedded in my TMUX configuration file so it appears on the screen:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-nv">sec</span><span class="tok-o">=</span><span class="tok-k">$(</span>date<span class="tok-w"> </span>+%s<span class="tok-k">)</span>
+<span class="tok-nb">test</span><span class="tok-w"> </span>-e<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$HOME</span><span class="tok-s2">/.state/muted&quot;</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;🔇&quot;</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-nb">exit</span>
+!<span class="tok-w"> </span><span class="tok-nb">test</span><span class="tok-w"> </span>-e<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$HOME</span><span class="tok-s2">/.state/recording&quot;</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-nb">exit</span>
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span><span class="tok-k">$((</span><span class="tok-nv">sec</span><span class="tok-w"> </span><span class="tok-o">%</span><span class="tok-w"> </span><span class="tok-m">2</span><span class="tok-k">))</span><span class="tok-w"> </span>-eq<span class="tok-w"> </span><span class="tok-m">0</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span>🟥
+<span class="tok-k">else</span>
+<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;  &quot;</span>
+<span class="tok-k">fi</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then I just toggle the status with <code>recording</code> and <code>muted</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-nv">file</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$HOME</span><span class="tok-s2">/.state/recording&quot;</span>
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nb">test</span><span class="tok-w"> </span>-e<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
+<span class="tok-w">	</span>rm<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span>
+<span class="tok-k">else</span>
+<span class="tok-w">	</span>touch<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span>
+<span class="tok-k">fi</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_perl_is_a_miniature_linux"><a class="link" href="#_perl_is_a_miniature_linux">Perl is a "miniature Linux"</a></h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>"Perl is, by and large, a digested and simplified version of Unix. Perl is the Cliff Notes of Unix. I could never really get myself to learn sed, awk, zsh, grep, find, m4, pipes, xargs, tee, cut, paste, yacc, lex, various IPC or even C for that matter. I ought to. In practice, in almost all cases I use Perl." - Larry Wall</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Every other GNU/Linux utility can be rather easily replaced with Perl—especially <code>awk</code>. Perl&#8217;s drop-dead simple handling of signals and forking as well as a simple backtick subprocess syntax make it the idea glue between simple shell scripts and other compiled programs. Just look at this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/env perl</span>
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">v5</span><span class="tok-mf">.36</span><span class="tok-p">;</span>
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">File::Basename</span><span class="tok-p">;</span>
+
+<span class="tok-ow">not</span><span class="tok-w"> </span><span class="tok-sb">`command -v figl`</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-n">say</span><span class="tok-w"> </span><span class="tok-s">&#39;figl not found&#39;</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-nb">exit</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="tok-ow">not</span><span class="tok-w"> </span><span class="tok-sb">`command -v lolcat`</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-n">say</span><span class="tok-w"> </span><span class="tok-s">&#39;lolcat not found&#39;</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-nb">exit</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$clear</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[2J&quot;</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$curoff</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[?25l&quot;</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$curon</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[?25h&quot;</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$top</span><span class="tok-w">    </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[H&quot;</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$lines</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-sb">`tput lines`</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-mi">6</span><span class="tok-p">;</span>
+
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">join</span><span class="tok-w"> </span><span class="tok-s">&#39; &#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">@ARGV</span><span class="tok-p">;</span>
+
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-ow">not</span><span class="tok-w"> </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-s">&quot;Text: &quot;</span><span class="tok-p">;</span>
+<span class="tok-w">    </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-sr">&lt;STDIN&gt;</span><span class="tok-p">;</span>
+<span class="tok-w">    </span><span class="tok-nb">chomp</span><span class="tok-w"> </span><span class="tok-nv">$what</span><span class="tok-p">;</span>
+<span class="tok-p">}</span>
+
+<span class="tok-k">sub</span><span class="tok-w"> </span><span class="tok-nf">cleanup</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-s">&quot;$curon$clear&quot;</span><span class="tok-p">;</span>
+<span class="tok-w">    </span><span class="tok-nb">exit</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="tok-p">}</span>
+<span class="tok-nv">$SIG</span><span class="tok-p">{</span><span class="tok-s">&#39;INT&#39;</span><span class="tok-p">}</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-o">\&amp;</span><span class="tok-n">cleanup</span><span class="tok-p">;</span>
+<span class="tok-nv">$SIG</span><span class="tok-p">{</span><span class="tok-s">&#39;TERM&#39;</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-o">\&amp;</span><span class="tok-n">cleanup</span><span class="tok-p">;</span>
+
+<span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-nv">$clear</span><span class="tok-o">.</span><span class="tok-w"> </span><span class="tok-nv">$curoff</span><span class="tok-p">;</span>
+<span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-nv">$top</span><span class="tok-o">.</span><span class="tok-w"> </span><span class="tok-sb">`echo &quot;$what&quot; | figl | lolcat -f`</span><span class="tok-p">;</span>
+<span class="tok-w">    </span><span class="tok-nb">sleep</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That example has a little of everything, besides maybe <code>pack</code> and system calls (which I wrote about earlier). This is where Perl really shines. It absolutely destroys bash for this sort of thing. I realized that after three years bashing my head against a wall. Don&#8217;t be me. Learn Perl today.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s another example (<code>F</code>) that puts <code>awk</code> to shame:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/env perl</span>
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">v5</span><span class="tok-mf">.36</span><span class="tok-p">;</span>
+
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$input</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">shift</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$delim</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">shift</span><span class="tok-w"> </span><span class="tok-o">||</span><span class="tok-w"> </span><span class="tok-s">&#39;\s+&#39;</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">@nums</span><span class="tok-p">;</span>
+
+<span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">$input</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-w"> </span><span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$chunk</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nb">split</span><span class="tok-w"> </span><span class="tok-sr">/,/</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$input</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">        </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nv">$chunk</span><span class="tok-w"> </span><span class="tok-o">=~</span><span class="tok-sr"> /^(\d+)\.\.(\d+)$/</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">            </span><span class="tok-nb">push</span><span class="tok-w"> </span><span class="tok-nv">@nums</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$1</span><span class="tok-w"> </span><span class="tok-o">..</span><span class="tok-w"> </span><span class="tok-nv">$2</span><span class="tok-p">;</span>
+<span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="tok-w">        </span><span class="tok-k">elsif</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nv">$chunk</span><span class="tok-w"> </span><span class="tok-o">=~</span><span class="tok-sr"> /^\d+$/</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">            </span><span class="tok-nb">push</span><span class="tok-w"> </span><span class="tok-nv">@nums</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$chunk</span><span class="tok-p">;</span>
+<span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="tok-w">        </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">            </span><span class="tok-nb">warn</span><span class="tok-w"> </span><span class="tok-s">&quot;Skipping invalid chunk: $chunk\n&quot;</span><span class="tok-p">;</span>
+<span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="tok-p">}</span>
+
+<span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-sr">&lt;STDIN&gt;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">@fields</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">split</span><span class="tok-w"> </span><span class="tok-sr">/$delim/</span><span class="tok-p">;</span>
+<span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-ow">not</span><span class="tok-w"> </span><span class="tok-nv">@nums</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">        </span><span class="tok-nb">push</span><span class="tok-w"> </span><span class="tok-nv">@nums</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-o">..</span><span class="tok-w"> </span><span class="tok-nb">scalar</span><span class="tok-p">(</span><span class="tok-nv">@fields</span><span class="tok-p">);</span>
+<span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="tok-w">    </span><span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">@out</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">();</span>
+<span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-w"> </span><span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$i</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">@nums</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">        </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nv">$i</span><span class="tok-w"> </span><span class="tok-o">&lt;=</span><span class="tok-w"> </span><span class="tok-nb">scalar</span><span class="tok-p">(</span><span class="tok-nv">@fields</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">            </span><span class="tok-nb">push</span><span class="tok-w"> </span><span class="tok-nv">@out</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">$fields</span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-nv">$i</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-p">];</span>
+<span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="tok-w">    </span><span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-nb">join</span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-s">&quot; &quot;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">@out</span><span class="tok-w"> </span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-s">&quot;\n&quot;</span><span class="tok-p">;</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I use this all the time as a Vim filter to eliminate columns in stuff with just <code>F 2..4,5</code> type of syntax.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_go_for_the_big_stuff"><a class="link" href="#_go_for_the_big_stuff">Go for the big stuff</a></h3>
+<div class="paragraph">
+<p>As soon as something grows beyond the rational limits of Perl, which is far earlier than most developers who have made Perl into an entire middleware layer should have done, there is the Go language sitting in that ideal spot. It is super fast to write, simple to grok, powerful, and has every battery included you could ever need for terminal applications—especially terminal interface apps. The Charmbracelet stuff is absolutely gorgeous and CLI frameworks like Bonzai make Go the obvious favorite for a terminal junky who wants to stay productive producing useful, reusable, shareable tools.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of my Go YouTube API command line tool (<code>yt</code>) that uses Bonzai. You see that there is variable persistence with environment variable overrides, embedded documentation, and more. (This <code>cmd.go</code> file actually uses a high-level set of functions in another file as well.)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="golang"><span></span><span class="tok-kn">package</span><span class="tok-w"> </span><span class="tok-nx">yt</span>
+
+<span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-p">(</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;context&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;os&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;text/template&quot;</span>
+
+<span class="tok-w">	</span><span class="tok-s">&quot;github.com/rwxrob/bonzai&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;github.com/rwxrob/bonzai/cmds/help&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;github.com/rwxrob/bonzai/comp&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;github.com/rwxrob/bonzai/json&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;github.com/rwxrob/bonzai/persisters/inprops&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;github.com/rwxrob/bonzai/term&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;google.golang.org/api/option&quot;</span>
+<span class="tok-w">	</span><span class="tok-s">&quot;google.golang.org/api/youtube/v3&quot;</span>
+<span class="tok-p">)</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">yt</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-nx">youtube</span><span class="tok-p">.</span><span class="tok-nx">Service</span>
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">chanid</span><span class="tok-w"> </span><span class="tok-kt">string</span>
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">apikey</span><span class="tok-w"> </span><span class="tok-kt">string</span>
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">nextpage</span><span class="tok-w"> </span><span class="tok-kt">string</span>
+
+<span class="tok-c1">// -------------------------------- Cmd -------------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">Cmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`yt`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`interact with YouTube API`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Comp</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-nx">comp</span><span class="tok-p">.</span><span class="tok-nx">CmdsAliases</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Def</span><span class="tok-p">:</span><span class="tok-w">   </span><span class="tok-nx">help</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span>
+
+<span class="tok-w">	</span><span class="tok-nx">Cmds</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-p">[]</span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">help</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">startCmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">videoCmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">messagesCmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">detailsCmd</span><span class="tok-p">,</span>
+<span class="tok-w">		</span><span class="tok-nx">chatidCmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">nextpageCmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">chanidCmd</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+
+<span class="tok-w">	</span><span class="tok-nx">Persist</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nx">inprops</span><span class="tok-p">.</span><span class="tok-nx">NewUserConfig</span><span class="tok-p">(</span><span class="tok-s">`ytwee`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-s">`properties`</span><span class="tok-p">),</span>
+<span class="tok-w">	</span><span class="tok-nx">Vars</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Vars</span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-p">{</span><span class="tok-nx">K</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`yt-channel-id`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">E</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`YTCHANNELID`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">P</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">G</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">chanid</span><span class="tok-p">},</span>
+<span class="tok-w">		</span><span class="tok-p">{</span><span class="tok-nx">K</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`yt-api-key`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">E</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`YTAPIKEY`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">P</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">R</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">G</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">apikey</span><span class="tok-p">},</span>
+<span class="tok-w">		</span><span class="tok-p">{</span><span class="tok-nx">K</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`yt-chat-next-page`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">P</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">G</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">nextpage</span><span class="tok-p">},</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+
+<span class="tok-w">	</span><span class="tok-nx">Init</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-nx">x</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">_</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">ctx</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">context</span><span class="tok-p">.</span><span class="tok-nx">Background</span><span class="tok-p">()</span>
+<span class="tok-w">		</span><span class="tok-nx">service</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">err</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">youtube</span><span class="tok-p">.</span><span class="tok-nx">NewService</span><span class="tok-p">(</span><span class="tok-nx">ctx</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">option</span><span class="tok-p">.</span><span class="tok-nx">WithAPIKey</span><span class="tok-p">(</span><span class="tok-nx">apikey</span><span class="tok-p">))</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nx">err</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-kc">nil</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nx">err</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-nx">yt</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-nx">service</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// ---------------------------- messagesCmd ---------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">messagesCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`messages`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`print up to 200 messages`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Vars</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Vars</span><span class="tok-p">{{</span><span class="tok-nx">I</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`yt-chat-next-page`</span><span class="tok-p">}},</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-nx">x</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">_</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">vidid</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchVideoId</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">chanid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-nx">chatid</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchChatId</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">vidid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-nx">messages</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">nextpage</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">err</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchMessages</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">chatid</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">nextpage</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nx">err</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-kc">nil</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nx">err</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-nx">x</span><span class="tok-p">.</span><span class="tok-nx">Set</span><span class="tok-p">(</span><span class="tok-s">`yt-chat-next-page`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">nextpage</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-nx">tmpl</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">_</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">template</span><span class="tok-p">.</span><span class="tok-nx">New</span><span class="tok-p">(</span><span class="tok-s">&quot;message&quot;</span><span class="tok-p">).</span><span class="tok-nx">Parse</span><span class="tok-p">(</span><span class="tok-s">`{{.Author}} {{.Text}}`</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-s">&quot;\n&quot;</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">for</span><span class="tok-w"> </span><span class="tok-nx">_</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">message</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-k">range</span><span class="tok-w"> </span><span class="tok-nx">messages</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-nx">tmpl</span><span class="tok-p">.</span><span class="tok-nx">Execute</span><span class="tok-p">(</span><span class="tok-nx">os</span><span class="tok-p">.</span><span class="tok-nx">Stdout</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">message</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// ----------------------------- startCmd -----------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">startCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`start`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`start relaying messages`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-nx">x</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">_</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nb">println</span><span class="tok-p">(</span><span class="tok-s">`would start relaying`</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// ----------------------------- videoCmd -----------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">videoCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`video`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`unique id of current live stream video`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Long</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`</span>
+<span class="tok-s">		This is the **most** _expensive_ operation available so ***use with</span>
+<span class="tok-s">		caution*** and generally only once a stream to cache it someplace</span>
+<span class="tok-s">		and reuse it.</span>
+<span class="tok-s">	`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">vidid</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchVideoId</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">chanid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nx">vidid</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-s">&quot;&quot;</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-nx">term</span><span class="tok-p">.</span><span class="tok-nx">Print</span><span class="tok-p">(</span><span class="tok-nx">vidid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">chanidCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">    </span><span class="tok-s">`chanid`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w">   </span><span class="tok-s">`set or get the channel ID`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Vars</span><span class="tok-p">:</span><span class="tok-w">    </span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Vars</span><span class="tok-p">{{</span><span class="tok-nx">I</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`yt-channel-id`</span><span class="tok-p">}},</span>
+<span class="tok-w">	</span><span class="tok-nx">MaxArgs</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-nx">x</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">args</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nb">len</span><span class="tok-p">(</span><span class="tok-nx">args</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-nx">x</span><span class="tok-p">.</span><span class="tok-nx">Set</span><span class="tok-p">(</span><span class="tok-s">`yt-channel-id`</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">args</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">])</span>
+<span class="tok-w">			</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-nx">term</span><span class="tok-p">.</span><span class="tok-nx">Print</span><span class="tok-p">(</span><span class="tok-nx">x</span><span class="tok-p">.</span><span class="tok-nx">Get</span><span class="tok-p">(</span><span class="tok-s">`yt-channel-id`</span><span class="tok-p">))</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// ---------------------------- detailsCmd ----------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">detailsCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`details`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`live stream details`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">vidid</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchVideoId</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">chanid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-nx">details</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">err</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchStreamDetails</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">vidid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nx">err</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-kc">nil</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nx">err</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nx">vidid</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-s">&quot;&quot;</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-nx">term</span><span class="tok-p">.</span><span class="tok-nx">Print</span><span class="tok-p">(</span><span class="tok-nx">json</span><span class="tok-p">.</span><span class="tok-nx">This</span><span class="tok-p">{</span><span class="tok-nx">details</span><span class="tok-p">})</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// ----------------------------- chatidCmd ----------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">chatidCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`chatid`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`live stream chat unique identifier`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">vidid</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchVideoId</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">chanid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-nx">chatid</span><span class="tok-w"> </span><span class="tok-o">:=</span><span class="tok-w"> </span><span class="tok-nx">FetchChatId</span><span class="tok-p">(</span><span class="tok-nx">yt</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nx">vidid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nx">chatid</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-s">&quot;&quot;</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-nx">term</span><span class="tok-p">.</span><span class="tok-nx">Print</span><span class="tok-p">(</span><span class="tok-nx">chatid</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// ---------------------------- nextpageCmd ---------------------------</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">nextpageCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`nextpage`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`print the next page token that has been cached`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">term</span><span class="tok-p">.</span><span class="tok-nx">Print</span><span class="tok-p">(</span><span class="tok-nx">nextpage</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kd">var</span><span class="tok-w"> </span><span class="tok-nx">isliveCmd</span><span class="tok-w"> </span><span class="tok-p">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-nx">Name</span><span class="tok-p">:</span><span class="tok-w">  </span><span class="tok-s">`islive`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Short</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">`check if channal is live`</span><span class="tok-p">,</span>
+<span class="tok-w">	</span><span class="tok-nx">Do</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kd">func</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-nx">bonzai</span><span class="tok-p">.</span><span class="tok-nx">Cmd</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-o">...</span><span class="tok-kt">string</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kt">error</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-nx">term</span><span class="tok-p">.</span><span class="tok-nx">Print</span><span class="tok-p">(</span><span class="tok-nx">nextpage</span><span class="tok-p">)</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">nil</span>
+<span class="tok-w">	</span><span class="tok-p">},</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nothing_wrong_with_other_languages"><a class="link" href="#_nothing_wrong_with_other_languages">Nothing wrong with other languages</a></h3>
+<div class="paragraph">
+<p>Please do not misunderstand. This is not me saying those are the only languages out there or even that they are the only tools for the job be maintaining a personal terminal development environment the best. I know people who accomplish the entire thing using nothing but Emacs and Lisp. That&#8217;s just not me. I also use a Rust terminal (WezTerm) and C when required to do low-level stuff that Go doesn&#8217;t cover. It&#8217;s just that Shell + Perl + Go covers every major need there is for coding utilities and tools for my personal use in the terminal. Everything else is highly specialized.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_why_no_python"><a class="link" href="#_why_no_python">Why no Python?</a></h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Python gets a special mention since I ported all my tools to python in 2014 and seriously regret having done that.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Python has very specific uses—especially machine learning (for some stupid reason even though C/C++ is doing all the work). The terminal is <em>not</em> one of Python&#8217;s strong suits and it never has been. Just compare a simple Perl one-liner to Python. There&#8217;s no contest.</p>
+</div>
+<div class="paragraph">
+<p>The worst part about Python is how heavy and bloated it is compared to Perl. Most Python programs should be Go programs and a few small ones would be fine as Perl. There is simply never a good reason to willingly force yourself to do the Python virtual environment dance every time you want to use your dotfiles scripts. While it is true that most systems will not have Perl v5.36 it is true that those scripts that require it would be better served by installing Perl than Python.</p>
+</div>
+<div class="sect3">
+<h4 id="_but_rob_all_these_hacker_tools_exist_in_python"><a class="link" href="#_but_rob_all_these_hacker_tools_exist_in_python">But Rob, all these hacker tools exist in Python?</a></h4>
+<div class="paragraph">
+<p>Yep, they do, and many are absolutely amazing. Pretty much every single one of them would have been a whole lot better in Go but Go wasn&#8217;t really around when they where made.</p>
+</div>
+<div class="paragraph">
+<p>The hacker community is fickle and divided. The leading web pwning toolkit was written in Java for years. Metasploit had to apologize for "Ruby only" and eventually allowed anything into it even though they made a big deal about picking Ruby instead of Perl—that&#8217;s right—<em>not</em> Python. The point is hackers are always using whatever their favorite flavor of the day is. A few tools stick around and get big enough to maintain their inertia.</p>
+</div>
+<div class="paragraph">
+<p>If I&#8217;m hacking and needing a tool that is written in Python then I&#8217;ll either port it to Go or use it as it just like I do with AsciiDoctor in Ruby.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1870,7 +2293,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-04 16:03:37 -0500
+Last updated 2025-01-04 18:13:17 -0500
 </div>
 </div>
 </body>
