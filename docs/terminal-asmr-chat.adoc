@@ -1,0 +1,12 @@
+= Terminal ASMR + chat
+
+_Sunday, January 5, 2025, 11:37:24AM EST_
+
+Going back to the beginning: just a terminal with something going on—usually coding when I can—and a bunch of people in the chat over IRC, YouTube, Facebook, and Twitch. I want to make my terminal into something that is just interesting to have on a side screen all day long—and I'm not talking _just_ fishies. I want to create the Bloomberg terminal of link:https://github.com/rwxrob/terminal-velocity[_Terminal Velocity_] fans, a place for them to come after and while reading the book to get ideas, share new discoveries, and just keep informed on what's going on.
+
+- Live coding and terminal tweaking
+- Chat via IRC on the screen
+- Whatever searches and AI queries I'm doing
+- Rotating ASCII art of all different kinds (some that I will create)
+
+I'm already getting negative feedback about people "missing my voice on these live streams" and it's my own fault. Over the holidays I built up the expectation that I would live stream all day and code and talk through the whole thing. It was never intended to last beyond the holidays.
