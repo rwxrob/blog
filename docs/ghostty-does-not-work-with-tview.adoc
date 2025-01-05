@@ -1,0 +1,11 @@
+= Ghostty does not work with tview
+
+_Sunday, January 5, 2025, 4:10:39PM EST_
+
+https://github.com/gdamore/tcell/pull/763
+
+I have to laugh a little at Ghostty's complete inability to impress me. It continues to demonstrate poor design and development decisions (compared to WezTerm, for example). The latest I discovered is that _for absolutely no reason_ Ghostty has decided to come up with its own terminal marker type.
+
+It's no surprise to me that the Ghostty devs didn't even think to test the largest terminal library on the planet (`tcell` which I sponsor) before releasing it. I know it is a passion project, but my God. At the very best we can assume that the developer either doesn't know about Go or just doesn't care about it. Maybe he'll get to it "one day" like me. If that is the case, then why not say it in the changelog or release notes before the whole freaking Internet explodes promoting it.
+
+These thing speak for themselves. Astute developers and technologists recognize horrible over-engineering when they see it, when a project doesn't provide a solution to a problem and—more importantly—a complete and utter lack of testing against existing tools and libraries for compatibility. Maybe it will get better, but I believe it will be _years_ before it is half as good as WezTerm for everything that matters to me.

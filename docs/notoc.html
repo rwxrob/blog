@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-05 15:09:55</span>
+<span id="revdate">2025-01-05 16:19:21</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -513,6 +513,26 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ghostty_does_not_work_with_tview"><a class="link" href="#_ghostty_does_not_work_with_tview">Ghostty does not work with tview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Sunday, January 5, 2025, 4:10:39PM EST</em></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/gdamore/tcell/pull/763" class="bare">https://github.com/gdamore/tcell/pull/763</a></p>
+</div>
+<div class="paragraph">
+<p>I have to laugh a little at Ghostty&#8217;s complete inability to impress me. It continues to demonstrate poor design and development decisions (compared to WezTerm, for example). The latest I discovered is that <em>for absolutely no reason</em> Ghostty has decided to come up with its own terminal marker type.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s no surprise to me that the Ghostty devs didn&#8217;t even think to test the largest terminal library on the planet (<code>tcell</code> which I sponsor) before releasing it. I know it is a passion project, but my God. At the very best we can assume that the developer either doesn&#8217;t know about Go or just doesn&#8217;t care about it. Maybe he&#8217;ll get to it "one day" like me. If that is the case, then why not say it in the changelog or release notes before the whole freaking Internet explodes promoting it.</p>
+</div>
+<div class="paragraph">
+<p>These thing speak for themselves. Astute developers and technologists recognize horrible over-engineering when they see it, when a project doesn&#8217;t provide a solution to a problem and—more importantly—a complete and utter lack of testing against existing tools and libraries for compatibility. Maybe it will get better, but I believe it will be <em>years</em> before it is half as good as WezTerm for everything that matters to me.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2441,7 +2461,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-05 13:00:30 -0500
+Last updated 2025-01-05 16:10:39 -0500
 </div>
 </div>
 </body>

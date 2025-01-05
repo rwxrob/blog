@@ -42,6 +42,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./ghostty-does-not-work-with-tview.adoc[]
+
 include::./suitable-for-work.adoc[]
 
 include::./terminal-asmr-chat.adoc[]
