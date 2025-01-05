@@ -2,7 +2,7 @@
 
 _Saturday, January 4, 2025, 3:08:59PM EST_
 
-Very few things communicate "I'm a fucking noob" more that simply adding `.py` or `.pl` or `.sh` to the end of your _executable_ scripts (not libraries)—even more if you hard-code them into pipelines used by other scripts. If I were interviewing a person for a SysDE position (and I've interviewed 100s) and they claimed they did this for all their tools I would immediate reject them. It demonstrates that they have no fundamental understand of Unix at all—at least not as a tool smith and developer (which is what a SysDE requires).
+Very few things communicate "I'm a noob" more that simply adding `.py` or `.pl` or `.sh` to the end of your _executable_ scripts (not libraries)—even more if you hard-code them into pipelines used by other scripts. If I were interviewing a person for a SysDE position (and I've interviewed dozens) and they claimed they did this for all their tools I would immediate reject them. It demonstrates that they have no fundamental understand of Unix at all—at least not as a tool smith and developer (which is what a SysDE requires).
 
 [source,shell]
 ----
@@ -13,7 +13,7 @@ The reason no one should willingly add suffixes to any executable that could eve
 
 == Who started it?
 
-That idiotic practice of suffixing _everything_ started in the probably 90s because of shitty Windows systems requiring them to know what type of script it is because Windows can't do shebang lines. But why THE HELL would we want a shitty Windows practice to persist into Unix land.
+That idiotic practice of suffixing _everything_ started in the probably 90s because of Windows systems requiring them to know what type of script it is because Windows can't do shebang lines. Why would we want a Windows practice to persist into Unix land?
 
 Some of us have noticed that web developers and "full stack developers" tend to do this as well, which tracks because as a community they are the most likely to use a terminal without having a clue about what Unix even is, you know, the type who ask me "what's your distro?" These developers have suffixes on everything they make all the time because the web requires it, so, to them, it follows that it must be true for the scripts in their dot files scripts directory—if they even have one.
 
@@ -22,11 +22,11 @@ Some of us have noticed that web developers and "full stack developers" tend to 
 Being a vendor who does this does not justify it. My friends and I bitch all the time about vendors who just do not understand this and yet are multi-million dollar companies. But these same companies have no problem corrupting my `~/.bashrc` without my confirmation at all either. Being a vendor of any size doesn't mean anything—in fact—it means you should probably be _more_ cautious when dealing with them—especially IBM.
 ====
 
-I see professionals argue about this as if it is defensible all the time. I just laugh my ass off every single time. Do I look down on them? Absolutely. They instantly lose every shred of respect in my eyes because it means _they do not understand Unix at all_. Wait, I already said that. Oh well, it cannot be said enough.
+I see professionals argue about this as if it is defensible all the time. I just laugh every single time. Do I look down on them? Absolutely. They instantly lose every shred of respect in my eyes because it means _they do not understand Unix at all_. Wait, I already said that. Oh well, it cannot be said enough.
 
 == What about symlinks?
 
-Some have suggested that links take care of this problem. That the original can have the suffix but the symbolic or hard link can not have it. While this is a good hack to _fix_ whatever some idiot did to add suffixes that you cannot now avoid, links are never a defense of doing it wrong to begin with.
+Some have suggested that links take care of this problem. That the original can have the suffix but the symbolic or hard link can not have it. While this is a good hack to _fix_ whatever someone did to add suffixes that you cannot now avoid, links are never a defense of doing it wrong to begin with.
 
 == We aren't talking libraries
 

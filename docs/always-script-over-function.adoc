@@ -2,7 +2,7 @@
 
 _Saturday, January 4, 2025, 2:46:10PM EST_
 
-Moving back to Perl has reminded me of a best practice that I started to seriously violate by doing everything in bash: the use of functions and aliases for things that should really be stand-alone executables—even if just one line. _*You cannot use functions and aliases as filters in Vim and Neovim*_.
+Moving back to Perl has reminded me of a best practice that I started to seriously violate by doing everything in Bash: the use of functions and aliases for things that should really be stand-alone executables—even if just one line. _*You cannot use functions and aliases as filters in Vim and Neovim*_.
 
 [CAUTION]
 ====

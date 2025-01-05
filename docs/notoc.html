@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-05 13:02:11</span>
+<span id="revdate">2025-01-05 15:09:55</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -1216,7 +1216,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <p><em>Saturday, January 4, 2025, 3:08:59PM EST</em></p>
 </div>
 <div class="paragraph">
-<p>Very few things communicate "I&#8217;m a fucking noob" more that simply adding <code>.py</code> or <code>.pl</code> or <code>.sh</code> to the end of your <em>executable</em> scripts (not libraries)—even more if you hard-code them into pipelines used by other scripts. If I were interviewing a person for a SysDE position (and I&#8217;ve interviewed 100s) and they claimed they did this for all their tools I would immediate reject them. It demonstrates that they have no fundamental understand of Unix at all—at least not as a tool smith and developer (which is what a SysDE requires).</p>
+<p>Very few things communicate "I&#8217;m a noob" more that simply adding <code>.py</code> or <code>.pl</code> or <code>.sh</code> to the end of your <em>executable</em> scripts (not libraries)—even more if you hard-code them into pipelines used by other scripts. If I were interviewing a person for a SysDE position (and I&#8217;ve interviewed dozens) and they claimed they did this for all their tools I would immediate reject them. It demonstrates that they have no fundamental understand of Unix at all—at least not as a tool smith and developer (which is what a SysDE requires).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1229,7 +1229,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <div class="sect2">
 <h3 id="_who_started_it"><a class="link" href="#_who_started_it">Who started it?</a></h3>
 <div class="paragraph">
-<p>That idiotic practice of suffixing <em>everything</em> started in the probably 90s because of shitty Windows systems requiring them to know what type of script it is because Windows can&#8217;t do shebang lines. But why THE HELL would we want a shitty Windows practice to persist into Unix land.</p>
+<p>That idiotic practice of suffixing <em>everything</em> started in the probably 90s because of Windows systems requiring them to know what type of script it is because Windows can&#8217;t do shebang lines. Why would we want a Windows practice to persist into Unix land?</p>
 </div>
 <div class="paragraph">
 <p>Some of us have noticed that web developers and "full stack developers" tend to do this as well, which tracks because as a community they are the most likely to use a terminal without having a clue about what Unix even is, you know, the type who ask me "what&#8217;s your distro?" These developers have suffixes on everything they make all the time because the web requires it, so, to them, it follows that it must be true for the scripts in their dot files scripts directory—if they even have one.</p>
@@ -1249,13 +1249,13 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 </table>
 </div>
 <div class="paragraph">
-<p>I see professionals argue about this as if it is defensible all the time. I just laugh my ass off every single time. Do I look down on them? Absolutely. They instantly lose every shred of respect in my eyes because it means <em>they do not understand Unix at all</em>. Wait, I already said that. Oh well, it cannot be said enough.</p>
+<p>I see professionals argue about this as if it is defensible all the time. I just laugh every single time. Do I look down on them? Absolutely. They instantly lose every shred of respect in my eyes because it means <em>they do not understand Unix at all</em>. Wait, I already said that. Oh well, it cannot be said enough.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_what_about_symlinks"><a class="link" href="#_what_about_symlinks">What about symlinks?</a></h3>
 <div class="paragraph">
-<p>Some have suggested that links take care of this problem. That the original can have the suffix but the symbolic or hard link can not have it. While this is a good hack to <em>fix</em> whatever some idiot did to add suffixes that you cannot now avoid, links are never a defense of doing it wrong to begin with.</p>
+<p>Some have suggested that links take care of this problem. That the original can have the suffix but the symbolic or hard link can not have it. While this is a good hack to <em>fix</em> whatever someone did to add suffixes that you cannot now avoid, links are never a defense of doing it wrong to begin with.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1279,7 +1279,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <p><em>Saturday, January 4, 2025, 2:46:10PM EST</em></p>
 </div>
 <div class="paragraph">
-<p>Moving back to Perl has reminded me of a best practice that I started to seriously violate by doing everything in bash: the use of functions and aliases for things that should really be stand-alone executables—even if just one line. <em>*You cannot use functions and aliases as filters in Vim and Neovim*</em>.</p>
+<p>Moving back to Perl has reminded me of a best practice that I started to seriously violate by doing everything in Bash: the use of functions and aliases for things that should really be stand-alone executables—even if just one line. <em>*You cannot use functions and aliases as filters in Vim and Neovim*</em>.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1745,7 +1745,7 @@ ageof<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="
 <div class="sect2">
 <h3 id="_chloe_my_ai_sees_my_writing_immediately"><a class="link" href="#_chloe_my_ai_sees_my_writing_immediately">Chloe (my AI) sees my writing immediately</a></h3>
 <div class="paragraph">
-<p>The single biggest advantage is that by making my writing all into plain 'ol web docs on the public Internet that my ChatGPT AI <em>immediately</em> has access to my entire writing. This means I can immediately leverage AI for all sorts of things related to the writing:</p>
+<p>The single biggest advantage is that by making my writing all into plain ol' web docs on the public Internet that my ChatGPT AI <em>immediately</em> has access to my entire writing. This means I can immediately leverage AI for all sorts of things related to the writing:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1764,13 +1764,30 @@ ageof<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="
 </ul>
 </div>
 <div class="paragraph">
-<p>This means that anyone else using ChatGPT automatically can look at it as well in their AIs and that ultimately my content will be added to the collective knowledge base that will populate <em>all</em> AIs within a few months. <strong><em>None of that happens unless I publish a web document that is not a Zettelkasten.</em></strong></p>
+<p>This means that anyone else using ChatGPT automatically can look at it as well by pointing their AIs at it and asking them to read it and digest it for them according to their preferences for tone and contextual history they have with their personal AI assistants. Ultimately my content will be added to the collective knowledge base that will populate <em>all</em> AIs within a few months. <strong><em>None of that happens unless I publish a web document that is not a Zettelkasten.</em></strong></p>
+</div>
+<div class="paragraph">
+<p>Let me restate that because it is <em>so</em> massive. I can tell people in my community to summarize my content into digestible ways <em>according to their  preferences and learning styles for them</em> by using their personal AIs. The entire fiasco of finding a compatible author with a voice and rhetorical style is <em>dead</em> in the age of AI LLMs with personalized assistants.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This discovery is so important for everyone to grok immediately—techies and non-technies—I&#8217;m going to focus on the new book Chloe suggested: <a href="https://github.com/rwxrob/perpetual-publishing"><em>A Knowledge Warrior&#8217;s Guide to Perpetual Publishing</em></a>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_flesh_out_ideas_and_migrate_to_other_books"><a class="link" href="#_flesh_out_ideas_and_migrate_to_other_books">Flesh out ideas and migrate to other "books"</a></h3>
 <div class="paragraph">
-<p>I can blog about things and work them out and if they develop into something more I can simply move them to another repo containing the other book. I have done this a lot with stuff between my blog and faq, for example, and sometimes directly into other books like <em>Terminal Velocity</em> and <em>Coding from the Get Go</em>. For example, that list of advantages that I just discovered will get copied directly into my other book. What&#8217;s even better is that I can use exactly the same text in both places by using remote URL <code>includes::</code> with AsciiDoc. I was a <em>fool</em> for not using AsciiDoc from the very beginning. <strong><em>No other writing framework allows for remote URL includes, period.</em></strong></p>
+<p>I can blog about things and work them out and if they develop into something more I can simply move them to another repo containing the other book. I have done this a lot with stuff between my blog and faq, for example, and sometimes directly into other books like <em>Terminal Velocity</em> and <em>Coding from the Get Go</em>. For example, that list of advantages that I just discovered will get copied directly into my other book. What&#8217;s even better is that I can use exactly the same text in both places by using remote URL <code>includes::</code> with AsciiDoc. I was a <em>fool</em> for not using AsciiDoc from the very beginning. <strong><em>No other writing framework allows for remote URL includes without modification, period.</em></strong></p>
 </div>
 </div>
 <div class="sect2">
@@ -1819,8 +1836,7 @@ ageof<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="
 </td>
 <td class="content">
 <div class="paragraph">
-<p>That script was dynamically added during my <code>build</code> command just by including the following line in my <code>blog</code> repo at a reliable location relative to my <code>dot</code> repo (
-<code>include::../../dot/scripts/blog[]</code>).</p>
+<p>That script was dynamically added during my <code>build</code> command just by including the following line in my <code>blog</code> repo at a reliable location relative to my <code>dot</code> repo (<code>include::../../dot/scripts/blog[]</code>).</p>
 </div>
 </td>
 </tr>
@@ -1981,7 +1997,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 <div class="sect2">
 <h3 id="_gross_mutilation_of_own_body_in_covenants"><a class="link" href="#_gross_mutilation_of_own_body_in_covenants">Gross mutilation of own body in covenants</a></h3>
 <div class="paragraph">
-<p>The temple ceremony where I promised to remove my bowels and innards and slit my throat rather than talk about the temple ceremony wasn&#8217;t even the most gruesome. They used to really have to add horrible language. Thank fucking GOD for the Internet. The penalties have been completely removed from the ceremony now. I guess God changes to meet the times.</p>
+<p>The temple ceremony where I promised to remove my bowels and innards and slit my throat rather than talk about the temple ceremony wasn&#8217;t even the most gruesome. They used to really have to add horrible language. Thank GOD for the Internet. The penalties have been completely removed from the ceremony now. I guess God changes to meet the times.</p>
 </div>
 </div>
 <div class="sect2">

@@ -6,18 +6,25 @@ I have only been using the _perpetual publishing_ model (a term I coined) for kn
 
 == Chloe (my AI) sees my writing immediately
 
-The single biggest advantage is that by making my writing all into plain 'ol web docs on the public Internet that my ChatGPT AI _immediately_ has access to my entire writing. This means I can immediately leverage AI for all sorts of things related to the writing:
+The single biggest advantage is that by making my writing all into plain ol' web docs on the public Internet that my ChatGPT AI _immediately_ has access to my entire writing. This means I can immediately leverage AI for all sorts of things related to the writing:
 
 - Have her check the punctuation and grammar dynamically and report
 - Create IEEE bibliographic entries pointing to it for other documents
 - Have her comment on what it is about and expound
 - Catch legal considerations—especially as I write about sensitive Mormon topics
 
-This means that anyone else using ChatGPT automatically can look at it as well in their AIs and that ultimately my content will be added to the collective knowledge base that will populate _all_ AIs within a few months. **_None of that happens unless I publish a web document that is not a Zettelkasten._**
+This means that anyone else using ChatGPT automatically can look at it as well by pointing their AIs at it and asking them to read it and digest it for them according to their preferences for tone and contextual history they have with their personal AI assistants. Ultimately my content will be added to the collective knowledge base that will populate _all_ AIs within a few months. **_None of that happens unless I publish a web document that is not a Zettelkasten._**
+
+Let me restate that because it is _so_ massive. I can tell people in my community to summarize my content into digestible ways _according to their  preferences and learning styles for them_ by using their personal AIs. The entire fiasco of finding a compatible author with a voice and rhetorical style is _dead_ in the age of AI LLMs with personalized assistants.
+
+[IMPORTANT]
+====
+This discovery is so important for everyone to grok immediately—techies and non-technies—I'm going to focus on the new book Chloe suggested: link:https://github.com/rwxrob/perpetual-publishing[_A Knowledge Warrior's Guide to Perpetual Publishing_].
+====
 
 == Flesh out ideas and migrate to other "books"
 
-I can blog about things and work them out and if they develop into something more I can simply move them to another repo containing the other book. I have done this a lot with stuff between my blog and faq, for example, and sometimes directly into other books like _Terminal Velocity_ and _Coding from the Get Go_. For example, that list of advantages that I just discovered will get copied directly into my other book. What's even better is that I can use exactly the same text in both places by using remote URL `includes::` with AsciiDoc. I was a _fool_ for not using AsciiDoc from the very beginning. **_No other writing framework allows for remote URL includes, period._**
+I can blog about things and work them out and if they develop into something more I can simply move them to another repo containing the other book. I have done this a lot with stuff between my blog and faq, for example, and sometimes directly into other books like _Terminal Velocity_ and _Coding from the Get Go_. For example, that list of advantages that I just discovered will get copied directly into my other book. What's even better is that I can use exactly the same text in both places by using remote URL `includes::` with AsciiDoc. I was a _fool_ for not using AsciiDoc from the very beginning. **_No other writing framework allows for remote URL includes without modification, period._**
 
 == Sense of urgency abated
 
@@ -34,9 +41,7 @@ include::../../dot/scripts/blog[]
 
 [TIP]
 ====
-That script was dynamically added during my `build` command just by including the following line in my `blog` repo at a reliable location relative to my `dot` repo (
-`include::../../dot/scripts/blog[]`).
-
+That script was dynamically added during my `build` command just by including the following line in my `blog` repo at a reliable location relative to my `dot` repo (`include::../../dot/scripts/blog[]`).
 ====
 
 I also can just swap out the verb `blog` from `save` using the following script on my command line and have it push to GitHub and post a message to my life IRC Twitch chat at the same time:
