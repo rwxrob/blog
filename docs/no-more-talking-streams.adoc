@@ -1,0 +1,39 @@
+= Fewer talking streams
+
+_Sunday, January 5, 2025, 10:59:49AM EST_
+
+> Let all your efforts be directed to something, let it keep that end in view. It’s not activity that disturbs people, but false conceptions of things that drive them mad.” —SENECA, ON TRANQUILITY OF MIND, 12.5
+
+Yesterday I streamed for 14 hours, most of it sitting next to my wife doing her thing. I got a ton of stuff done. This morning I woke up refreshed and so happy for some reason. I'm pretty sure it is because of how much stuff I got done:
+
+- 14 blog posts
+- Most of my dotfiles scripts cleaned up
+- Relearning Perl
+- Absolutely zero unrelated rabbit holes
+- Able to stay on task and focused even when chat was flowing
+
+== Still just as many viewers
+
+It blows my mind that I averaged about 30 viewers the entire day, without saying a single thing. And I was actually able to engage and see what they had to say even more because their chat is on the screen.
+
+== Better viewers, doing their own thing
+
+People who keep me company on my streams often had their own projects going. The pace of a screencast stream is naturally slower, encouraging viewers to multitask—sometimes even watching other streamers. I think that's ideal. I've always been bothered by the idea that, by promoting constant engagement, I might be stealing time from my viewers—time they could spend focused on something meaningful.
+
+Screencasting allows me to motivate others *by doing*, answering relevant questions in real-time, and capturing those answers in a way that's immediately searchable. I can even turn them into reusable commands for future viewers with the same questions. Honestly, this feels like the ideal setup.
+
+The focus is on building a _community of quality_ — people who are genuinely interested in learning and working on something important—rather than entertaining an audience with surface-level energy and antics. As I've always said, it’s about _quality_ of community over _quantity_ of viewers.
+
+I have one of the very best communities on the Internet, and I love keeping it that way. The long-running nature of my screencast streams acts as a natural filter, keeping away the fleeting, mediocre masses I have no desire to know or interact with.
+
+That might sound elitist, but honestly, I don't care. I would much rather invest in *the elite*—the focused, the motivated—and help them develop the skills to change the world, rather than entertaining intellectually lazy livestream wanderers who stumbled in by accident while aimlessly scrolling for distractions.
+
+== Better physical shape
+
+I don't think people realize the serious tax on the body it takes to live stream. Even a short live stream where I am talking and responding is crazy hard on my body. In contrast, screen casting yesterday for 14 hours actually left me rested and fulfilled. I was able to move all over, take breaks, even talk to my wife on occasion while also still streaming and following what was happening.
+
+The single biggest factor in physical live streaming is my voice. Substantial streamers have actually lost their voice on occasion. For some reason it is speaking that is harder to control and throttle. This is the same when I go biking. When I'm just on the bike and enjoying it the experience—for me—is much better.
+
+== Writing is therapeutic
+
+Writing has always been a much better release for me than speaking. I do love to talk, but writing doesn't trigger me as much. I'm able to think about the topic, edit it, revise it.
