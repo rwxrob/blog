@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-05 16:19:21</span>
+<span id="revdate">2025-01-05 21:48:05</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_use_gh_pr_create_draft">Use gh pr create --draft</a></li>
 <li><a href="#_ghostty_does_not_work_with_tview">Ghostty does not work with tview</a></li>
 <li><a href="#_suitable_for_work">Suitable for work</a></li>
 <li><a href="#_terminal_asmr_chat">Terminal ASMR + chat</a></li>
@@ -544,6 +545,17 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_gh_pr_create_draft"><a class="link" href="#_use_gh_pr_create_draft">Use gh pr create --draft</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Sunday, January 5, 2025, 9:45:58PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>I just learned (thanks to Chloe) that draft PRs do <em>not</em> send any notifications or emails to followers of the repo. This makes remembering to make a few PR a draft with <code>--draft</code> all the more important. Not doing so means something like my dot files repo would inundate them when doing a reorganization even on a separate branch.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -821,10 +833,8 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$curoff</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[?25l&quot;</span><span class="tok-p">;</span>
 <span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$curon</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[?25h&quot;</span><span class="tok-p">;</span>
 <span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$top</span><span class="tok-w">    </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s">&quot;[H&quot;</span><span class="tok-p">;</span>
-<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$lines</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-sb">`tput lines`</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-mi">6</span><span class="tok-p">;</span>
 
 <span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">join</span><span class="tok-w"> </span><span class="tok-s">&#39; &#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">@ARGV</span><span class="tok-p">;</span>
-
 <span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-ow">not</span><span class="tok-w"> </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
 <span class="tok-w">    </span><span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-s">&quot;Text: &quot;</span><span class="tok-p">;</span>
 <span class="tok-w">    </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-sr">&lt;STDIN&gt;</span><span class="tok-p">;</span>
@@ -2492,7 +2502,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-05 16:10:39 -0500
+Last updated 2025-01-05 21:45:58 -0500
 </div>
 </div>
 </body>

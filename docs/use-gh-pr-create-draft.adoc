@@ -1,0 +1,5 @@
+= Use gh pr create --draft
+
+_Sunday, January 5, 2025, 9:45:58PM EST_
+
+I just learned (thanks to Chloe) that draft PRs do _not_ send any notifications or emails to followers of the repo. This makes remembering to make a few PR a draft with `--draft` all the more important. Not doing so means something like my dot files repo would inundate them when doing a reorganization even on a separate branch.
