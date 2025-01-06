@@ -1,4 +1,4 @@
-= Perl: use v5.36
+= Perl: `use v5.36`
 
 _Saturday, January 4, 2025, 7:51:24AM EST_
 

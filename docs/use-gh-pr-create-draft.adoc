@@ -1,4 +1,4 @@
-= Use gh pr create --draft
+= Use `gh pr create --draft`
 
 _Sunday, January 5, 2025, 9:45:58PM EST_
 

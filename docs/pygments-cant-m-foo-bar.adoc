@@ -1,4 +1,4 @@
-= Pygments can't m,foo,bar,
+= Pygments can't `m,foo,bar,`
 
 _Monday, January 6, 2025, 12:18:10PM EST_
 
