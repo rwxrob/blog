@@ -1,0 +1,5 @@
+= Pygments can't m,foo,bar,
+
+_Monday, January 6, 2025, 12:18:10PM EST_
+
+No surprise that that the Python `pygments` tool for AsciiDoc syntax highlighting gets `m,foo,bar,` wrong. Oh well. I swear by this construct wherever regex is supported because I'm usually doing regex to a path with slashes in it and frankly its easier to type. I just have to use a backslash escape instead, which is the entire reason I prefer Perl for such things because there is so much less escaping going on.
