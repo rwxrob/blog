@@ -1,4 +1,4 @@
-= `type` or `which` or `command -v`
+= `type` or `which` or `command`
 
 _Saturday, January 4, 2025, 4:03:37PM EST_
 

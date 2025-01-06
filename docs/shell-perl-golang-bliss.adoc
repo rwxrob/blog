@@ -63,6 +63,11 @@ include::../../dot/scripts/banner[]
 
 That example has a little of everything, besides maybe `pack` and system calls (which I wrote about earlier). This is where Perl really shines. It absolutely destroys bash for this sort of thing. I realized that after three years bashing my head against a wall. Don't be me. Learn Perl today.
 
+[CAUTION]
+====
+Do _not_ create Perl code with _any_  dependency on CPAN libraries. That defeats the entire core value proposition of Perl. At that point use Go (or _anything_ that statically cross-compiles into a binary that has no dependencies). Trust me on this one.
+====
+
 Here's another example (`fields`) that puts `awk` to shame:
 
 [source,perl]
@@ -74,7 +79,9 @@ I use this all the time as a Vim filter to eliminate columns in stuff with just 
 
 == Go for the big stuff
 
-As soon as something grows beyond the rational limits of Perl, which is far earlier than most developers who have made Perl into an entire middleware layer should have done, there is the Go language sitting in that ideal spot. It is super fast to write, simple to grok, powerful, and has every battery included you could ever need for terminal applications—especially terminal interface apps. The Charmbracelet stuff is absolutely gorgeous and CLI frameworks like Bonzai make Go the obvious favorite for a terminal junky who wants to stay productive producing useful, reusable, shareable tools.
+As soon as something grows beyond the rational limits of Perl, which is far earlier than most developers who have made Perl into an entire middleware layer should have done, there is the Go language sitting in that ideal spot.
+
+It is super fast to write, simple to grok, powerful, and has every battery included you could ever need for terminal applications—especially terminal interface apps. The Charmbracelet stuff is absolutely gorgeous and CLI frameworks like Bonzai make Go the obvious favorite for a terminal junky who wants to stay productive producing useful, reusable, shareable tools.
 
 Here's an example of my Go YouTube API command line tool (`yt`) that uses Bonzai. You see that there is variable persistence with environment variable overrides, embedded documentation in Markdown rendered to the terminal, tab self-completion, and more. (This `cmd.go` file actually uses a high-level set of functions in another file as well.)
 

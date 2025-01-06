@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-06 12:24:09</span>
+<span id="revdate">2025-01-06 12:33:23</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
@@ -494,13 +494,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <ul class="sectlevel1">
 <li><a href="#_pygments_cant_mfoobar">Pygments can&#8217;t <code>m,foo,bar,</code></a></li>
 <li><a href="#_power_of_perl">Power of Perl</a></li>
-<li><a href="#_use_gh_pr_create_draft">Use <code>gh pr create --draft</code></a></li>
+<li><a href="#_gh_pr_create_draft"><code>gh pr create --draft</code></a></li>
 <li><a href="#_ghostty_broke_tview">Ghostty broke tview</a></li>
 <li><a href="#_suitable_for_work">Suitable for work</a></li>
 <li><a href="#_terminal_asmr_chat">Terminal ASMR + chat</a></li>
 <li><a href="#_fewer_talking_streams">Fewer talking streams</a></li>
 <li><a href="#_shell_perl_go_bliss">Shell + Perl + Go = Bliss</a></li>
-<li><a href="#_type_or_which_or_command_v"><code>type</code> or <code>which</code> or <code>command -v</code></a></li>
+<li><a href="#_type_or_which_or_command"><code>type</code> or <code>which</code> or <code>command</code></a></li>
 <li><a href="#_scripts_without_suffixes">Scripts without suffixes</a></li>
 <li><a href="#_always_script_over_function">Always script over function</a></li>
 <li><a href="#_packing_a_syscall_in_perl">Packing a syscall in perl</a></li>
@@ -606,7 +606,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_gh_pr_create_draft"><a class="link" href="#_use_gh_pr_create_draft">Use <code>gh pr create --draft</code></a></h2>
+<h2 id="_gh_pr_create_draft"><a class="link" href="#_gh_pr_create_draft"><code>gh pr create --draft</code></a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><em>Sunday, January 5, 2025, 9:45:58PM EST</em></p>
@@ -632,7 +632,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>It&#8217;s no surprise to me that the Ghostty devs didn&#8217;t even think to test the largest terminal library on the planet (<code>tcell</code> which I sponsor) before releasing it. I know it is a passion project, but my God. At the very best we can assume that the developer either doesn&#8217;t know about Go or just doesn&#8217;t care about it. Maybe he&#8217;ll get to it "one day" like me. If that is the case, then why not say it in the changelog or release notes before the whole freaking Internet explodes promoting it.</p>
 </div>
 <div class="paragraph">
-<p>These thing speak for themselves. Astute developers and technologists recognize horrible over-engineering when they see it, when a project doesn&#8217;t provide a solution to a problem and—more importantly—a complete and utter lack of testing against existing tools and libraries for compatibility. Maybe it will get better, but I believe it will be <em>years</em> before it is half as good as WezTerm for everything that matters to me.</p>
+<p>These things speak for themselves. Astute developers and technologists recognize horrible over-engineering when they see it. When a project doesn&#8217;t provide a solution to a problem and—more importantly—demonstrates a complete and utter lack of testing against existing tools and libraries for compatibility they know to just ignore it. Maybe Ghostty will get better. Probably not. It will be <em>years</em> before Ghostty is half as good as WezTerm for everything that matters to me and most engineers focused on getting work done instead of playing with macOS only things and shaders—especially if I cannot even use it with the leading terminal library on the planet.</p>
 </div>
 </div>
 </div>
@@ -916,6 +916,20 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <div class="paragraph">
 <p>That example has a little of everything, besides maybe <code>pack</code> and system calls (which I wrote about earlier). This is where Perl really shines. It absolutely destroys bash for this sort of thing. I realized that after three years bashing my head against a wall. Don&#8217;t be me. Learn Perl today.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do <em>not</em> create Perl code with <em>any</em>  dependency on CPAN libraries. That defeats the entire core value proposition of Perl. At that point use Go (or <em>anything</em> that statically cross-compiles into a binary that has no dependencies). Trust me on this one.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Here&#8217;s another example (<code>fields</code>) that puts <code>awk</code> to shame:</p>
 </div>
@@ -964,7 +978,10 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <div class="sect2">
 <h3 id="_go_for_the_big_stuff"><a class="link" href="#_go_for_the_big_stuff">Go for the big stuff</a></h3>
 <div class="paragraph">
-<p>As soon as something grows beyond the rational limits of Perl, which is far earlier than most developers who have made Perl into an entire middleware layer should have done, there is the Go language sitting in that ideal spot. It is super fast to write, simple to grok, powerful, and has every battery included you could ever need for terminal applications—especially terminal interface apps. The Charmbracelet stuff is absolutely gorgeous and CLI frameworks like Bonzai make Go the obvious favorite for a terminal junky who wants to stay productive producing useful, reusable, shareable tools.</p>
+<p>As soon as something grows beyond the rational limits of Perl, which is far earlier than most developers who have made Perl into an entire middleware layer should have done, there is the Go language sitting in that ideal spot.</p>
+</div>
+<div class="paragraph">
+<p>It is super fast to write, simple to grok, powerful, and has every battery included you could ever need for terminal applications—especially terminal interface apps. The Charmbracelet stuff is absolutely gorgeous and CLI frameworks like Bonzai make Go the obvious favorite for a terminal junky who wants to stay productive producing useful, reusable, shareable tools.</p>
 </div>
 <div class="paragraph">
 <p>Here&#8217;s an example of my Go YouTube API command line tool (<code>yt</code>) that uses Bonzai. You see that there is variable persistence with environment variable overrides, embedded documentation in Markdown rendered to the terminal, tab self-completion, and more. (This <code>cmd.go</code> file actually uses a high-level set of functions in another file as well.)</p>
@@ -1190,7 +1207,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 </div>
 </div>
 <div class="sect1">
-<h2 id="_type_or_which_or_command_v"><a class="link" href="#_type_or_which_or_command_v"><code>type</code> or <code>which</code> or <code>command -v</code></a></h2>
+<h2 id="_type_or_which_or_command"><a class="link" href="#_type_or_which_or_command"><code>type</code> or <code>which</code> or <code>command</code></a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><em>Saturday, January 4, 2025, 4:03:37PM EST</em></p>
