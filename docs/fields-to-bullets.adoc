@@ -1,0 +1,99 @@
+= Join fields with bullet
+
+_Monday, January 6, 2025, 5:24:20PM EST_
+
+Yeah, `awk` isn't anywhere near as amazing as this 42 character `bullets` Perl script:
+
+[source,perl]
+----
+include::../../dot/scripts/bullets[]
+----
+
+== What does it do?
+
+This little script will take every whitespace-separated word on a line and join them with bullets.
+
+- `-p` → Read each line, process it, and print it automatically.
+- `-a` → Auto-split the line into the `@F` array using whitespace as the delimiter.
+- `$_ = join " • ", @F` → Reconstruct the line by joining each field with a fancy bullet `•`.
+
+[source,text]
+----
+foo bar baz
+hello world perl
+----
+
+Becomes:
+
+[source,text]
+----
+foo • bar • baz
+hello • world • perl
+----
+
+== Using it in Vim/Neovim
+
+While I could do something like this in Vim:
+
+[source,vim]
+----
+:.!perl -pa -E '$_ = join " • ", @F'
+----
+
+Putting it into a `bullets` executable script is better since it integrates perfectly into Vim or Neovim without any unnecessary plugins. Run it on a line (`!!bullets`), section (`!}bullets` or `!apbullets`) or whole file (`:%!bullets`).
+
+If you are going to do a lot of this, map to a Vim/Neovim keybinding:
+
+[source,lua]
+----
+vim.api.nvim_set_keymap('n', '<leader>jb', ':.!bullets <CR>', { noremap = true, silent = true })
+----
+
+Now, every time you hit `<leader>jb`, the current line gets bulletized. For me, I just use the other filter commands because they work everywhere and I can create my own pipelines. But maybe you are doing  _a lot_ of bulleted joining.
+
+== Editor independence
+
+A filter command doesn’t care whether you’re in:
+
+- Vim
+- Neovim
+- Nano
+- Emacs
+- A plain shell session
+
+It just _works_. Lua plugins and other editor extensions, on the other hand, are trapped by their editors. They can’t participate in shell pipelines or be reused across different tools.
+
+== Not just for editing
+
+When deciding between a Lua plugin for Neovim and a command-line filter, the real power of any command executable filter comes down to _composability_.
+
+Filters like our bullet-joining one-liner are not locked into _one editor_ or _one use case_. They live in the shell, where they can:
+
+- Be combined with other commands in pipelines
+- Process input from files, pipes, or other scripts
+- Run in batch mode across thousands of files
+
+For example, you could easily chain the bullet filter with `grep`, `sort`, or any other Unix tool:
+
+[source,shell]
+----
+grep '^foo' file.txt | bullets | sort -r > output.txt
+----
+
+This pipeline:
+
+. Filters lines starting with `foo`
+. Applies the bullet transformation
+. Sorts the output in reverse
+. Writes the result to a file
+
+_No Lua plugin can do this._
+
+== A philosophy, not just a tool
+
+When you use a command-line filter one-liner:
+
+- You're embracing the Unix philosophy: "Do one thing, and do it well."
+- You're keeping your tools _composable_ and _interoperable_ across any system, shell, or editor.
+
+Lua plugins are great for in-editor enhancements such as syntax highlighting, linting, fixing, or displaying keystrokes during a live stream, but when it comes to raw power and flexibility, commands win every time.

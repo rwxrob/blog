@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-06 12:33:23</span>
+<span id="revdate">2025-01-06 18:27:23</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -513,6 +513,181 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_join_fields_with_bullet"><a class="link" href="#_join_fields_with_bullet">Join fields with bullet</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Monday, January 6, 2025, 5:24:20PM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Yeah, <code>awk</code> isn&#8217;t anywhere near as amazing as this 42 character <code>bullets</code> Perl script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/perl -pa</span>
+<span class="tok-nv">$_</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">join</span><span class="tok-w"> </span><span class="tok-s">&quot; • &quot;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">@F</span></code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_does_it_do"><a class="link" href="#_what_does_it_do">What does it do?</a></h3>
+<div class="paragraph">
+<p>This little script will take every whitespace-separated word on a line and join them with bullets.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-p</code> → Read each line, process it, and print it automatically.</p>
+</li>
+<li>
+<p><code>-a</code> → Auto-split the line into the <code>@F</code> array using whitespace as the delimiter.</p>
+</li>
+<li>
+<p><code>$_ = join " • ", @F</code> → Reconstruct the line by joining each field with a fancy bullet <code>•</code>.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>foo bar baz
+hello world perl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Becomes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>foo • bar • baz
+hello • world • perl</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_it_in_vimneovim"><a class="link" href="#_using_it_in_vimneovim">Using it in Vim/Neovim</a></h3>
+<div class="paragraph">
+<p>While I could do something like this in Vim:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="vim"><span></span><span class="tok-p">:</span>.<span class="tok-p">!</span>perl <span class="tok-p">-</span><span class="tok-nb">pa</span> <span class="tok-p">-</span>E <span class="tok-s1">&#39;$_ = join &quot; • &quot;, @F&#39;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Putting it into a <code>bullets</code> executable script is better since it integrates perfectly into Vim or Neovim without any unnecessary plugins. Run it on a line (<code>!!bullets</code>), section (<code>!}bullets</code> or <code>!apbullets</code>) or whole file (<code>:%!bullets</code>).</p>
+</div>
+<div class="paragraph">
+<p>If you are going to do a lot of this, map to a Vim/Neovim keybinding:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="lua"><span></span><span class="tok-n">vim</span><span class="tok-p">.</span><span class="tok-n">api</span><span class="tok-p">.</span><span class="tok-n">nvim_set_keymap</span><span class="tok-p">(</span><span class="tok-s1">&#39;n&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;&lt;leader&gt;jb&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;:.!bullets &lt;CR&gt;&#39;</span><span class="tok-p">,</span> <span class="tok-p">{</span> <span class="tok-n">noremap</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">,</span> <span class="tok-n">silent</span> <span class="tok-o">=</span> <span class="tok-kc">true</span> <span class="tok-p">})</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, every time you hit <code>&lt;leader&gt;jb</code>, the current line gets bulletized. For me, I just use the other filter commands because they work everywhere and I can create my own pipelines. But maybe you are doing  <em>a lot</em> of bulleted joining.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_editor_independence"><a class="link" href="#_editor_independence">Editor independence</a></h3>
+<div class="paragraph">
+<p>A filter command doesn’t care whether you’re in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Vim</p>
+</li>
+<li>
+<p>Neovim</p>
+</li>
+<li>
+<p>Nano</p>
+</li>
+<li>
+<p>Emacs</p>
+</li>
+<li>
+<p>A plain shell session</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It just <em>works</em>. Lua plugins and other editor extensions, on the other hand, are trapped by their editors. They can’t participate in shell pipelines or be reused across different tools.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_not_just_for_editing"><a class="link" href="#_not_just_for_editing">Not just for editing</a></h3>
+<div class="paragraph">
+<p>When deciding between a Lua plugin for Neovim and a command-line filter, the real power of any command executable filter comes down to <em>composability</em>.</p>
+</div>
+<div class="paragraph">
+<p>Filters like our bullet-joining one-liner are not locked into <em>one editor</em> or <em>one use case</em>. They live in the shell, where they can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Be combined with other commands in pipelines</p>
+</li>
+<li>
+<p>Process input from files, pipes, or other scripts</p>
+</li>
+<li>
+<p>Run in batch mode across thousands of files</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, you could easily chain the bullet filter with <code>grep</code>, <code>sort</code>, or any other Unix tool:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span>grep<span class="tok-w"> </span><span class="tok-s1">&#39;^foo&#39;</span><span class="tok-w"> </span>file.txt<span class="tok-w"> </span><span class="tok-p">|</span><span class="tok-w"> </span>bullets<span class="tok-w"> </span><span class="tok-p">|</span><span class="tok-w"> </span>sort<span class="tok-w"> </span>-r<span class="tok-w"> </span>&gt;<span class="tok-w"> </span>output.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This pipeline:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Filters lines starting with <code>foo</code></p>
+</li>
+<li>
+<p>Applies the bullet transformation</p>
+</li>
+<li>
+<p>Sorts the output in reverse</p>
+</li>
+<li>
+<p>Writes the result to a file</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>No Lua plugin can do this.</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_philosophy_not_just_a_tool"><a class="link" href="#_a_philosophy_not_just_a_tool">A philosophy, not just a tool</a></h3>
+<div class="paragraph">
+<p>When you use a command-line filter one-liner:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You&#8217;re embracing the Unix philosophy: "Do one thing, and do it well."</p>
+</li>
+<li>
+<p>You&#8217;re keeping your tools <em>composable</em> and <em>interoperable</em> across any system, shell, or editor.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Lua plugins are great for in-editor enhancements such as syntax highlighting, linting, fixing, or displaying keystrokes during a live stream, but when it comes to raw power and flexibility, commands win every time.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1551,6 +1726,7 @@ qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor<span class
 <span class="tok-w">  </span>./docs/index.adoc
 <span class="tok-o">}</span><span class="tok-p">;</span>
 
+<span class="tok-c1"># HTML without table of contents</span>
 qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor<span class="tok-w"> </span><span class="tok-se">\\</span>
 <span class="tok-w">  </span>-D<span class="tok-w"> </span>docs<span class="tok-w"> </span><span class="tok-se">\\</span>
 <span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">date</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$date</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
@@ -1593,13 +1769,7 @@ qx<span class="tok-o">{</span><span class="tok-w"> </span>asciidoctor-epub3<span
 <span class="tok-w">  </span>-a<span class="tok-w"> </span><span class="tok-nv">hours_week</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-nv">$hours_week</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
 <span class="tok-w">  </span>-o<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$parent</span><span class="tok-s2">-</span><span class="tok-nv">$name</span><span class="tok-s2">.epub&quot;</span><span class="tok-w"> </span><span class="tok-se">\\</span>
 <span class="tok-w">  </span>./docs/index.adoc
-<span class="tok-o">}</span><span class="tok-p">;</span>
-
-<span class="tok-nv">__END__</span>
-
-<span class="tok-o">=</span>head1<span class="tok-w"> </span>NAME
-
-buildadoc<span class="tok-w"> </span>-<span class="tok-w"> </span>build<span class="tok-w"> </span>AsciiDoc<span class="tok-w"> </span>with<span class="tok-w"> </span>rwxrob<span class="tok-w"> </span>preferences</code></pre>
+<span class="tok-o">}</span><span class="tok-p">;</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1906,27 +2076,20 @@ ageof<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
-
-<span class="tok-c1"># TODO optimize rather than brute force</span>
 <span class="tok-nv">mark</span><span class="tok-o">=</span><span class="tok-s1">&#39;// NEW POST HERE&#39;</span>
-
 <span class="tok-nv">markfound</span><span class="tok-o">=</span><span class="tok-k">$(</span>grep<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$mark</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span>docs/index.adoc<span class="tok-k">)</span>
 <span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span>-z<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$markfound</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
 <span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;no docs/index.adoc with &#39;</span><span class="tok-nv">$mark</span><span class="tok-s2">&#39; found&quot;</span>
 <span class="tok-w">	</span><span class="tok-nb">exit</span><span class="tok-w"> </span><span class="tok-m">1</span>
 <span class="tok-k">fi</span>
-
 <span class="tok-nv">file</span><span class="tok-o">=</span><span class="tok-s2">&quot;</span><span class="tok-k">$(</span>slug<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$*</span><span class="tok-s2">&quot;</span><span class="tok-k">)</span><span class="tok-s2">.adoc&quot;</span>
-
 <span class="tok-nv">hasfile</span><span class="tok-o">=</span><span class="tok-k">$(</span>grep<span class="tok-w"> </span><span class="tok-s1">&#39;include::./&#39;</span><span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span><span class="tok-s1">&#39;\[\]&#39;</span><span class="tok-w"> </span>docs/index.adoc<span class="tok-k">)</span>
 <span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span>-z<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$hasfile</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
 <span class="tok-w">	</span>perl<span class="tok-w"> </span>-p<span class="tok-w"> </span>-i<span class="tok-w"> </span>-e<span class="tok-w"> </span><span class="tok-s2">&quot;s,</span><span class="tok-nv">$mark</span><span class="tok-s2">,</span><span class="tok-nv">$mark</span><span class="tok-s2">\n\ninclude::./</span><span class="tok-nv">$file</span><span class="tok-s2">\[\],&quot;</span><span class="tok-w"> </span>docs/index.adoc
 <span class="tok-k">fi</span>
-
 <span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-o">[</span><span class="tok-w"> </span>!<span class="tok-w"> </span>-e<span class="tok-w"> </span>docs/<span class="tok-s2">&quot;</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-o">]</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">then</span>
 <span class="tok-w">	</span><span class="tok-nb">printf</span><span class="tok-w"> </span><span class="tok-s2">&quot;= %s\n\n%s\n\n\n&quot;</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$*</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-k">$(</span>inow<span class="tok-k">)</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span>&gt;<span class="tok-s2">&quot;docs/</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span>
 <span class="tok-k">fi</span>
-
 <span class="tok-nb">exec</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-nv">$EDITOR</span><span class="tok-s2">&quot;</span><span class="tok-w"> </span><span class="tok-s2">&quot;docs/</span><span class="tok-nv">$file</span><span class="tok-s2">&quot;</span></code></pre>
 </div>
 </div>
@@ -2543,7 +2706,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-06 12:18:10 -0500
+Last updated 2025-01-06 17:24:20 -0500
 </div>
 </div>
 </body>
