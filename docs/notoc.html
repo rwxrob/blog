@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-05 21:48:05</span>
+<span id="revdate">2025-01-06 11:56:03</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -516,6 +516,49 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 </div>
 </div>
 <div class="sect1">
+<h2 id="_power_of_perl"><a class="link" href="#_power_of_perl">Power of Perl</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Monday, January 6, 2025, 11:37:52AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>The power of Perl comes from context—the very thing people complain about the most. This allows a ton of work to be packed into very few characters, which is what Perl was created to do, create the most powerful one-liners on the planet. I&#8217;m happy to report Perl still reigns supreme for such things. Take this relatively simple <code>back</code> example. It&#8217;s a simple script I threw together in a few minutes to look up all the scripts I have with <code>banner*</code> and then randomly pick one and run it with my "back in a bit" screen using TMUX.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/env perl</span>
+<span class="tok-k">use</span><span class="tok-w"> </span><span class="tok-nn">v5</span><span class="tok-mf">.36</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">join</span><span class="tok-w"> </span><span class="tok-s">&#39; &#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">@ARGV</span><span class="tok-p">;</span>
+<span class="tok-nv">$what</span><span class="tok-w"> </span><span class="tok-o">||=</span><span class="tok-w"> </span><span class="tok-s">&#39;in a bit&#39;</span><span class="tok-p">;</span>
+<span class="tok-sb">`prepend ~/.currently &quot;💤 $what&quot;`</span><span class="tok-p">;</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">@files</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">grep</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-n">f</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-sr">/^banner\S/</span><span class="tok-w"> </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-nb">glob</span><span class="tok-p">(</span><span class="tok-s">&quot;*&quot;</span><span class="tok-p">);</span>
+<span class="tok-k">my</span><span class="tok-w"> </span><span class="tok-nv">$file</span><span class="tok-w">  </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">$files</span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-nb">int</span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nb">rand</span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-nb">scalar</span><span class="tok-p">(</span><span class="tok-nv">@files</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">];</span>
+<span class="tok-nb">exec</span><span class="tok-w"> </span><span class="tok-s">&quot;$file back $what&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These few lines do things that would take ten times as long to write in any other language, plus you get the power of Perl regular expressions, the most powerful in the world.</p>
+</div>
+<div class="paragraph">
+<p>I&#8217;m really love Perl this year.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Have a look at the rest of the scripts in my <a href="https://github.com/rwxrob/dot" class="bare">https://github.com/rwxrob/dot</a> files.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_use_gh_pr_create_draft"><a class="link" href="#_use_gh_pr_create_draft">Use gh pr create --draft</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -527,7 +570,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ghostty_does_not_work_with_tview"><a class="link" href="#_ghostty_does_not_work_with_tview">Ghostty does not work with tview</a></h2>
+<h2 id="_ghostty_broke_tview"><a class="link" href="#_ghostty_broke_tview">Ghostty broke tview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><em>Sunday, January 5, 2025, 4:10:39PM EST</em></p>
@@ -827,7 +870,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <p>That example has a little of everything, besides maybe <code>pack</code> and system calls (which I wrote about earlier). This is where Perl really shines. It absolutely destroys bash for this sort of thing. I realized that after three years bashing my head against a wall. Don&#8217;t be me. Learn Perl today.</p>
 </div>
 <div class="paragraph">
-<p>Here&#8217;s another example (<code>F</code>) that puts <code>awk</code> to shame:</p>
+<p>Here&#8217;s another example (<code>fields</code>) that puts <code>awk</code> to shame:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -868,7 +911,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 </div>
 </div>
 <div class="paragraph">
-<p>I use this all the time as a Vim filter to eliminate columns in stuff with just <code>F 2..4,5</code> type of syntax.</p>
+<p>I use this all the time as a Vim filter to eliminate columns in stuff with just <code>fields 2..4,5</code> type of syntax.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1952,7 +1995,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 </div>
 <div class="sect1">
-<h2 id="_changelog_over_pull_request_body"><a class="link" href="#_changelog_over_pull_request_body">Changelog over pull request body</a></h2>
+<h2 id="_changelog_over_pr_body"><a class="link" href="#_changelog_over_pr_body">Changelog over PR body</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><em>Friday, January 3, 2025, 5:15:52PM EST</em></p>
@@ -2470,7 +2513,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-05 21:45:58 -0500
+Last updated 2025-01-06 11:37:52 -0500
 </div>
 </div>
 </body>

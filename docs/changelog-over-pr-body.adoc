@@ -1,4 +1,4 @@
-= Changelog over pull request body
+= Changelog over PR body
 
 _Friday, January 3, 2025, 5:15:52PM EST_
 

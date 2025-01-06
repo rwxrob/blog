@@ -63,14 +63,14 @@ include::../../dot/scripts/banner[]
 
 That example has a little of everything, besides maybe `pack` and system calls (which I wrote about earlier). This is where Perl really shines. It absolutely destroys bash for this sort of thing. I realized that after three years bashing my head against a wall. Don't be me. Learn Perl today.
 
-Here's another example (`F`) that puts `awk` to shame:
+Here's another example (`fields`) that puts `awk` to shame:
 
 [source,perl]
 ----
-include::../../dot/scripts/F[]
+include::../../dot/scripts/fields[]
 ----
 
-I use this all the time as a Vim filter to eliminate columns in stuff with just `F 2..4,5` type of syntax.
+I use this all the time as a Vim filter to eliminate columns in stuff with just `fields 2..4,5` type of syntax.
 
 == Go for the big stuff
 

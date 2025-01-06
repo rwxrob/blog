@@ -1,0 +1,19 @@
+= Power of Perl
+
+_Monday, January 6, 2025, 11:37:52AM EST_
+
+The power of Perl comes from context—the very thing people complain about the most. This allows a ton of work to be packed into very few characters, which is what Perl was created to do, create the most powerful one-liners on the planet. I'm happy to report Perl still reigns supreme for such things. Take this relatively simple `back` example. It's a simple script I threw together in a few minutes to look up all the scripts I have with `banner*` and then randomly pick one and run it with my "back in a bit" screen using TMUX.
+
+[source,perl]
+----
+include::../../dot/scripts/back[]
+----
+
+These few lines do things that would take ten times as long to write in any other language, plus you get the power of Perl regular expressions, the most powerful in the world.
+
+I'm really love Perl this year.
+
+[NOTE]
+====
+Have a look at the rest of the scripts in my https://github.com/rwxrob/dot files.
+====

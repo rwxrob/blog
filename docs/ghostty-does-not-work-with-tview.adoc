@@ -1,4 +1,4 @@
-= Ghostty does not work with tview
+= Ghostty broke tview
 
 _Sunday, January 5, 2025, 4:10:39PM EST_
 
