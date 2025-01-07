@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-06 19:25:47</span>
+<span id="revdate">2025-01-07 08:33:06</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
@@ -583,9 +583,10 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="shell"><span></span>pae<span class="tok-w"> </span>print<span class="tok-w"> </span>&lt;file&gt;
-pae<span class="tok-w"> </span><span class="tok-s1">&#39;say $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;
-pae<span class="tok-w"> </span><span class="tok-s1">&#39;$x += $F[3];END{say $x}&#39;</span><span class="tok-w"> </span>&lt;file&gt;</code></pre>
+<pre class="pygments highlight"><code data-lang="shell"><span></span>pae<span class="tok-w"> </span>print<span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">                      </span><span class="tok-c1"># cat equivalent</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;say $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">                </span><span class="tok-c1"># awk &#39;{print $3}&#39;</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;END{say $x} $x += $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">  </span><span class="tok-c1"># total all third fields</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print unless $.==1&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">       </span><span class="tok-c1"># trim first line from all files</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -846,7 +847,7 @@ hello • world • perl</code></pre>
 <p><em>Monday, January 6, 2025, 11:37:52AM EST</em></p>
 </div>
 <div class="paragraph">
-<p>The power of Perl comes from context—the very thing people complain about the most. This allows a ton of work to be packed into very few characters, which is what Perl was created to do, create the most powerful one-liners on the planet. I&#8217;m happy to report Perl still reigns supreme for such things. Take this relatively simple <code>back</code> example. It&#8217;s a simple script I threw together in a few minutes to look up all the scripts I have with <code>banner*</code> and then randomly pick one and run it with my "back in a bit" screen using TMUX.</p>
+<p>The power of Perl comes from context—the very thing people complain about the most. This allows a ton of work to be packed into very few characters, which is what Perl was created to do, create the most powerful one-liners on the planet. I&#8217;m happy to report Perl still reigns supreme for such things. Take this relatively simple <code>afk</code> example. It&#8217;s a simple script I threw together in a few minutes to look up all the scripts I have with <code>banner*</code> and then randomly pick one and run it with my "back in a bit" screen using TMUX.</p>
 </div>
 <div class="listingblock">
 <div class="content">

@@ -19,9 +19,10 @@ This one maps over each line of input splitting the fields into `@F` but not pri
 
 [source,shell]
 ----
-pae print <file>
-pae 'say $F[2]' <file>
-pae '$x += $F[3];END{say $x}' <file>
+pae print <file> ...                      # cat equivalent
+pae 'say $F[2]' <file> ...                # awk '{print $3}'
+pae 'END{say $x} $x += $F[2]' <file> ...  # total all third fields
+pae 'print unless $.==1' <file> ...       # trim first line from all files
 ----
 
 This is particularly useful for doing things with the line without printing the line, the sort of _reduce_ operations from functional programming. Something similar to this can be done in `awk` but with only a tiny fraction of the power and more than triple the RAM cost.
