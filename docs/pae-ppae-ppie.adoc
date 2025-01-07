@@ -22,12 +22,22 @@ This one maps over each line of input splitting the fields into `@F` but not pri
 pae print <file> ...                      # cat equivalent
 pae 'say $F[2]' <file> ...                # awk '{print $3}'
 pae 'END{say $x} $x += $F[2]' <file> ...  # total all third fields
-pae 'print unless $.==1' <file> ...       # trim first line from all files
-pae 'print if $.==3' <file> ...           # print third line of all files
-pae 'print if eof' <file> ...             # print last line of all files
+pae 'print unless $.==1' <file>           # trim first line (one file only)
+pae 'print if $.==3' <file>               # print third line
+pae 'print if eof' <file>                 # print last line
 ----
 
 This is particularly useful for doing things with the line without printing the line, the sort of _reduce_ operations from functional programming. Something similar to this can be done in `awk` but with only a tiny fraction of the power and more than triple the RAM cost.
+
+[CAUTION]
+====
+Remember, when multiple files are passed as arguments with these options Perl treats them as one continuous stream of data so the special line number variable `$.` is not reset for each file. You can, however, reset it by closing the special `ARGV` file handle when you reach the end of a line. This isn't as beautiful as a one-liner, but makes for a great two liner like this `trimfirst` script:
+
+[source, perl]
+----
+include::../../dot/scripts/trimfirst[]
+----
+====
 
 == `ppae`
 

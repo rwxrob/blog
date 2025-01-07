@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-07 08:47:16</span>
+<span id="revdate">2025-01-07 09:26:54</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
@@ -586,13 +586,34 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <pre class="pygments highlight"><code data-lang="shell"><span></span>pae<span class="tok-w"> </span>print<span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">                      </span><span class="tok-c1"># cat equivalent</span>
 pae<span class="tok-w"> </span><span class="tok-s1">&#39;say $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">                </span><span class="tok-c1"># awk &#39;{print $3}&#39;</span>
 pae<span class="tok-w"> </span><span class="tok-s1">&#39;END{say $x} $x += $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">  </span><span class="tok-c1"># total all third fields</span>
-pae<span class="tok-w"> </span><span class="tok-s1">&#39;print unless $.==1&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">       </span><span class="tok-c1"># trim first line from all files</span>
-pae<span class="tok-w"> </span><span class="tok-s1">&#39;print if $.==3&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">           </span><span class="tok-c1"># print third line of all files</span>
-pae<span class="tok-w"> </span><span class="tok-s1">&#39;print if eof&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">             </span><span class="tok-c1"># print last line of all files</span></code></pre>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print unless $.==1&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w">           </span><span class="tok-c1"># trim first line (one file only)</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print if $.==3&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w">               </span><span class="tok-c1"># print third line</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print if eof&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w">                 </span><span class="tok-c1"># print last line</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>This is particularly useful for doing things with the line without printing the line, the sort of <em>reduce</em> operations from functional programming. Something similar to this can be done in <code>awk</code> but with only a tiny fraction of the power and more than triple the RAM cost.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Remember, when multiple files are passed as arguments with these options Perl treats them as one continuous stream of data so the special line number variable <code>$.</code> is not reset for each file. You can, however, reset it by closing the special <code>ARGV</code> file handle when you reach the end of a line. This isn&#8217;t as beautiful as a one-liner, but makes for a great two liner like this <code>trimfirst</code> script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/usr/bin/env perl -i -n</span>
+<span class="tok-k">print</span><span class="tok-w"> </span><span class="tok-k">unless</span><span class="tok-w"> </span><span class="tok-vg">$.</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="tok-nb">close</span><span class="tok-w"> </span><span class="tok-n">ARGV</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nb">eof</span><span class="tok-p">;</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
