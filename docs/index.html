@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-06 18:27:23</span>
+<span id="revdate">2025-01-06 19:25:47</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_perl_pae_ppae_ppie">Perl <code>pae</code>, <code>ppae</code>, <code>ppie</code></a></li>
 <li><a href="#_join_fields_with_bullet">Join fields with bullet</a></li>
 <li><a href="#_pygments_cant_mfoobar">Pygments can&#8217;t <code>m,foo,bar,</code></a></li>
 <li><a href="#_power_of_perl">Power of Perl</a></li>
@@ -548,6 +549,108 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_perl_pae_ppae_ppie"><a class="link" href="#_perl_pae_ppae_ppie">Perl <code>pae</code>, <code>ppae</code>, <code>ppie</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Monday, January 6, 2025, 6:31:06PM EST</em></p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>POSIX or Perl!</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>A lot of people don&#8217;t know that <code>sed -i</code> and <code>awk -i</code> are <em>not</em> POSIX compliant and should never be used in any scripts, ever. Besides these stupid commands use up more than three times the RAM of <code>perl</code> and don&#8217;t come close to providing the same functionality. Here&#8217;s how you never use horrible <code>sed</code>, <code>awk</code>, <code>tr</code> and non-POSIX inplace replacements ever again.</p>
+</div>
+<div class="paragraph">
+<p>I have created three similarly named shell scripts that call <code>perl</code> to progressively built up whatever it is I want to transform about a file or text pipeline.</p>
+</div>
+<div class="sect2">
+<h3 id="_pae"><a class="link" href="#_pae"><code>pae</code></a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-nb">exec</span><span class="tok-w"> </span><span class="tok-n">perl</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-n">aE</span><span class="tok-w"> </span><span class="tok-s">&quot;$@&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This one maps over each line of input splitting the fields into <code>@F</code> but not printing the output without adding a <code>say</code> or <code>print</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span>pae<span class="tok-w"> </span>print<span class="tok-w"> </span>&lt;file&gt;
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;say $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;$x += $F[3];END{say $x}&#39;</span><span class="tok-w"> </span>&lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is particularly useful for doing things with the line without printing the line, the sort of <em>reduce</em> operations from functional programming. Something similar to this can be done in <code>awk</code> but with only a tiny fraction of the power and more than triple the RAM cost.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ppae"><a class="link" href="#_ppae"><code>ppae</code></a></h3>
+<div class="paragraph">
+<p>This is exactly the same as <code>pae</code> but always prints the line after it has been transformed by whatever code is passed as the first argument. Notice that it is capital <code>E</code> instead of lower case. This is important because it enables all the optional features like the <code>say</code> command, which you <em>definitely</em> want:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-nb">exec</span><span class="tok-w"> </span><span class="tok-n">perl</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-n">paE</span><span class="tok-w"> </span><span class="tok-s">&quot;$@&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To start a transformation I start with a no-op (<code>_</code>) which effectively cats the file to see what I&#8217;m dealing with and then change to a transformation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span>ppae<span class="tok-w"> </span>_<span class="tok-w"> </span>&lt;file&gt;
+ppae<span class="tok-w"> </span>s,/home,/other/home,g<span class="tok-w"> </span>&lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice I don&#8217;t even need to quote the regex most of the time.</p>
+</div>
+<div class="paragraph">
+<p>This is great for complex filter transformations from within Vim or Neovim when the limited builtin "enhanced" regular expressions just won&#8217;t cut it (literally).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ppie"><a class="link" href="#_ppie"><code>ppie</code></a></h3>
+<div class="paragraph">
+<p>Then we have the in-place edit version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="perl"><span></span><span class="tok-ch">#!/bin/sh</span>
+<span class="tok-nb">exec</span><span class="tok-w"> </span><span class="tok-n">perl</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-n">pi</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-n">E</span><span class="tok-w"> </span><span class="tok-s">&quot;$@&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s where the <em>real</em> power kicks in. If I change the <code>a</code> to an <code>i</code> it will <em>commit the change to the file</em> rather than printing it out:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell"><span></span>ppie<span class="tok-w"> </span>s,/home,/other/home,g<span class="tok-w"> </span>&lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep in mind <em>this is destructive with no backups</em>. If you are paranoid you can alter the <code>ppie</code> program and add a suffix to the <code>-i</code> option—perhaps even the process ID—so that you have a backup but I find cleaning up the backups annoying and using the <code>ppae</code> first ensures I can preview exactly what the transformation will be in advance. Plus, there&#8217;s always <code>git restore</code>.</p>
+</div>
+<div class="paragraph">
+<p>Also know that if you enable expanded globbing with <code>shopt -s globstar</code> you can use <code>**/*.go</code> and such to find and replace that <em>in every single file in the current directory and below</em> (yeah, you definitely want that saved with <code>git commit</code> first).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conclusion"><a class="link" href="#_conclusion">Conclusion</a></h3>
+<div class="paragraph">
+<p>Perl pipelines and filters like these are a <em>testament to the raw power of text processing in the terminal</em> and specifically to Perl. Larry Wall regularly talked about how these transformations were the very reason he created Perl in the first place, not to be better than C and POSIX shell for backend web development, the only options at the time. Forget about bloated extensions and plugins—these one-liners replace them all. And remember, this power <em>is</em> Perl&#8217;s sweetest of spots. Python, Ruby, Node, Bash, none of them can touch it (and yet all of them use Perl&#8217;s original regular expressions).</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2741,7 +2844,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-06 17:24:20 -0500
+Last updated 2025-01-06 19:02:34 -0500
 </div>
 </div>
 </body>

@@ -42,6 +42,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./pae-ppae-ppie.adoc[]
+
 include::./fields-to-bullets.adoc[]
 
 include::./pygments-cant-m-foo-bar.adoc[]
