@@ -486,7 +486,7 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-07 08:33:06</span>
+<span id="revdate">2025-01-07 08:47:16</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 </div>
@@ -550,7 +550,9 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <pre class="pygments highlight"><code data-lang="shell"><span></span>pae<span class="tok-w"> </span>print<span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">                      </span><span class="tok-c1"># cat equivalent</span>
 pae<span class="tok-w"> </span><span class="tok-s1">&#39;say $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">                </span><span class="tok-c1"># awk &#39;{print $3}&#39;</span>
 pae<span class="tok-w"> </span><span class="tok-s1">&#39;END{say $x} $x += $F[2]&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">  </span><span class="tok-c1"># total all third fields</span>
-pae<span class="tok-w"> </span><span class="tok-s1">&#39;print unless $.==1&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">       </span><span class="tok-c1"># trim first line from all files</span></code></pre>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print unless $.==1&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">       </span><span class="tok-c1"># trim first line from all files</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print if $.==3&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">           </span><span class="tok-c1"># print third line of all files</span>
+pae<span class="tok-w"> </span><span class="tok-s1">&#39;print if eof&#39;</span><span class="tok-w"> </span>&lt;file&gt;<span class="tok-w"> </span>...<span class="tok-w">             </span><span class="tok-c1"># print last line of all files</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
