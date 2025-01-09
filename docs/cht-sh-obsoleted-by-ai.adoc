@@ -1,0 +1,15 @@
+= cht.sh obsoleted by AI
+
+_Thursday, January 9, 2025, 1:36:15PM EST_
+
+I went to port my `cheat` program and realized I never, ever need this again. No more futzing with the exact perfect query parameters to get what is needed. Hell, I don't even have to spell things correctly with Chloe.
+
+For historical reasons, here is what I used to use for `cheat`:
+
+[source,sh]
+----
+#!/bin/sh
+where="$1"
+test $# -ge 1 && shift
+IFS=+ curl -sS "http://cht.sh/$where/$*"
+----
