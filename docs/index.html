@@ -486,12 +486,13 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <div class="details">
 <span id="author" class="author">Robert S. Muhlestein (rwxrob)</span><br>
 <span id="email" class="email"><a href="mailto:rob@rwx.gg">rob@rwx.gg</a></span><br>
-<span id="revdate">2025-01-09 00:16:55</span>
+<span id="revdate">2025-01-09 11:49:42</span>
 <br><span id="revremark">Perpetually published</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_mkdir_p_is_posix_now"><code>mkdir -p</code> is POSIX (now)</a></li>
 <li><a href="#_kris_nova_suggested_asciidoc">Kris Nova suggested AsciiDoc</a></li>
 <li><a href="#_language_of_the_year">"Language of the year"</a></li>
 <li><a href="#_do_not_do_zettelkasten">Do NOT do Zettelkasten</a></li>
@@ -552,6 +553,26 @@ pre.pygments .tok-ss { color: #a31515 } /* Literal.String.Symbol */
 <p>Hello friend. Welcome. Here you&#8217;ll find my random ranting about nothing and everything. Some ideas start here and end somewhere else. Mostly I write for me but might as well share it.</p>
 </div>
 <hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mkdir_p_is_posix_now"><a class="link" href="#_mkdir_p_is_posix_now"><code>mkdir -p</code> is POSIX (now)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Thursday, January 9, 2025, 11:43:23AM EST</em></p>
+</div>
+<div class="paragraph">
+<p>Using <code>mkdir -p</code> is one of the most useful ways to create a directory because you never have to worry about the directory existing, which is why some years back I was really troubled to discover that it <em>was not</em> POSIX compatible. In fact, people were using it on our IBM project that strictly forbade anything not POSIX.</p>
+</div>
+<div class="paragraph">
+<p>Well I was happy to be informed by <code>swills6</code> on Twitch that the <code>-p</code> is now officially POSIX, which explains why <code>ash</code> on Alpine had it when I checked.</p>
+</div>
+<div class="sect2">
+<h3 id="_reference"><a class="link" href="#_reference">Reference</a></h3>
+<div class="paragraph">
+<p>The Open Group, "mkdir - make directories," The Open Group Base Specifications Issue 7, 2018 Edition, [Online]. Available: <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/mkdir.html" class="bare">https://pubs.opengroup.org/onlinepubs/9699919799/utilities/mkdir.html</a>. [Accessed: Jan. 8, 2025].</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1178,9 +1199,7 @@ head<span class="tok-w"> </span>-1<span class="tok-w"> </span><span class="tok-s
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-ch">#!/bin/sh</span>
-<span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-nv">IFS</span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">read</span><span class="tok-w"> </span>-r<span class="tok-w"> </span>line<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">do</span>
-<span class="tok-w">	</span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-si">${</span><span class="tok-nv">1</span><span class="tok-k">:-</span><span class="tok-p">#</span><span class="tok-si">}</span><span class="tok-s2"> </span><span class="tok-nv">$line</span><span class="tok-s2">&quot;</span>
-<span class="tok-k">done</span></code></pre>
+<span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-nv">IFS</span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">read</span><span class="tok-w"> </span>-r<span class="tok-w"> </span>line<span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">do</span><span class="tok-w"> </span><span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="tok-si">${</span><span class="tok-nv">1</span><span class="tok-k">:-</span><span class="tok-p">#</span><span class="tok-si">}</span><span class="tok-s2"> </span><span class="tok-nv">$line</span><span class="tok-s2">&quot;</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-k">done</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2946,7 +2965,7 @@ main<span class="tok-w"> </span><span class="tok-s2">&quot;</span><span class="t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-09 00:00:59 -0500
+Last updated 2025-01-09 11:43:23 -0500
 </div>
 </div>
 </body>

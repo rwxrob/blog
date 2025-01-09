@@ -42,6 +42,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./mkdir-p-not-posix.adoc[]
+
 include::./kris-nova-suggested-asciidoc.adoc[]
 
 include::./language-of-year.adoc[]

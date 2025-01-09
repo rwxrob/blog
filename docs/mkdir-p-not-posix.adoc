@@ -1,0 +1,11 @@
+= `mkdir -p` is POSIX (now)
+
+_Thursday, January 9, 2025, 11:43:23AM EST_
+
+Using `mkdir -p` is one of the most useful ways to create a directory because you never have to worry about the directory existing, which is why some years back I was really troubled to discover that it _was not_ POSIX compatible. In fact, people were using it on our IBM project that strictly forbade anything not POSIX.
+
+Well I was happy to be informed by `swills6` on Twitch that the `-p` is now officially POSIX, which explains why `ash` on Alpine had it when I checked.
+
+== Reference
+
+The Open Group, "mkdir - make directories," The Open Group Base Specifications Issue 7, 2018 Edition, [Online]. Available: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/mkdir.html. [Accessed: Jan. 8, 2025].
