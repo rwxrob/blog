@@ -1,0 +1,58 @@
+= POSIX + Perl backticks
+
+_Thursday, January 9, 2025, 1:01:54PM EST_
+
+Perl backticks invoke subprocesses to run whatever in the host shell. In the old days I would stay up late ensuring my Perl code didn't have any backticks. Today I realize that is the slippery slope to Perl hell, the one that gave Perl a bad name in 2025. I now use backticks all the time. They are simpler, easier to remember, integrate better with other POSIX shell scripts, and generally just more Unix-y.
+
+== Better POSIX integration
+
+Here's a simple example using Perl builtin modules:
+
+[source,perl]
+----
+use File::Basename;
+use Cwd;
+my $name = basename(cwd());
+----
+
+Now the exact same thing using nothing but POSIX that I would regularly be using from the command line itself:
+
+[source,perl]
+----
+my $name = `basename \$(pwd)`;
+chomp($name);
+----
+
+This invoked two subprocesses but do I really care? Scripting at this level is supposed to be about agile discovery and functionality, not the most efficiency.
+
+Here's another example:
+
+[source,perl]
+----
+use File::Path qw(make_file);
+make_file('./path/to/some/where');
+----
+
+But this is so much easier to remember and understand:
+
+[source,perl]
+----
+`mkdir -p ./path/to/some/where`;
+----
+
+[NOTE]
+====
+As of 2018 the `-p` became POSIX standard.
+====
+
+Every time I feel regret for taking the subprocess hit, which is absolutely negligible on any modern computer, I just have to remember that I would be invoking many _more_ subprocesses if I were to do this in POSIX shell only instead. Besides, using POSIX commands means I can build and test them from the command line itself while I'm building up the Perl code.
+
+== The less modules the better
+
+As soon as I find myself looking up the niche docs for `File::Find` (which is absolutely amazing but completely unlike anything from the `find` command) I realized I've probably lost my way. It's hard enough to remember the syntax of the `find` command—the most powerful command in all of Unix and Linux. All that knowledge will not transfer to my command-line skills if I use `File::Find` instead. It only creates highly specialized Perl knowledge.
+
+For the most part I've banned `use` from my Perl scripts in my dot files. Other than `use v5.36` which saves on a lot of typing and enables `say` I really don't need the rest. Everything that I would want a module for generally already has a POSIX shell command that will do the same thing.
+
+== Think `awk` on steroids
+
+When I remember to approach Perl like a better `awk` I do not get caught up into these problems. I don't waste time looking up lost, arcane Perl knowledge. I just use what I would every day from the command line.
