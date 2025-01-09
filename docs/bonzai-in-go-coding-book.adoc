@@ -1,0 +1,13 @@
+= Bonzai in Go coding book
+
+_Thursday, January 9, 2025, 3:02:57PM EST_
+
+After concluding that the `clip` project will be migrated to Go I've decided to use that project in _both_ the link:https://github.com/rwxrob/terminal-velocity[_Terminal Velocity_] book and the link:https://github.com/rwxrob/coding-from-the-get-go[_Coding from the Get Go_] book. Thanks to AsciiDoc I can include the entire chapter in both of them without any problem.
+
+== Terminal Velocity
+
+In the _Terminal Velocity_ book the `clip` project will be a capstone after learning POSIX and basic Perl shell scripting with a focus on raw development speed. I'll use it to introduce Bonzai specifically with the intent of showing just how fast powerful commands with self tab completion can be realized in Go. _This will assume Go coding ability already._ The entire point of this inclusion is not to each Go but to show just how solid a language it is for these kind of tools—especially when combined with the `embed` package.
+
+== Coding from the Get Go
+
+In this book the `clip` project will be one of the final projects after all the basics have been covered. It will serve as an example of the symphony of concepts coming together to create something useful and fun in the world's best language for such things. This will give coders learning Go a solid example of just how much Go dominates all other languages for this kind of work (despite the crap unemployed influencers continue to throw at it).

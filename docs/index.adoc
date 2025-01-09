@@ -42,6 +42,8 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./bonzai-in-go-coding-book.adoc[]
+
 include::./perl-or-go.adoc[]
 
 include::./cht-sh-obsoleted-by-ai.adoc[]
