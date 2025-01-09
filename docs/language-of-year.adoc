@@ -1,0 +1,16 @@
+= "Language of the year"
+
+_Wednesday, January 8, 2025, 8:39:07PM EST_
+
+Perl. How about Ada? Okay, then COBOL.
+
+I'm not even kidding. So few people even know these languages but way more code exists in production in them than any trending language—yes including Python.
+
+I'm going to be creating a lot of Perl content, because it is the best tool for the job when doing anything with text processing—especially from the command line. If every single person who uses the terminal can benefit from learning even a little Perl to construct powerful one-liners (which I've covered a lot in other blog posts).
+
+== How about "Shovel of the year?"
+
+A language is just a tool. The concept of a "language of the year" is just as stupid as focusing on just one type of hammer or shovel or hair dryer. Languages address different problems in different ways.
+
+The focus _should_ be on solutions or a "solution of the year" or "project" of the year. Why not pick some very valuable and important open source projects that need help and live stream working on those while working on learning the language at hand? I've met people who are literally keeping planes flying with their contributions and bug fixes. Why not that?
+

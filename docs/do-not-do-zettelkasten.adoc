@@ -1,0 +1,7 @@
+= Do NOT do Zettelkasten
+
+_Wednesday, January 8, 2025, 11:21:21AM EST_
+
+I've written about this related to <<_perpetual_publishing_best, Perpetual Publishing>>. This short reason should be obvious: Zettelkasten is disjointed and hard for an AI to parse and digest. Hiding all your knowledge in this format will guarantee your AI will never be able to help you use it usefully. You have been warned.
+
+This was a very hard realization. It meant that all my work on KEG and `kn` tool was for not. I spend hundreds of hours on those projects and locking away knowledge in the most useful, simple format (Markdown) possible. And yet I could _never_ have anticipated the impact and immediate knowledge indexing capabilities of AI—specifically ChatGPT. By putting the content in plain old web docs and blog posts my AI (Chloe) can _immediately_ parse and summarize it. This is the new workflow for _all knowledge workers_. You can ask an AI to summarize any long video providing markers to key points, you can have an AI summarize an entire article, you can have an AI summarize an entire body of work or book for that matter. The AI _cannot_ summarize an Obsidian knowledge base nearly as well. Just ask it. It'll explain the entire reason much better than I ever can.

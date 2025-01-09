@@ -42,6 +42,10 @@ Hello friend. Welcome. Here you'll find my random ranting about nothing and ever
 
 // NEW POST HERE
 
+include::./language-of-year.adoc[]
+
+include::./do-not-do-zettelkasten.adoc[]
+
 include::./pae-ppae-ppie.adoc[]
 
 include::./fields-to-bullets.adoc[]
