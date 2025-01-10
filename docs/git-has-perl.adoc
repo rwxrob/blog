@@ -1,0 +1,7 @@
+= Git has Perl
+
+_Friday, January 10, 2025, 3:08:07PM EST_
+
+Q1 of 2025 the Git project is adding a dependency on Perl 5.26. Note that they did not take the opportunity to get rid of it but instead and doing even more with it. This should be enough evidence to convince people that it is totally okay to build dependencies on Perl 5.26 in anything that also has Git installed. Such is not true for other languages like Python, which have to be installed.
+
+2025 is really turning into the _year of Perl_.
