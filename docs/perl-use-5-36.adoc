@@ -1,4 +1,10 @@
-= Perl: `use v5.36`
+= Perl: `use v5.26`
+
+_Friday, January 10, 2025, 3:02:40PM EST_
+
+Update: Discovered that version 5.26 is the defacto on most systems including my multi-user system at work. Also just learned today that in Q1 2025 the Git project will add dependency on 5.26 (currently 5.8) which means any system that has the `git` command also must have `perl` even if the path might be weird if not installed for the whole system.
+
+The only thing that I care about that we lose is `use warnings` but that is not a big deal since I have Ale linters that catch all the things that `use warnings` would tell me anyway.
 
 _Saturday, January 4, 2025, 7:51:24AM EST_
 
